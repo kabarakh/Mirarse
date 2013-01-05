@@ -11,7 +11,11 @@ class Gallery extends \Kaba\Gallery\Controller\AbstractController {
 	 * the action to list all galleries available in the configured base folder
 	 */
 	public function listAction() {
-		echo "Listing Galleries\n";
+		$galleryRepository = new \Kaba\Gallery\Domain\Repository\Gallery();
+
+		$galleryRootPath = $this->parameter['galleryRootPath'];
+
+		$galleryRepository->getAllGalleriesByRootPath($galleryRootPath);
 	}
 }
 

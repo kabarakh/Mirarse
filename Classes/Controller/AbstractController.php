@@ -16,6 +16,11 @@ class AbstractController {
 	protected $view;
 
 	/**
+	 * @var Array
+	 */
+	protected $parameter;
+
+	/**
 	 * Initialize the controller
 	 */
 	public function __construct() {
@@ -35,9 +40,11 @@ class AbstractController {
 	public function callAction($actionName, $parameter = array(), $controller = NULL) {
 		$action = $actionName."Action";
 
+		$this->parameter = $parameter;
+
 		echo "Called class: ".get_called_class(). "\n";
 		echo "Action: ".$action."\n";
-		echo "Parameters: ".print_r($parameter, TRUE);
+		echo "Parameters: ".print_r($this->parameter, TRUE);
 
 		echo "Calling ".get_called_class().'->'.$action."\n";
 
@@ -69,7 +76,9 @@ class AbstractController {
 				throw new \Exception('Class not found: ' . $controllerClassName, 1357259410);
 			}
 
+			/** @var $controllerObject AbstractController */
 			$controllerObject = new $controllerClassName();
+			$controllerObject->setParameter($this->parameter);
 
 		} else {
 
@@ -82,6 +91,22 @@ class AbstractController {
 		return $controllerObject;
 
 	}
+
+	/**
+	 * @param Array $parameter
+	 */
+	public function setParameter($parameter) {
+		$this->parameter = $parameter;
+	}
+
+	/**
+	 * @return Array
+	 */
+	public function getParameter() {
+		return $this->parameter;
+	}
+
+
 }
 
 ?>
