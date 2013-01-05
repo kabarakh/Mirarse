@@ -1,9 +1,6 @@
 <?php 
 include('../Gallery.php');
-$gallery = new \Kaba\Gallery();
 
-$gallery->main();
-
-
+$gallery->callAction('list', array('directory' => '/var/www/'), 'Gallery');
 
 ?>

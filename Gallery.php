@@ -6,25 +6,36 @@ namespace Kaba;
  * The main class for the gallery. Starts the whole thing and contains the controllers
  */
 class Gallery {
-    
-    /**
-     * Starts the gallery. After calling this method you have access to the controllers
-     * @return void
-     */
-    public function main() {
-        // with this we define the SCRIPT_ROOT_PATH to the location of this very file, no matter from where it is included
-        define(SCRIPT_ROOT_PATH, dirname(__FILE__).'/');
-        
-        // get the bootstrap and initialitze everything
-        require_once SCRIPT_ROOT_PATH."Classes/Bootstrap/Initializer.php";
-        
-        $bootstrap = new Gallery\Bootstrap\Initializer();
-        $bootstrap->init();
-        
-        // test for autoloader
-        $gallery = new Gallery\Controller\Gallery();
-        
-        $gallery->callAction('list', array('directory' => '/var/www/'));
-    }
+
+	/**
+	 * @var \Kaba\Gallery\Controller\AbstractController
+	 */
+	public $controller;
+
+	/**
+	 * Starts the gallery. After calling this method you have access to the controllers
+	 *
+	 * @return void
+	 */
+	public function start() {
+
+		// get the bootstrap and initialize everything
+		require_once dirname(__FILE__)."/Classes/Bootstrap/Initializer.php";
+
+		$bootstrap = new Gallery\Bootstrap\Initializer();
+		$bootstrap->init();
+
+		$this->controller = new \Kaba\Gallery\Controller\AbstractController();
+
+	}
+
+	public function callAction($actionName, $parameter = array(), $controller = NULL) {
+		$this->controller->callAction($actionName, $parameter, $controller);
+	}
+
 }
+
+$gallery = new \Kaba\Gallery();
+
+$gallery->start();
 ?>
