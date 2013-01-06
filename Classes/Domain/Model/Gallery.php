@@ -3,7 +3,7 @@
 namespace Kaba\Gallery\Domain\Model;
 
 /**
- *
+ * The model for a gallery
  */
 class Gallery {
 
