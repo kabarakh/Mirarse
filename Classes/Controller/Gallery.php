@@ -13,7 +13,7 @@ class Gallery extends \Kaba\Gallery\Controller\AbstractController {
 	public function listAction() {
 		$galleryRepository = new \Kaba\Gallery\Domain\Repository\Gallery();
 
-		$galleryRootPath = $this->parameter['galleryRootPath'];
+		$galleryRootPath = $GLOBALS['parameter']['galleryRootPath'];
 
 		$galleryRepository->getAllGalleriesByRootPath($galleryRootPath, TRUE);
 

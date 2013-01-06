@@ -72,7 +72,8 @@ class Folders {
 	}
 
 	/**
-	 * A valid folder for the gallery consists of at least one picture and the config file (name gallery.conf)
+	 * A valid folder for the gallery consists of at least one picture and the config file (name gallery.conf, can be overriden
+	 * while calling an action)
 	 *
 	 * @param $contentsOfRootPath
 	 */
@@ -96,9 +97,15 @@ class Folders {
 	}
 
 	protected function validateConfigFileExists($foldername) {
+		$configFileName = 'gallery.conf';
+
+		if ($GLOBALS['parameter']['galleryConfigFile']) {
+			$configFileName = $GLOBALS['parameter']['galleryConfigFile'];
+		}
+
 		$fileHandler = new \Kaba\Gallery\FileHandler\Files();
 
-		return $fileHandler->validateFileExists($foldername.'/gallery.conf');
+		return $fileHandler->validateFileExists($foldername.'/'.$configFileName);
 	}
 
 	protected function validateAtLeastOnePictureFileExists($foldername) {
