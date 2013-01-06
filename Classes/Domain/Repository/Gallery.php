@@ -2,6 +2,9 @@
 
 namespace Kaba\Gallery\Domain\Repository;
 
+/**
+ * The repository for galleries
+ */
 class Gallery {
 
 	/**
@@ -17,5 +20,8 @@ class Gallery {
 		$contentsOfRootPath = $folderHandler->limitResultToFolders($contentsOfRootPath);
 
 		$contentsOfRootPath = $folderHandler->limitResultToValidFolders($contentsOfRootPath);
+
+
+
 	}
 }

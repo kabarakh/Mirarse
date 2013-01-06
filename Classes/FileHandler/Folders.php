@@ -2,12 +2,26 @@
 
 namespace Kaba\Gallery\FileHandler;
 
+/**
+ * Everything which has to do with folder handling
+ */
 class Folders {
 
+	/**
+	 * Get all the folders and files in a directory, but omit the directories "." and ".."
+	 * If $relative is provided, the path is assumed to be relative to the file which is used to start the script,
+	 * and is made absolute accordingly
+	 *
+	 * @param $path
+	 * @param bool $relative
+	 *
+	 * @return array
+	 */
 	public function getContentsOfFolder($path, $relative = FALSE) {
 
-		echo "\n\nPath: ".$path."\n\n";
+		echo "\n\nPath: ".$path."\n";
 		echo 'Realpath: '.realpath($path)."\n\n";
+
 		if ($relative) {
 			$path = $this->getAbsolutePathFromRelativePath($path);
 		} else {
@@ -27,8 +41,15 @@ class Folders {
 		print_r($folderContent, FALSE);
 
 		return ($folderContent);
-	}
+}
 
+	/**
+	 * Makes a path relative to the file which runs the script absolute
+	 *
+	 * @param $relativePath
+	 * @return string
+	 * @throws \Exception
+	 */
 	protected function getAbsolutePathFromRelativePath($relativePath) {
 		$absolutePath = realpath(GALLERY_RUN_DIRECTORY.$relativePath);
 
@@ -39,8 +60,14 @@ class Folders {
 		echo 'AbsolutePath: '.$absolutePath."\n";
 
 		return $absolutePath;
-	}
+}
 
+	/**
+	 * Returns true if a folder exists, false if otherwise
+	 *
+	 * @param $path
+	 * @return bool
+	 */
 	protected function validateFolderExists($path) {
 
 		if ($path == FALSE) {
@@ -48,8 +75,16 @@ class Folders {
 		}
 
 		return TRUE;
-	}
+}
 
+	/**
+	 * Removes "." and ".." from an folder content array
+	 *
+	 * Resets the array keys to start from 0 with array_slice
+	 *
+	 * @param $folderContent
+	 * @return array
+	 */
 	protected function removeDotDirectoriesFromFolderContent($folderContent) {
 		unset($folderContent[array_search('.', $folderContent)]);
 		unset($folderContent[array_search('..', $folderContent)]);
@@ -57,8 +92,16 @@ class Folders {
 		$folderContent = array_slice($folderContent, 0);
 
 		return $folderContent;
-	}
+}
 
+	/**
+	 * Filters a folder content array so that everything except folders is removed from the array
+	 *
+	 * Resets the array keys to start from 0 with array_slice
+	 *
+	 * @param $contentsOfRootPath
+	 * @return mixed
+	 */
 	public function limitResultToFolders($contentsOfRootPath) {
 		foreach ($contentsOfRootPath as $key => $filename) {
 			if (!is_dir($filename)) {
@@ -72,10 +115,13 @@ class Folders {
 	}
 
 	/**
-	 * A valid folder for the gallery consists of at least one picture and the config file (name gallery.conf, can be overriden
-	 * while calling an action)
+	 * Filters a folder content array so that everything except valid gallery folders is removed from the array
+	 *
+	 * A valid folder for the gallery consists of at least one picture and the config file (name gallery.conf, can be
+	 * overridden while calling an action)
 	 *
 	 * @param $contentsOfRootPath
+	 * @return array
 	 */
 	public function limitResultToValidFolders($contentsOfRootPath) {
 
@@ -96,7 +142,13 @@ class Folders {
 		return $contentsOfRootPath;
 	}
 
-	protected function validateConfigFileExists($foldername) {
+	/**
+	 * Returns true if a config file exists in the folder, false if otherwise
+	 * Uses the GLOBALS-parameter-array to get the name for the config-files
+	 *
+	 * @param $foldername
+	 * @return bool
+	 */protected function validateConfigFileExists($foldername) {
 		$configFileName = 'gallery.conf';
 
 		if ($GLOBALS['parameter']['galleryConfigFile']) {
@@ -106,9 +158,14 @@ class Folders {
 		$fileHandler = new \Kaba\Gallery\FileHandler\Files();
 
 		return $fileHandler->validateFileExists($foldername.'/'.$configFileName);
-	}
+}
 
-	protected function validateAtLeastOnePictureFileExists($foldername) {
+	/**
+	 * Returns true if at least one image file exists in the folder, false if otherwise
+	 *
+	 * @param $foldername
+	 * @return bool
+	 */protected function validateAtLeastOnePictureFileExists($foldername) {
 		$fileHandler = new \Kaba\Gallery\FileHandler\Files();
 
 		$contentsOfFolder = $this->getContentsOfFolder($foldername);

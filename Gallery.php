@@ -29,13 +29,20 @@ class Gallery {
 
 	}
 
+	/**
+	 * Wrapper for $this->controller->callAction to make the script more useable
+	 *
+	 * @param $actionName
+	 * @param array $parameter
+	 * @param null|String $controller
+	 */
 	public function callAction($actionName, $parameter = array(), $controller = NULL) {
 		$this->controller->callAction($actionName, $parameter, $controller);
 	}
 
 }
 
+// this is put here so the user can just include this file and use $gallery->callAction
 $gallery = new \Kaba\Gallery();
-
 $gallery->start();
 ?>

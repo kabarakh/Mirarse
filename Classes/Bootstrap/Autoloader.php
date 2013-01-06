@@ -18,6 +18,13 @@ class Autoloader {
 		spl_autoload_register(__NAMESPACE__.'\Autoloader::autoload');
 	}
 
+	/**
+	 * Autoloader for classes.
+	 * Assumes that all classes
+	 *
+	 * @param $className
+	 * @throws \Exception
+	 */
 	public static function autoload($className) {
 		echo "Class to load: ".$className."\n";
 
