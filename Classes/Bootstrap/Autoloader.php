@@ -28,6 +28,10 @@ class Autoloader {
 	public static function autoload($className) {
 		echo "Class to load: ".$className."\n";
 
+		if (strncmp($className, 'Kaba\\Gallery\\', 13) !== 0) {
+			throw new \Exception('Trying to load class '.$className.' which isn\'t in the right namespace!', 1357512186);
+		}
+
 		$filename = str_replace('Kaba\\Gallery\\', GALLERY_CLASSES, $className).".php";
 		$filename = str_replace('\\', '/', $filename);
 
