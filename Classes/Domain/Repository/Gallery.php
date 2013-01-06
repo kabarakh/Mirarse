@@ -6,14 +6,16 @@ class Gallery {
 
 	/**
 	 * @param $rootPath String
+	 *
+	 * @throws \Exception
 	 */
 	public function getAllGalleriesByRootPath($rootPath) {
-		$absolutePathToGalleries = realpath(GALLERY_RUN_DIRECTORY.$rootPath);
+		$folderHandler = new \Kaba\Gallery\FileHandler\Folders();
 
-		if ($absolutePathToGalleries == FALSE) {
-			throw new \Exception('GalleryRootPath not accessible or doesn\'t exist', 1357353323);
-		}
+		$contentsOfRootPath = $folderHandler->getContentsOfFolder($rootPath);
 
-		echo 'AbsolutePathToGalleries: '.$absolutePathToGalleries."\n";
+		$contentsOfRootPath = $folderHandler->limitResultToFolders($contentsOfRootPath);
+
+		$contentsOfRootPath = $folderHandler->limitResultToValidFolders($contentsOfRootPath);
 	}
 }

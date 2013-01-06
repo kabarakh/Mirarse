@@ -22,7 +22,7 @@ class Gallery {
 		// get the bootstrap and initialize everything
 		require_once dirname(__FILE__)."/Classes/Bootstrap/Initializer.php";
 
-		$bootstrap = new Gallery\Bootstrap\Initializer();
+		$bootstrap = new \Kaba\Gallery\Bootstrap\Initializer();
 		$bootstrap->init();
 
 		$this->controller = new \Kaba\Gallery\Controller\AbstractController();

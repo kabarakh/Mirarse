@@ -15,7 +15,8 @@ class Gallery extends \Kaba\Gallery\Controller\AbstractController {
 
 		$galleryRootPath = $this->parameter['galleryRootPath'];
 
-		$galleryRepository->getAllGalleriesByRootPath($galleryRootPath);
+		$galleryRepository->getAllGalleriesByRootPath($galleryRootPath, TRUE);
+
 	}
 }
 

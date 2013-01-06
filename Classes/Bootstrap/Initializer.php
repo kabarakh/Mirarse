@@ -55,7 +55,7 @@ class Initializer {
 
 		require_once(GALLERY_CLASSES.'Bootstrap/Autoloader.php');
 
-		$autoloader = new Autoloader();
+		$autoloader = new \Kaba\Gallery\Bootstrap\Autoloader();
 		$autoloader->init();
 	}
 
