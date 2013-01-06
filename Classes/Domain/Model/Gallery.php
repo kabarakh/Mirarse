@@ -38,6 +38,11 @@ class Gallery {
 	protected $images;
 
 	/**
+	 * @var String
+	 */
+	protected $galleryThumbnail;
+
+	/**
 	 * @param $date
 	 */
 	public function setDate($date) {
@@ -119,6 +124,20 @@ class Gallery {
 	 */
 	public function getTitle() {
 		return $this->title;
+	}
+
+	/**
+	 * @param String $galleryThumbnail
+	 */
+	public function setGalleryThumbnail($galleryThumbnail) {
+		$this->galleryThumbnail = $galleryThumbnail;
+	}
+
+	/**
+	 * @return String
+	 */
+	public function getGalleryThumbnail() {
+		return $this->galleryThumbnail;
 	}
 
 }
