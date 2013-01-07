@@ -8,7 +8,7 @@ namespace Kaba\Gallery\Controller;
 /**
  *
  */
-abstract class AbstractController {
+class AbstractController {
 
 	/**
 	 * @var \Kaba\Gallery\Controller\ControllerView
