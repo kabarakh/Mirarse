@@ -8,7 +8,7 @@ namespace Kaba;
 class Gallery {
 
 	/**
-	 * @var \Kaba\Gallery\Controller\AbstractController
+	 * @var \Kaba\Gallery\Controller\BaseController
 	 */
 	public $controller;
 
@@ -25,7 +25,7 @@ class Gallery {
 		$bootstrap = new \Kaba\Gallery\Bootstrap\Initializer();
 		$bootstrap->init();
 
-		$this->controller = new \Kaba\Gallery\Controller\AbstractController();
+		$this->controller = new \Kaba\Gallery\Controller\BaseController();
 
 	}
 
