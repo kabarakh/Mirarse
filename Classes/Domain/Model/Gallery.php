@@ -5,7 +5,7 @@ namespace Kaba\Gallery\Domain\Model;
 /**
  * The model for a gallery
  */
-class Gallery {
+class Gallery extends \Kaba\Gallery\Domain\Model\AbstractModel {
 
 	/**
 	 * @var String

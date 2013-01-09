@@ -148,17 +148,24 @@ class Folders {
 	 *
 	 * @param $foldername
 	 * @return bool
-	 */protected function validateConfigFileExists($foldername) {
+	 */
+	protected function validateConfigFileExists($foldername) {
+		$configFilePath = $this->getFullPathToConfigFile($foldername);
+
+		$fileHandler = new \Kaba\Gallery\FileHandler\Files();
+
+		return $fileHandler->validateFileExists($configFilePath);
+	}
+
+	protected function getFullPathToConfigFile($foldername) {
 		$configFileName = 'gallery.conf';
 
 		if ($GLOBALS['parameter']['galleryConfigFile']) {
 			$configFileName = $GLOBALS['parameter']['galleryConfigFile'];
 		}
 
-		$fileHandler = new \Kaba\Gallery\FileHandler\Files();
-
-		return $fileHandler->validateFileExists($foldername.'/'.$configFileName);
-}
+		return $foldername.'/'.$configFileName;
+	}
 
 	/**
 	 * Returns true if at least one image file exists in the folder, false if otherwise
@@ -177,6 +184,30 @@ class Folders {
 		}
 
 		return FALSE;
+	}
+
+	public function limitResultToImages($folderContent) {
+		$fileHandler = new \Kaba\Gallery\FileHandler\Files();
+
+		foreach ($folderContent as $key => $singleFile) {
+			if (!$fileHandler->validateFileIsImage($singleFile)) {
+				unset($folderContent[$key]);
+			}
+		}
+
+		$folderContent = array_slice($folderContent, 0);
+
+		return $folderContent;
+	}
+
+	public function getConfigFileFromFolder($foldername) {
+		if ($this->validateConfigFileExists($foldername)) {
+			$configFileContent = file($this->getFullPathToConfigFile($foldername));
+			return $configFileContent;
+		} else {
+			throw new \Exception('No config file found in folder '.$foldername.'. This shouldn\' happen because we filter
+			if there are config files earlier, but you never know', 1357772287);
+		}
 	}
 
 }
