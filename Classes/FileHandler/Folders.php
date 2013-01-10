@@ -28,6 +28,14 @@ class Folders {
 			$path = realpath($path);
 		}
 
+		if (empty($path)) {
+			throw new \Exception('GalleryRootPath could not be resolved', 1357860838);
+		}
+
+		if (!$this->validateFolderHasAtLeastOneFile($path)) {
+			throw new \Exception('GalleryRootPath is empty', 1357860334);
+		}
+
 		$folderContent = scandir($path);
 
 		$folderContent = $this->removeDotDirectoriesFromFolderContent($folderContent);
@@ -208,6 +216,14 @@ class Folders {
 			throw new \Exception('No config file found in folder '.$foldername.'. This shouldn\' happen because we filter
 			if there are config files earlier, but you never know', 1357772287);
 		}
+	}
+
+	private function validateFolderHasAtLeastOneFile($path) {
+		$folderContent = scandir($path);
+		if (count($folderContent > 0)) {
+			return TRUE;
+		}
+		return FALSE;
 	}
 
 }
