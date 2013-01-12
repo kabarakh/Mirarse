@@ -7,7 +7,7 @@ namespace Kaba\Gallery\Controller;
  *
  * @method render
  */
-class ControllerView {
+class ControllerView extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 	/**
 	 * Magic function to do anything...

@@ -2,7 +2,7 @@
 
 namespace Kaba\Gallery\Controller;
 
-abstract class AbstractController {
+abstract class AbstractController extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 	/**
 	 * @var \Kaba\Gallery\Controller\ControllerView
@@ -14,6 +14,8 @@ abstract class AbstractController {
 	 */
 	public function __construct() {
 		$this->view = new \Kaba\Gallery\Controller\ControllerView();
+
+		parent::__construct();
 	}
 
 	/**

@@ -5,7 +5,7 @@ namespace Kaba\Gallery\FileHandler;
 /**
  * Everything which has to do with file handling
  */
-class Files {
+class Files extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 	/**
 	 * Checks if a file with the provided path is an imagefile. Uses finfo and the mimetype to check the files.

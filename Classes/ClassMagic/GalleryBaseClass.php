@@ -26,7 +26,12 @@ namespace Kaba\Gallery\ClassMagic;
 abstract class GalleryBaseClass {
 
 	public function __construct() {
-		// todo: inject magic with reflection
+		$classMagic = new \Kaba\Gallery\Bootstrap\ClassMagic();
+		$classMagic->resolveInjects($this);
+	}
+
+	public function __toString() {
+		return get_class($this);
 	}
 }
 

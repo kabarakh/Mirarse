@@ -9,7 +9,11 @@ namespace Kaba\Gallery\Domain\Repository;
  */
 class Gallery extends \Kaba\Gallery\Domain\Repository\AbstractRepository {
 
-	public $injectFolderHandler = '\Kaba\Gallery\FileHandler\Folders';
+	/**
+	 * @var \Kaba\Gallery\FileHandler\Folders
+	 * @inject
+	 */
+	protected $folderHandler;
 
 	/**
 	 * @param $rootPath String

@@ -5,7 +5,7 @@ namespace Kaba\Gallery\FileHandler;
 /**
  * Everything which has to do with folder handling
  */
-class Folders {
+class Folders extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 	/**
 	 * Get all the folders and files in a directory, but omit the directories "." and ".."
@@ -33,7 +33,7 @@ class Folders {
 		}
 
 		if (!$this->validateFolderHasAtLeastOneFile($path)) {
-			throw new \Exception('GalleryRootPath is empty', 1357860334);
+			return NULL;
 		}
 
 		$folderContent = scandir($path);

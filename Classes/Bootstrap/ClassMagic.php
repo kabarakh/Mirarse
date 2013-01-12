@@ -4,6 +4,7 @@ namespace Kaba\Gallery\Bootstrap;
 
 class ClassMagic {
 	public function resolveInjects($classObj) {
+		/*
 		$className = get_class($classObj);
 		$classVariables = get_class_vars($className);
 		var_dump($classVariables);
@@ -21,12 +22,56 @@ class ClassMagic {
 				$classObj->$propertyName = $object;
 			}
 		}
+		*/
+
+		$injectProperties = $this->getInjectProperties($classObj);
+
+		foreach ($injectProperties as $propertyEntry) {
+			echo "\n\n".$propertyEntry['property']->getName()."\n\n";
+
+			$objectToInject = new $propertyEntry['type']();
+
+			echo "Injecting object of type ".$type.' in property '.get_class($classObj)."->".$propertyEntry['property']->getName()."\n";
+
+			$propertyEntry['property']->setAccessible(TRUE);
+			$propertyEntry['property']->setValue($classObj, $objectToInject);
+		}
+
 	}
 
-	protected function generatePropertyNameOutOfInject($classVariable) {
-		$classVariable = str_replace('inject', '', $classVariable);
-		$classVariable = lcfirst($classVariable);
-		return $classVariable;
+	protected function getInjectProperties($object) {
+		$reflectionClass = new \Kaba\Gallery\ClassMagic\Reflection\ReflectionClass($object);
+
+		$properties = $reflectionClass->getProperties();
+		$propertiesToInject = array();
+		foreach ($properties as $property) {/** @var $property \Kaba\Gallery\ClassMagic\Reflection\ReflectionProperty */
+			echo "\nProperty name: ".$property->getName()."\n";
+			$docComment = $property->getDocComment();
+
+			if (strpos($docComment, '@inject')) {
+				echo "@inject in comment for property ".$property->getName();
+				$type = $this->getPropertyTypeFromDocComment($docComment);
+
+				$propertiesToInject[] = array('property' => $property, 'type' => $type);
+			}
+
+		}
+
+		return $propertiesToInject;
+	}
+
+	protected function getPropertyTypeFromDocComment($docComment) {
+		$docCommentLines = explode(chr(10), $docComment);
+
+		foreach ($docCommentLines as $singleLine) {
+			if (strpos($singleLine, '@var')) {
+				$singleLine = trim($singleLine);
+				$singleLineArray = explode(' ', $singleLine);
+				return $singleLineArray[2];
+			}
+		}
+
+		throw new \Exception('@inject found but no @var was given', 1357950694);
 	}
 }
 

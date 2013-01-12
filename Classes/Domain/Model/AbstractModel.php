@@ -2,7 +2,7 @@
 
 namespace Kaba\Gallery\Domain\Model;
 
-abstract class AbstractModel {
+abstract class AbstractModel extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 	public function getObjectFromArray($objectArray) {
 
