@@ -24,6 +24,9 @@
 
 namespace Kaba\Gallery\Domain\Model;
 
+/**
+ * Domain Model for the configuration of galleries, created out of the config files
+ */
 class Config extends \Kaba\Gallery\Domain\Model\AbstractModel {
 
 }

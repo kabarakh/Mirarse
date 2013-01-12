@@ -58,6 +58,12 @@ class Gallery extends \Kaba\Gallery\Domain\Repository\AbstractRepository {
 
 	}
 
+	/**
+	 * Creates a gallery object from a provided path
+	 * get config, images and stuff
+	 *
+	 * @param $singleFolder
+	 */
 	protected function createGalleryFromPath($singleFolder) {
 		$folderContent = $this->folderHandler->getContentsOfFolder($singleFolder);
 

@@ -1,28 +1,41 @@
 <?php
+/*
+ * Copyright notice
+ *
+ * (c) 2012/2013 Christian Herberger <webmaster@kabarakh.de>
+ *
+ * All rights reserved
+ *
+ * This script is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
 namespace Kaba\Gallery\Bootstrap;
 
+/**
+ * Some magic stuff like injects
+ */
 class ClassMagic {
+
+	/**
+	 * Gets all properties from a class with var and inject phpdoc annotations and resolves them.
+	 * just builds basic objects of the proper type and sets them to the property
+	 *
+	 * @param $classObj
+	 */
 	public function resolveInjects($classObj) {
-		/*
-		$className = get_class($classObj);
-		$classVariables = get_class_vars($className);
-		var_dump($classVariables);
-		foreach ($classVariables as $classVariable => $type) {
-			if (strncmp($classVariable, 'inject', 6) === 0) {
-				echo 'Running '.$classVariable."\n";
-
-				echo 'Build new object for '.$type."\n";
-				$object = new $type();
-
-				$propertyName = $this->generatePropertyNameOutOfInject($classVariable);
-
-				echo 'Assigning object to property '.$propertyName."\n";
-
-				$classObj->$propertyName = $object;
-			}
-		}
-		*/
 
 		$injectProperties = $this->getInjectProperties($classObj);
 
@@ -39,6 +52,13 @@ class ClassMagic {
 
 	}
 
+	/**
+	 * Gets all properties with the proper annotations
+	 *
+	 * @param $object
+	 *
+	 * @return array
+	 */
 	protected function getInjectProperties($object) {
 		$reflectionClass = new \Kaba\Gallery\ClassMagic\Reflection\ReflectionClass($object);
 
@@ -58,8 +78,15 @@ class ClassMagic {
 		}
 
 		return $propertiesToInject;
-	}
+}
 
+	/**
+	 * Gets the var-annotation from the phpdoc comments and parses it to get the right class for the property
+	 *
+	 * @param $docComment
+	 * @return mixed
+	 * @throws \Exception
+	 */
 	protected function getPropertyTypeFromDocComment($docComment) {
 		$docCommentLines = explode(chr(10), $docComment);
 

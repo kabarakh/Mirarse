@@ -29,17 +29,17 @@ namespace Kaba\Gallery\FileHandler;
  */
 class Folders extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
+
 	/**
-	 * Get all the folders and files in a directory, but omit the directories "." and ".."
-	 * If $relative is provided, the path is assumed to be relative to the file which is used to start the script,
-	 * and is made absolute accordingly
+	 * returns an array with all folders and files in the respective $path
+	 * if relative is true, $path is considered inside of GALLERY_RUN_DIRECTORY
 	 *
 	 * @param $path
 	 * @param bool $relative
 	 *
-	 * @return array
-	 */
-	public function getContentsOfFolder($path, $relative = FALSE) {
+	 * @return array|null
+	 * @throws \Exception
+	 */public function getContentsOfFolder($path, $relative = FALSE) {
 
 		echo "\n\nPath: ".$path."\n";
 		echo 'Realpath: '.realpath($path)."\n\n";
@@ -187,6 +187,12 @@ class Folders extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 		return $fileHandler->validateFileExists($configFilePath);
 	}
 
+	/**
+	 * Generates the path to a gallery config file. Respects the config file name setting
+	 *
+	 * @param $foldername
+	 * @return string
+	 */
 	protected function getFullPathToConfigFile($foldername) {
 		$configFileName = 'gallery.conf';
 
@@ -202,7 +208,8 @@ class Folders extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	 *
 	 * @param $foldername
 	 * @return bool
-	 */protected function validateAtLeastOnePictureFileExists($foldername) {
+	 */
+	protected function validateAtLeastOnePictureFileExists($foldername) {
 		$fileHandler = new \Kaba\Gallery\FileHandler\Files();
 
 		$contentsOfFolder = $this->getContentsOfFolder($foldername);
@@ -214,8 +221,14 @@ class Folders extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 		}
 
 		return FALSE;
-	}
+}
 
+	/**
+	 * Unsets every folderContent-array entry which isn't a image file and resets the array keys
+	 *
+	 * @param $folderContent
+	 * @return array
+	 */
 	public function limitResultToImages($folderContent) {
 		$fileHandler = new \Kaba\Gallery\FileHandler\Files();
 
@@ -228,8 +241,15 @@ class Folders extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 		$folderContent = array_slice($folderContent, 0);
 
 		return $folderContent;
-	}
+}
 
+	/**
+	 * get the config file from a gallery folder
+	 *
+	 * @param $foldername
+	 * @return array
+	 * @throws \Exception
+	 */
 	public function getConfigFileFromFolder($foldername) {
 		if ($this->validateConfigFileExists($foldername)) {
 			$configFileContent = file($this->getFullPathToConfigFile($foldername));
@@ -238,8 +258,14 @@ class Folders extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 			throw new \Exception('No config file found in folder '.$foldername.'. This shouldn\' happen because we filter
 			if there are config files earlier, but you never know', 1357772287);
 		}
-	}
+}
 
+	/**
+	 * returns true if at least one file exists in the folder, false if otherwise
+	 *
+	 * @param $path
+	 * @return bool
+	 */
 	private function validateFolderHasAtLeastOneFile($path) {
 		$folderContent = scandir($path);
 		if (count($folderContent > 0)) {

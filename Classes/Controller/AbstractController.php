@@ -24,6 +24,9 @@
 
 namespace Kaba\Gallery\Controller;
 
+/**
+ * The basic abstract controller to provide functionality to specific controllers
+ */
 abstract class AbstractController extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 	/**

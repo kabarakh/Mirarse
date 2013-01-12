@@ -24,8 +24,17 @@
 
 namespace Kaba\Gallery\Domain\Model;
 
+/**
+ * The abstract model class to provide functionality for the specific models
+ */
 abstract class AbstractModel extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
+	/**
+	 * create a model object from an array. validates if all keys and data types are correct
+	 * and then calls the constructor for the model class
+	 *
+	 * @param $objectArray
+	 */
 	public function getObjectFromArray($objectArray) {
 
 		if (self::validateObjectArray($objectArray)) {
@@ -36,6 +45,11 @@ abstract class AbstractModel extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 	}
 
+	/**
+	 * checks if the keys and data types from the array entries fit to the model class
+	 *
+	 * @param $objectArray
+	 */
 	protected function validateObjectArray($objectArray) {
 	}
 

@@ -24,6 +24,9 @@
 
 namespace Kaba\Gallery\ClassMagic\Reflection;
 
+/**
+ * Extends \ReflectionMethod if we want to change something
+ */
 class ReflectionMethod extends \ReflectionMethod {
 	// todo: build reflection class using the php reflection classes
 }
