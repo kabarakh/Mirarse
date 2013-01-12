@@ -44,7 +44,7 @@ class ClassMagic {
 
 			$objectToInject = new $propertyEntry['type']();
 
-			echo "Injecting object of type ".$type.' in property '.get_class($classObj)."->".$propertyEntry['property']->getName()."\n";
+			echo "Injecting object of type ".$propertyEntry['type'].' in property '.get_class($classObj)."->".$propertyEntry['property']->getName()."\n";
 
 			$propertyEntry['property']->setAccessible(TRUE);
 			$propertyEntry['property']->setValue($classObj, $objectToInject);

@@ -258,7 +258,7 @@ class Folders extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 			throw new \Exception('No config file found in folder '.$foldername.'. This shouldn\' happen because we filter
 			if there are config files earlier, but you never know', 1357772287);
 		}
-}
+	}
 
 	/**
 	 * returns true if at least one file exists in the folder, false if otherwise
@@ -268,7 +268,7 @@ class Folders extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	 */
 	private function validateFolderHasAtLeastOneFile($path) {
 		$folderContent = scandir($path);
-		if (count($folderContent > 0)) {
+		if (count($folderContent) > 0) {
 			return TRUE;
 		}
 		return FALSE;
