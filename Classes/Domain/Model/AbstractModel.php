@@ -39,8 +39,6 @@ abstract class AbstractModel extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 		if (self::validateObjectArray($objectArray)) {
 
-			echo 'Creating object of class '.__CLASS__."\n";
-
 		};
 
 	}

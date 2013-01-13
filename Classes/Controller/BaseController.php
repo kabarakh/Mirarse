@@ -47,12 +47,6 @@ class BaseController extends \Kaba\Gallery\Controller\AbstractController {
 
 		$GLOBALS['parameter'] = $parameter;
 
-		echo "Called class: ".get_called_class(). "\n";
-		echo "Action: ".$action."\n";
-		echo "Parameters: ".print_r($GLOBALS['parameter'], TRUE);
-
-		echo "Calling ".get_called_class().'->'.$action."\n";
-
 		try {
 			$controllerObject = $this->getObjectForController($controller);
 

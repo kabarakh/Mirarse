@@ -40,11 +40,7 @@ class ClassMagic {
 		$injectProperties = $this->getInjectProperties($classObj);
 
 		foreach ($injectProperties as $propertyEntry) {
-			echo "\n\n".$propertyEntry['property']->getName()."\n\n";
-
 			$objectToInject = new $propertyEntry['type']();
-
-			echo "Injecting object of type ".$propertyEntry['type'].' in property '.get_class($classObj)."->".$propertyEntry['property']->getName()."\n";
 
 			$propertyEntry['property']->setAccessible(TRUE);
 			$propertyEntry['property']->setValue($classObj, $objectToInject);
@@ -65,11 +61,9 @@ class ClassMagic {
 		$properties = $reflectionClass->getProperties();
 		$propertiesToInject = array();
 		foreach ($properties as $property) {/** @var $property \Kaba\Gallery\ClassMagic\Reflection\ReflectionProperty */
-			echo "\nProperty name: ".$property->getName()."\n";
 			$docComment = $property->getDocComment();
 
 			if (strpos($docComment, '@inject')) {
-				echo "@inject in comment for property ".$property->getName();
 				$type = $this->getPropertyTypeFromDocComment($docComment);
 
 				$propertiesToInject[] = array('property' => $property, 'type' => $type);

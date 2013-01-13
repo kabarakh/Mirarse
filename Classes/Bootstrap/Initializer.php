@@ -56,16 +56,9 @@ class Initializer {
 		// get the path from where the gallery is run so we can use the relative path from there for gallery locations
 		define('GALLERY_RUN_DIRECTORY', realpath('.').'/');
 
-		echo "Script-Run-Directory: ".GALLERY_RUN_DIRECTORY."\n";
-
-		echo "Script-Main-Directory: ".GALLERY_ROOT_PATH."\n";
-
 		define('GALLERY_CLASSES', GALLERY_ROOT_PATH.'Classes/');
 
 		define('GALLERY_VIEWS', GALLERY_ROOT_PATH.'View/');
-
-		echo "Gallery Classes: ". GALLERY_CLASSES."\n";
-		echo "Gallery Views: ". GALLERY_VIEWS."\n";
 	}
 
 	/**
