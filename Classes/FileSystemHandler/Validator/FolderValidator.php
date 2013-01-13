@@ -67,7 +67,7 @@ class FolderValidator extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 		$contentsOfFolder = new \Kaba\Gallery\FileSystemHandler\FolderContentHandler($path);
 
 		foreach ($contentsOfFolder->getContent() as $file) {
-			if ($this->fileValidator->validateFileIsImage($file)) {
+			if ($this->fileValidator->validateFileIsImage($path.'/'.$file)) {
 				return TRUE;
 			}
 		}

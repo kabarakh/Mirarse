@@ -131,6 +131,7 @@ class FolderContentHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 		foreach ($this->content as $key => $path) {
 
 			$configFileExists = $this->fileValidator->validateFileExists($this->folderHandler->getFullPathToConfigFile($path));
+
 			$onePictureExists = $this->folderValidator->validateAtLeastOnePictureFileExists($path);
 
 			if (!$configFileExists || !$onePictureExists) {

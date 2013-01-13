@@ -51,8 +51,8 @@ class GalleryRepository extends \Kaba\Gallery\Domain\Repository\AbstractReposito
 
 		$galleryList = array();
 
-		foreach ($contentsOfRootPath as $singleFolder) {
-			$gallery[] = $this->createGalleryFromPath($singleFolder);
+		foreach ($contentsOfRootPath->getContent() as $singleFolder) {
+			$galleryList[] = $this->createGalleryFromPath($singleFolder);
 		}
 
 	}
@@ -70,6 +70,7 @@ class GalleryRepository extends \Kaba\Gallery\Domain\Repository\AbstractReposito
 		$folderContent->limitResultToImages();
 
 		$configFileContent = $this->folderHandler->getConfigFileFromFolder($singleFolder);
+
 
 
 		#$gallery = \Kaba\Gallery\Domain\Model\Gallery::getObjectFromArray();

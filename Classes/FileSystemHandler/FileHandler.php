@@ -31,6 +31,7 @@ class FileHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 	/**
 	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FileValidator
+	 * @inject
 	 */
 	protected $fileValidator;
 
