@@ -94,7 +94,7 @@ class FolderHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 		$absolutePath = realpath(GALLERY_RUN_DIRECTORY . $relativePath);
 
 		if (!$this->folderValidator->validateFolderExists($absolutePath)) {
-			throw new \Exception('Path ' . $relativePath . ' not accessible or doesn\'t exist', 1357353323);
+			throw new \Exception('Path ' . $relativePath . ' not accessible or does not exist', 1357353323);
 		}
 
 		return $absolutePath;

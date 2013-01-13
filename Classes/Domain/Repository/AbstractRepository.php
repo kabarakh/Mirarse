@@ -25,7 +25,7 @@
 namespace Kaba\Gallery\Domain\Repository;
 
 /**
- * The abstract repositiory to provide functionality for each and every specific repository
+ * The abstract repository to provide functionality for each and every specific repository
  */
 abstract class AbstractRepository extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 }

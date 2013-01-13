@@ -52,7 +52,7 @@ class Gallery {
 	}
 
 	/**
-	 * Wrapper for $this->controller->callAction to make the script more useable
+	 * Wrapper for $this->controller->callAction to make the script more usable
 	 *
 	 * @param $actionName
 	 * @param array $parameter

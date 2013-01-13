@@ -30,7 +30,7 @@ namespace Kaba\Gallery\FileSystemHandler\Validator;
 class FileValidator extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 	/**
-	 * Checks if a file with the provided path is an imagefile. Uses finfo and the mimetype to check the files.
+	 * Checks if a file with the provided path is an image file. Uses finfo and the mimetype to check the files.
 	 * If the mimetype starts with "image/", the file is an image and the function returns true, else returns false
 	 *
 	 * @param $pathToFile

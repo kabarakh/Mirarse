@@ -25,7 +25,7 @@
 namespace Kaba\Gallery\ClassMagic;
 
 /**
- * A base class for all other classes in the gallery - only thing to achive with that are global __construct
+ * A base class for all other classes in the gallery - only thing to achieve with that are global __construct
  * and __toString methods so we can always inject stuff and use class names when echo'ing objects
  */
 abstract class GalleryBaseClass {
