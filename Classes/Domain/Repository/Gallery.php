@@ -27,12 +27,12 @@ namespace Kaba\Gallery\Domain\Repository;
 /**
  * The repository for galleries
  *
- * @property \Kaba\Gallery\FileHandler\Folders $folderHandler
+ * @property \Kaba\Gallery\FileHandler\Folder $folderHandler
  */
 class Gallery extends \Kaba\Gallery\Domain\Repository\AbstractRepository {
 
 	/**
-	 * @var \Kaba\Gallery\FileHandler\Folders
+	 * @var \Kaba\Gallery\FileHandler\Folder
 	 * @inject
 	 */
 	protected $folderHandler;
@@ -46,9 +46,9 @@ class Gallery extends \Kaba\Gallery\Domain\Repository\AbstractRepository {
 
 		$contentsOfRootPath = $this->folderHandler->getContentsOfFolder($rootPath);
 
-		$contentsOfRootPath = $this->folderHandler->limitResultToFolders($contentsOfRootPath);
+		$contentsOfRootPath->limitResultToFolders();
 
-		$contentsOfRootPath = $this->folderHandler->limitResultToValidFolders($contentsOfRootPath);
+		$contentsOfRootPath->limitResultToValidFolders();
 
 		$galleryList = array();
 
@@ -67,12 +67,7 @@ class Gallery extends \Kaba\Gallery\Domain\Repository\AbstractRepository {
 	protected function createGalleryFromPath($singleFolder) {
 		$folderContent = $this->folderHandler->getContentsOfFolder($singleFolder);
 
-		echo "\n\nbefore: \n";
-		var_dump($folderContent);
-
-		$folderContent = $this->folderHandler->limitResultToImages($folderContent);
-		echo "\nafter: \n";
-		var_dump($folderContent);
+		$folderContent->limitResultToImages();
 
 		$configFileContent = $this->folderHandler->getConfigFileFromFolder($singleFolder);
 

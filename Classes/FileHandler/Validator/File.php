@@ -22,12 +22,12 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\FileHandler;
+namespace Kaba\Gallery\FileHandler\Validator;
 
 /**
  * Everything which has to do with file handling
  */
-class Files extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+class File extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 	/**
 	 * Checks if a file with the provided path is an imagefile. Uses finfo and the mimetype to check the files.
@@ -36,7 +36,8 @@ class Files extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	 * @param $pathToFile
 	 *
 	 * @return bool
-	 */public function validateFileIsImage($pathToFile) {
+	 */
+	public function validateFileIsImage($pathToFile) {
 		if (!$this->validateFileExists($pathToFile)) {
 			return FALSE;
 		}
@@ -44,8 +45,6 @@ class Files extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 		$finfo = new \finfo();
 
 		$mimeType = $finfo->file($pathToFile, FILEINFO_MIME_TYPE);
-
-		echo 'MimeType: '.$mimeType."\n";
 
 		if (strncmp($mimeType, 'image/', 6) === 0) {
 			return TRUE;
@@ -58,7 +57,8 @@ class Files extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	 *
 	 * @param $pathToFile
 	 * @return bool
-	 */public function validateFileExists($pathToFile) {
+	 */
+	public function validateFileExists($pathToFile) {
 		if (is_file($pathToFile)) {
 			return TRUE;
 		}
