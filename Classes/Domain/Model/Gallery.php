@@ -30,7 +30,7 @@ namespace Kaba\Gallery\Domain\Model;
 class Gallery extends \Kaba\Gallery\Domain\Model\AbstractModel {
 
 	/**
-	 * @var String
+	 * @var string
 	 */
 	protected $path;
 
@@ -92,14 +92,14 @@ class Gallery extends \Kaba\Gallery\Domain\Model\AbstractModel {
 	}
 
 	/**
-	 * @param String $path
+	 * @param string $path
 	 */
 	public function setPath($path) {
 		$this->path = $path;
 	}
 
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getPath() {
 		return $this->path;

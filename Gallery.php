@@ -56,7 +56,7 @@ class Gallery {
 	 *
 	 * @param $actionName
 	 * @param array $parameter
-	 * @param null|String $controller
+	 * @param null|string $controller
 	 */
 	public function callAction($actionName, $parameter = array(), $controller = NULL) {
 		$this->controller->callAction($actionName, $parameter, $controller);

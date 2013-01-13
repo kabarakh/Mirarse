@@ -36,7 +36,7 @@ class GalleryRepository extends \Kaba\Gallery\Domain\Repository\AbstractReposito
 	protected $folderHandler;
 
 	/**
-	 * @param $rootPath String
+	 * @param $rootPath string
 	 *
 	 * @throws \Exception
 	 */
