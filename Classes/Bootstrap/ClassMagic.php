@@ -85,7 +85,7 @@ class ClassMagic {
 		$docCommentLines = explode(chr(10), $docComment);
 
 		foreach ($docCommentLines as $singleLine) {
-			if (strpos($singleLine, '@var')) {
+			if (strpos($singleLine, '@var ')) {
 				$singleLine = trim($singleLine);
 				$singleLineArray = explode(' ', $singleLine);
 				return $singleLineArray[2];

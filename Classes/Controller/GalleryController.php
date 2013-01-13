@@ -25,25 +25,25 @@
 namespace Kaba\Gallery\Controller;
 
 /**
- * The basic abstract controller to provide functionality to specific controllers
+ * The controller for galleries. Has a list- and a singleView-action
  */
-abstract class AbstractController extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+class GalleryController extends \Kaba\Gallery\Controller\BaseController {
 
 	/**
-	 * @var \Kaba\Gallery\Controller\ControllerView
+	 * @var \Kaba\Gallery\Domain\Repository\GalleryRepository
 	 * @inject
 	 */
-	protected $view;
+	protected $galleryRepository;
 
 	/**
-	 * The method to call actions. This method must be used instead of calling the action methods directly,
-	 * if not the views can't be used
-	 *
-	 * @param $actionName
-	 * @param $parameter
-	 * @param null $controller
-	 *
-	 * @throws \Exception
+	 * the action to list all galleries available in the configured base folder
 	 */
-	public abstract function callAction($actionName, $parameter = array(), $controller = NULL);
+	public function listAction() {
+		$galleryRootPath = $GLOBALS['parameter']['galleryRootPath'];
+
+		$this->galleryRepository->getAllGalleriesByRootPath($galleryRootPath, TRUE);
+
+	}
 }
+
+?>

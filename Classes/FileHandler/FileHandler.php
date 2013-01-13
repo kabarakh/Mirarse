@@ -22,28 +22,13 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Controller;
+namespace Kaba\Gallery\FileSystemHandler;
 
 /**
- * The basic abstract controller to provide functionality to specific controllers
+ * Everything which has to do with file handling
  */
-abstract class AbstractController extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+class FileHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
-	/**
-	 * @var \Kaba\Gallery\Controller\ControllerView
-	 * @inject
-	 */
-	protected $view;
-
-	/**
-	 * The method to call actions. This method must be used instead of calling the action methods directly,
-	 * if not the views can't be used
-	 *
-	 * @param $actionName
-	 * @param $parameter
-	 * @param null $controller
-	 *
-	 * @throws \Exception
-	 */
-	public abstract function callAction($actionName, $parameter = array(), $controller = NULL);
 }
+
+?>

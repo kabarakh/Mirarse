@@ -48,7 +48,7 @@ class BaseController extends \Kaba\Gallery\Controller\AbstractController {
 		$GLOBALS['parameter'] = $parameter;
 
 		try {
-			$controllerObject = $this->getObjectForController($controller);
+			$controllerObject = $this->getObjectForController($controller.'Controller');
 
 			$controllerObject->$action();
 		} catch (\Exception $e) {
