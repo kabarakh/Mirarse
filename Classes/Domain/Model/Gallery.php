@@ -40,74 +40,45 @@ class Gallery extends \Kaba\Gallery\Domain\Model\AbstractModel {
 	protected $numberOfImages;
 
 	/**
-	 * @var String
-	 */
-	protected $title;
-
-	/**
-	 * @var \DateTime
-	 */
-	protected $date;
-
-	/**
-	 * @var String
-	 */
-	protected $description;
-
-	/**
-	 * @var Image[]
+	 * @var \Kaba\Gallery\Domain\Model\Image[]
 	 */
 	protected $images;
 
 	/**
-	 * @var String
+	 * @var \Kaba\Gallery\Domain\Model\SingleGalleryConfig
 	 */
-	protected $galleryThumbnail;
+	protected $galleryConfig;
 
 	/**
-	 * @param $date
+	 * @param \Kaba\Gallery\Domain\Model\SingleGalleryConfig $galleryConfig
 	 */
-	public function setDate($date) {
-		$this->date = $date;
+	public function setGalleryConfig($galleryConfig) {
+		$this->galleryConfig = $galleryConfig;
 	}
 
 	/**
-	 * @return \DateTime
+	 * @return \Kaba\Gallery\Domain\Model\SingleGalleryConfig
 	 */
-	public function getDate() {
-		return $this->date;
+	public function getGalleryConfig() {
+		return $this->galleryConfig;
 	}
 
 	/**
-	 * @param $description
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
-
-	/**
-	 * @return String
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-
-	/**
-	 * @param $images
+	 * @param $images \Kaba\Gallery\Domain\Model\Image[]
 	 */
 	public function setImages($images) {
 		$this->images = $images;
 	}
 
 	/**
-	 * @return Image[]
+	 * @return \Kaba\Gallery\Domain\Model\Image[]
 	 */
 	public function getImages() {
 		return $this->images;
 	}
 
 	/**
-	 * @param $numberOfImages
+	 * @param int $numberOfImages
 	 */
 	public function setNumberOfImages($numberOfImages) {
 		$this->numberOfImages = $numberOfImages;
@@ -121,7 +92,7 @@ class Gallery extends \Kaba\Gallery\Domain\Model\AbstractModel {
 	}
 
 	/**
-	 * @param $path
+	 * @param String $path
 	 */
 	public function setPath($path) {
 		$this->path = $path;
@@ -132,34 +103,6 @@ class Gallery extends \Kaba\Gallery\Domain\Model\AbstractModel {
 	 */
 	public function getPath() {
 		return $this->path;
-	}
-
-	/**
-	 * @param $title
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
-
-	/**
-	 * @return String
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
-
-	/**
-	 * @param String $galleryThumbnail
-	 */
-	public function setGalleryThumbnail($galleryThumbnail) {
-		$this->galleryThumbnail = $galleryThumbnail;
-	}
-
-	/**
-	 * @return String
-	 */
-	public function getGalleryThumbnail() {
-		return $this->galleryThumbnail;
 	}
 
 }

@@ -36,6 +36,12 @@ class FileHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	protected $fileValidator;
 
 	/**
+	 * @var \Kaba\Gallery\FileSystemHandler\YamlParser
+	 * @inject
+	 */
+	protected $yamlParser;
+
+	/**
 	 * Returns the content from a file as an array
 	 * Validates first if the file exists
 	 *
@@ -48,8 +54,30 @@ class FileHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 		if ($this->fileValidator->validateFileExists($pathOfConfigFile)) {
 			return $configFileContent = file($pathOfConfigFile);
 		} else {
-			throw new \Exception('No config file found with path ' . $pathOfConfigFile . '. This shouldn\' happen because we filter
+			throw new \Exception('No config file found with path ' . $pathOfConfigFile . '. This should not happen because we filter
 			if there are config files earlier, but you never know', 1357772287);
+		}
+	}
+
+	/**
+	 * Reads a yaml config file and returns the array after parsing it
+	 * checks first if the file exists (basically unnecessary but you never know...) and if the file is not empty
+	 *
+	 * @param $pathOfConfigFile
+	 *
+	 * @return array|null
+	 * @throws \Exception
+	 */
+	public function getConfigArrayFromYamlFile($pathOfConfigFile) {
+		if ($this->fileValidator->validateFileExists($pathOfConfigFile)) {
+			if ($this->fileValidator->validateIfFileIsNotEmpty($pathOfConfigFile)) {
+				return $configFileContent = $this->yamlParser->parseYamlFile($pathOfConfigFile);
+			} else {
+				return NULL;
+			}
+		} else {
+			throw new \Exception('No config file found with path ' . $pathOfConfigFile . '. This should not happen because we filter
+				if there are config files earlier, but you never know', 1357772287);
 		}
 	}
 }

@@ -64,6 +64,20 @@ class FileValidator extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 		}
 		return FALSE;
 	}
+
+	/**
+	 * Returns true if a file has any size larger than 0, false if size is 0
+	 *
+	 * @param $pathToFile
+	 *
+	 * @return bool
+	 */
+	public function validateIfFileIsNotEmpty($pathToFile) {
+		if (filesize($pathToFile) !== 0) {
+			return TRUE;
+		}
+		return FALSE;
+	}
 }
 
 ?>

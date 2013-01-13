@@ -27,8 +27,16 @@ namespace Kaba\Gallery\Domain\Model;
 /**
  * Domain Model for the configuration of galleries, created out of the config files
  */
-class Config extends \Kaba\Gallery\Domain\Model\AbstractModel {
+class SingleGalleryConfig extends \Kaba\Gallery\Domain\Model\AbstractModel {
 
+	/**
+	 * Creates a SingleGalleryConfigFile from an array
+	 *
+	 * @param array $configFileArray
+	 */
+	public function createConfigObjectFromConfigFileContent(array $configFileArray) {
+
+	}
 }
 
 ?>

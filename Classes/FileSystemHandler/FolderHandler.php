@@ -110,7 +110,7 @@ class FolderHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	 */
 	public function getConfigFileFromFolder($path) {
 		$pathOfConfigFile = $this->getFullPathToConfigFile($path);
-		return $this->fileHandler->getContentFromFile($pathOfConfigFile);
+		return $this->fileHandler->getConfigArrayFromYamlFile($pathOfConfigFile);
 	}
 
 	/**
@@ -121,7 +121,7 @@ class FolderHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	 * @return string
 	 */
 	public function getFullPathToConfigFile($path) {
-		$configFileName = 'gallery.conf';
+		$configFileName = 'gallery.yml';
 
 		if ($GLOBALS['parameter']['galleryConfigFile']) {
 			$configFileName = $GLOBALS['parameter']['galleryConfigFile'];
