@@ -29,6 +29,28 @@ namespace Kaba\Gallery\FileSystemHandler;
  */
 class FileHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
+	/**
+	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FileValidator
+	 */
+	protected $fileValidator;
+
+	/**
+	 * Returns the content from a file as an array
+	 * Validates first if the file exists
+	 *
+	 * @param $pathOfConfigFile
+	 *
+	 * @return array
+	 * @throws \Exception
+	 */
+	public function getContentFromFile($pathOfConfigFile) {
+		if ($this->fileValidator->validateFileExists($pathOfConfigFile)) {
+			return $configFileContent = file($pathOfConfigFile);
+		} else {
+			throw new \Exception('No config file found with path ' . $pathOfConfigFile . '. This shouldn\' happen because we filter
+			if there are config files earlier, but you never know', 1357772287);
+		}
+	}
 }
 
 ?>

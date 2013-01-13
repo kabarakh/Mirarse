@@ -30,22 +30,16 @@ namespace Kaba\Gallery\FileSystemHandler;
 class FolderHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FileValidator
-	 * @inject
-	 */
-	protected $fileValidator;
-
-	/**
 	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FolderValidator
 	 * @inject 
 	 */
 	protected $folderValidator;
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FolderContentValidator
+	 * @var \Kaba\Gallery\FileSystemHandler\FileHandler
 	 * @inject
 	 */
-	protected $folderContentValidator;
+	protected $fileHandler;
 
 	/**
 	 * returns an array with all folders and files in the respective $path
@@ -116,13 +110,7 @@ class FolderHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	 */
 	public function getConfigFileFromFolder($path) {
 		$pathOfConfigFile = $this->getFullPathToConfigFile($path);
-		if ($this->fileValidator->validateFileExists($pathOfConfigFile)) {
-			$configFileContent = file($pathOfConfigFile);
-			return $configFileContent;
-		} else {
-			throw new \Exception('No config file found in folder ' . $path . '. This shouldn\' happen because we filter
-			if there are config files earlier, but you never know', 1357772287);
-		}
+		return $this->fileHandler->getContentFromFile($pathOfConfigFile);
 	}
 
 	/**
