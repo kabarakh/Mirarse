@@ -268,6 +268,7 @@ class Folders extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	 */
 	private function validateFolderHasAtLeastOneFile($path) {
 		$folderContent = scandir($path);
+		$folderContent = $this->removeDotDirectoriesFromFolderContent($folderContent);
 		if (count($folderContent) > 0) {
 			return TRUE;
 		}
