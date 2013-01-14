@@ -22,15 +22,15 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Domain\Repository;
+namespace Kabarakh\Mirarse\Domain\Repository;
 
 /**
  * The repository for galleries
  */
-class GalleryRepository extends \Kaba\Gallery\Domain\Repository\AbstractRepository {
+class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepository {
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\FolderHandler
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\FolderHandler
 	 * @inject
 	 */
 	protected $folderHandler;
@@ -42,7 +42,7 @@ class GalleryRepository extends \Kaba\Gallery\Domain\Repository\AbstractReposito
 	 */
 	public function getAllGalleriesByRootPath($rootPath) {
 
-		/** @var $contentsOfRootPath \Kaba\Gallery\FileSystemHandler\FolderContentHandler */
+		/** @var $contentsOfRootPath \Kabarakh\Mirarse\FileSystemHandler\FolderContentHandler */
 		$contentsOfRootPath = $this->folderHandler->getContentsOfFolder($rootPath);
 
 		$contentsOfRootPath->limitResultToFolders();
@@ -64,7 +64,7 @@ class GalleryRepository extends \Kaba\Gallery\Domain\Repository\AbstractReposito
 	 * @param $singleFolder
 	 */
 	protected function createGalleryFromPath($singleFolder) {
-		/** @var $folderContent \Kaba\Gallery\FileSystemHandler\FolderContentHandler */
+		/** @var $folderContent \Kabarakh\Mirarse\FileSystemHandler\FolderContentHandler */
 		$folderContent = $this->folderHandler->getContentsOfFolder($singleFolder);
 
 		$folderContent->limitResultToImages();
@@ -73,6 +73,6 @@ class GalleryRepository extends \Kaba\Gallery\Domain\Repository\AbstractReposito
 
 
 
-		#$gallery = \Kaba\Gallery\Domain\Model\Gallery::getObjectFromArray();
+		#$gallery = \Kabarakh\Mirarse\Domain\Model\Gallery::getObjectFromArray();
 	}
 }

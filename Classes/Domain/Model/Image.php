@@ -22,11 +22,11 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Domain\Model;
+namespace Kabarakh\Mirarse\Domain\Model;
 /**
  * The model for the images which are in one gallery
  */
-class Image extends \Kaba\Gallery\Domain\Model\AbstractModel {
+class Image extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 
 }
 ?>

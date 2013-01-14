@@ -22,21 +22,21 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\FileSystemHandler;
+namespace Kabarakh\Mirarse\FileSystemHandler;
 
 /**
  * Everything which has to do with folder handling
  */
-class FolderHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+class FolderHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FolderValidator
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\Validator\FolderValidator
 	 * @inject 
 	 */
 	protected $folderValidator;
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\FileHandler
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\FileHandler
 	 * @inject
 	 */
 	protected $fileHandler;
@@ -48,7 +48,7 @@ class FolderHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	 * @param $path
 	 * @param bool $relative
 	 *
-	 * @return \Kaba\Gallery\FileSystemHandler\FolderContentHandler|null
+	 * @return \Kabarakh\Mirarse\FileSystemHandler\FolderContentHandler|null
 	 * @throws \Exception
 	 */
 	public function getContentsOfFolder($path, $relative = FALSE) {
@@ -67,7 +67,7 @@ class FolderHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 			return NULL;
 		}
 
-		$folderContent = new \Kaba\Gallery\FileSystemHandler\FolderContentHandler($path);
+		$folderContent = new \Kabarakh\Mirarse\FileSystemHandler\FolderContentHandler($path);
 
 		$folderContent->removeDotDirectoriesFromFolderContent();
 

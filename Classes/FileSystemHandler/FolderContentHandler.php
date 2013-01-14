@@ -21,33 +21,33 @@
  * 
  * This copyright notice MUST APPEAR in all copies of the script!
  */
-namespace Kaba\Gallery\FileSystemHandler;
+namespace Kabarakh\Mirarse\FileSystemHandler;
 
 /**
  * Everything that has to do with folder content arrays
  */
-class FolderContentHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+class FolderContentHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FileValidator
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\Validator\FileValidator
 	 * @inject
 	 */
 	protected $fileValidator;
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FolderContentValidator
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\Validator\FolderContentValidator
 	 * @inject
 	 */
 	protected $folderContentValidator;
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FolderValidator
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\Validator\FolderValidator
 	 * @inject
 	 */
 	protected $folderValidator;
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\FolderHandler
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\FolderHandler
 	 * @inject
 	 */
 	protected $folderHandler;

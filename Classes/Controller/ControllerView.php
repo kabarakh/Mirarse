@@ -22,14 +22,14 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Controller;
+namespace Kabarakh\Mirarse\Controller;
 
 /**
  * The view class for controllers.
  *
  * @method render
  */
-class ControllerView extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+class ControllerView extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
 	 * Magic function to do anything...

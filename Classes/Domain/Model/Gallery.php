@@ -22,12 +22,12 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Domain\Model;
+namespace Kabarakh\Mirarse\Domain\Model;
 
 /**
  * The model for a gallery
  */
-class Gallery extends \Kaba\Gallery\Domain\Model\AbstractModel {
+class Gallery extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 
 	/**
 	 * @var string
@@ -40,38 +40,38 @@ class Gallery extends \Kaba\Gallery\Domain\Model\AbstractModel {
 	protected $numberOfImages;
 
 	/**
-	 * @var \Kaba\Gallery\Domain\Model\Image[]
+	 * @var \Kabarakh\Mirarse\Domain\Model\Image[]
 	 */
 	protected $images;
 
 	/**
-	 * @var \Kaba\Gallery\Domain\Model\SingleGalleryConfig
+	 * @var \Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig
 	 */
 	protected $galleryConfig;
 
 	/**
-	 * @param \Kaba\Gallery\Domain\Model\SingleGalleryConfig $galleryConfig
+	 * @param \Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig $galleryConfig
 	 */
 	public function setGalleryConfig($galleryConfig) {
 		$this->galleryConfig = $galleryConfig;
 	}
 
 	/**
-	 * @return \Kaba\Gallery\Domain\Model\SingleGalleryConfig
+	 * @return \Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig
 	 */
 	public function getGalleryConfig() {
 		return $this->galleryConfig;
 	}
 
 	/**
-	 * @param $images \Kaba\Gallery\Domain\Model\Image[]
+	 * @param $images \Kabarakh\Mirarse\Domain\Model\Image[]
 	 */
 	public function setImages($images) {
 		$this->images = $images;
 	}
 
 	/**
-	 * @return \Kaba\Gallery\Domain\Model\Image[]
+	 * @return \Kabarakh\Mirarse\Domain\Model\Image[]
 	 */
 	public function getImages() {
 		return $this->images;

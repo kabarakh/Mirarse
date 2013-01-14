@@ -22,7 +22,7 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\ClassMagic\Reflection;
+namespace Kabarakh\Mirarse\ClassMagic\Reflection;
 
 /**
  * Extends \ReflectionMethod if we want to change something

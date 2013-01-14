@@ -22,21 +22,21 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\FileSystemHandler;
+namespace Kabarakh\Mirarse\FileSystemHandler;
 
 /**
  * Everything which has to do with file handling
  */
-class FileHandler extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+class FileHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FileValidator
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\Validator\FileValidator
 	 * @inject
 	 */
 	protected $fileValidator;
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\YamlParser
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\YamlParser
 	 * @inject
 	 */
 	protected $yamlParser;

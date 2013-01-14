@@ -22,11 +22,11 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Domain\Repository;
+namespace Kabarakh\Mirarse\Domain\Repository;
 
 /**
  * The abstract repository to provide functionality for each and every specific repository
  */
-abstract class AbstractRepository extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+abstract class AbstractRepository extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 }
 ?>

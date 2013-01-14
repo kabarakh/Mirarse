@@ -22,12 +22,12 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Domain\Model;
+namespace Kabarakh\Mirarse\Domain\Model;
 
 /**
  * Domain Model for the configuration of galleries, created out of the config files
  */
-class SingleGalleryConfig extends \Kaba\Gallery\Domain\Model\AbstractModel {
+class SingleGalleryConfig extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 
 	/**
 	 * Creates a SingleGalleryConfigFile from an array

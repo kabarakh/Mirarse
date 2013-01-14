@@ -22,15 +22,15 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba;
+namespace Kabarakh;
 
 /**
  * The main class for the gallery. Starts the whole thing and contains the controllers
  */
-class Gallery {
+class Mirarse {
 
 	/**
-	 * @var \Kaba\Gallery\Controller\BaseController
+	 * @var \Kabarakh\Mirarse\Controller\BaseController
 	 */
 	public $controller;
 
@@ -44,10 +44,10 @@ class Gallery {
 		// get the bootstrap and initialize everything
 		require_once dirname(__FILE__)."/Classes/Bootstrap/Initializer.php";
 
-		$bootstrap = new \Kaba\Gallery\Bootstrap\Initializer();
+		$bootstrap = new \Kabarakh\Mirarse\Bootstrap\Initializer();
 		$bootstrap->init();
 
-		$this->controller = new \Kaba\Gallery\Controller\BaseController();
+		$this->controller = new \Kabarakh\Mirarse\Controller\BaseController();
 
 	}
 
@@ -65,6 +65,6 @@ class Gallery {
 }
 
 // this is put here so the user can just include this file and use $gallery->callAction
-$gallery = new \Kaba\Gallery();
-$gallery->start();
+$mirarse = new \Kabarakh\Mirarse();
+$mirarse->start();
 ?>

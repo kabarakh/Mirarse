@@ -22,11 +22,11 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Bootstrap;
+namespace Kabarakh\Mirarse\Bootstrap;
 
 /**
  * This class is the class autoloader for the whole gallery. It expects classes in the namespace
- * Kaba\Gallery and the files in /Classes/ with the file extension .php
+ * Kabarakh\Mirarse and the files in /Classes/ with the file extension .php
  */
 class Autoloader {
 
@@ -48,11 +48,13 @@ class Autoloader {
 	 */
 	public static function autoload($className) {
 
-		if (strncmp($className, 'Kaba\\Gallery\\', 13) !== 0) {
+		$rootNameSpace = 'Kabarakh\\Mirarse\\';
+
+		if (strncmp($className, $rootNameSpace, strlen($rootNameSpace)) !== 0) {
 			throw new \Exception('Trying to load class '.$className.' which isn\'t in the right namespace!', 1357512186);
 		}
 
-		$filename = str_replace('Kaba\\Gallery\\', GALLERY_CLASSES, $className).".php";
+		$filename = str_replace($rootNameSpace, GALLERY_CLASSES, $className).".php";
 		$filename = str_replace('\\', '/', $filename);
 
 		if (file_exists($filename)) {

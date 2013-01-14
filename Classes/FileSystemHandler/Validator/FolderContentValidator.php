@@ -21,15 +21,15 @@
  * 
  * This copyright notice MUST APPEAR in all copies of the script!
  */
-namespace Kaba\Gallery\FileSystemHandler\Validator;
+namespace Kabarakh\Mirarse\FileSystemHandler\Validator;
 
 /**
  * Everything that has to do with folder content arrays
  */
-class FolderContentValidator extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+class FolderContentValidator extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
-	 * @param $folderContent \Kaba\Gallery\FileSystemHandler\FolderContentHandler
+	 * @param $folderContent \Kabarakh\Mirarse\FileSystemHandler\FolderContentHandler
 	 *
 	 * @return bool
 	 */

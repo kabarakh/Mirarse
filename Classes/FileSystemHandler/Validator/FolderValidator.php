@@ -22,21 +22,21 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\FileSystemHandler\Validator;
+namespace Kabarakh\Mirarse\FileSystemHandler\Validator;
 
 /**
  * Everything which has to do with folder handling
  */
-class FolderValidator extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+class FolderValidator extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FileValidator
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\Validator\FileValidator
 	 * @inject
 	 */
 	protected $fileValidator;
 
 	/**
-	 * @var \Kaba\Gallery\FileSystemHandler\Validator\FolderContentValidator
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\Validator\FolderContentValidator
 	 * @inject
 	 */
 	protected $folderContentValidator;
@@ -64,7 +64,7 @@ class FolderValidator extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	 */
 	public function validateAtLeastOnePictureFileExists($path) {
 
-		$contentsOfFolder = new \Kaba\Gallery\FileSystemHandler\FolderContentHandler($path);
+		$contentsOfFolder = new \Kabarakh\Mirarse\FileSystemHandler\FolderContentHandler($path);
 
 		foreach ($contentsOfFolder->getContent() as $file) {
 			if ($this->fileValidator->validateFileIsImage($path.'/'.$file)) {
@@ -83,7 +83,7 @@ class FolderValidator extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
 	 * @return bool
 	 */
 	public function validateFolderHasAtLeastOneFile($path) {
-		$folderContent = new \Kaba\Gallery\FileSystemHandler\FolderContentHandler($path);
+		$folderContent = new \Kabarakh\Mirarse\FileSystemHandler\FolderContentHandler($path);
 		return $this->folderContentValidator->validateFolderContentContainsAtLeastOneFile($folderContent);
 	}
 

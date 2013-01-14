@@ -22,15 +22,15 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Controller;
+namespace Kabarakh\Mirarse\Controller;
 
 /**
  * The controller for galleries. Has a list- and a singleView-action
  */
-class GalleryController extends \Kaba\Gallery\Controller\BaseController {
+class GalleryController extends \Kabarakh\Mirarse\Controller\BaseController {
 
 	/**
-	 * @var \Kaba\Gallery\Domain\Repository\GalleryRepository
+	 * @var \Kabarakh\Mirarse\Domain\Repository\GalleryRepository
 	 * @inject
 	 */
 	protected $galleryRepository;

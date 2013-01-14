@@ -22,15 +22,15 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Controller;
+namespace Kabarakh\Mirarse\Controller;
 
 /**
  * The basic abstract controller to provide functionality to specific controllers
  */
-abstract class AbstractController extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+abstract class AbstractController extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
-	 * @var \Kaba\Gallery\Controller\ControllerView
+	 * @var \Kabarakh\Mirarse\Controller\ControllerView
 	 * @inject
 	 */
 	protected $view;

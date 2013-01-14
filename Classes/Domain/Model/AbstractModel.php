@@ -22,12 +22,12 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Domain\Model;
+namespace Kabarakh\Mirarse\Domain\Model;
 
 /**
  * The abstract model class to provide functionality for the specific models
  */
-abstract class AbstractModel extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+abstract class AbstractModel extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
 	 * create a model object from an array. validates if all keys and data types are correct

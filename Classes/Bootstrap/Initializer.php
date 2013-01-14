@@ -22,7 +22,7 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Bootstrap;
+namespace Kabarakh\Mirarse\Bootstrap;
 
 /**
  * Initialize the whole stuff. Directories/Paths, Class autoloader, whatever comes in my mind...
@@ -70,7 +70,7 @@ class Initializer {
 
 		require_once(GALLERY_CLASSES.'Bootstrap/Autoloader.php');
 
-		$autoloader = new \Kaba\Gallery\Bootstrap\Autoloader();
+		$autoloader = new \Kabarakh\Mirarse\Bootstrap\Autoloader();
 		$autoloader->init();
 	}
 

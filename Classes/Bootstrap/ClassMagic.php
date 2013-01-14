@@ -22,7 +22,7 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Bootstrap;
+namespace Kabarakh\Mirarse\Bootstrap;
 
 /**
  * Some magic stuff like injects
@@ -56,11 +56,11 @@ class ClassMagic {
 	 * @return array
 	 */
 	protected function getInjectProperties($object) {
-		$reflectionClass = new \Kaba\Gallery\ClassMagic\Reflection\ReflectionClass($object);
+		$reflectionClass = new \Kabarakh\Mirarse\ClassMagic\Reflection\ReflectionClass($object);
 
 		$properties = $reflectionClass->getProperties();
 		$propertiesToInject = array();
-		foreach ($properties as $property) {/** @var $property \Kaba\Gallery\ClassMagic\Reflection\ReflectionProperty */
+		foreach ($properties as $property) {/** @var $property \Kabarakh\Mirarse\ClassMagic\Reflection\ReflectionProperty */
 			$docComment = $property->getDocComment();
 
 			if (strpos($docComment, '@inject')) {

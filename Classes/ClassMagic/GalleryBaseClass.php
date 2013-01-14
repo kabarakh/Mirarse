@@ -22,7 +22,7 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\ClassMagic;
+namespace Kabarakh\Mirarse\ClassMagic;
 
 /**
  * A base class for all other classes in the gallery - only thing to achieve with that are global __construct
@@ -34,7 +34,7 @@ abstract class GalleryBaseClass {
 	 * Global constructor for every class. should be called always, must be called if you want to use injects
 	 */
 	public function __construct() {
-		$classMagic = new \Kaba\Gallery\Bootstrap\ClassMagic();
+		$classMagic = new \Kabarakh\Mirarse\Bootstrap\ClassMagic();
 		$classMagic->resolveInjects($this);
 	}
 

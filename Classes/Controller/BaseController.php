@@ -22,7 +22,7 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\Controller;
+namespace Kabarakh\Mirarse\Controller;
 
 /**
  * The base class for all controllers. Takes care of calling actions and the views
@@ -30,7 +30,7 @@ namespace Kaba\Gallery\Controller;
 /**
  *
  */
-class BaseController extends \Kaba\Gallery\Controller\AbstractController {
+class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 
 	/**
 	 * The method to call actions. This method must be used instead of calling the action methods directly,
@@ -80,7 +80,7 @@ class BaseController extends \Kaba\Gallery\Controller\AbstractController {
 
 		} else {
 
-			if (get_class($this) == 'Kaba\Gallery\Controller\BaseController') {
+			if (get_class($this) == 'Kabarakh\Mirarse\Controller\BaseController') {
 				throw new \Exception('Please set an explicit controller, BaseController is used', 1357349347);
 			}
 

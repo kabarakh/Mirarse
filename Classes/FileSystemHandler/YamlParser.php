@@ -21,7 +21,7 @@
  * 
  * This copyright notice MUST APPEAR in all copies of the script!
  */
-namespace Kaba\Gallery\FileSystemHandler;
+namespace Kabarakh\Mirarse\FileSystemHandler;
 
 /**
  * Everything that has to do with yaml config parsing (maybe this will be refactored to "everything that has to do with yaml"

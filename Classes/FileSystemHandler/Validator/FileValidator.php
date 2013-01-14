@@ -22,12 +22,12 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kaba\Gallery\FileSystemHandler\Validator;
+namespace Kabarakh\Mirarse\FileSystemHandler\Validator;
 
 /**
  * Everything which has to do with file handling
  */
-class FileValidator extends \Kaba\Gallery\ClassMagic\GalleryBaseClass {
+class FileValidator extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
 	 * Checks if a file with the provided path is an image file. Uses finfo and the mimetype to check the files.
