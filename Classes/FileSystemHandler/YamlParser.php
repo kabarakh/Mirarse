@@ -32,11 +32,33 @@ class YamlParser {
 	/**
 	 * Takes the path to the file, reads the yaml content and returns an array with the content
 	 *
-	 * @param $path
+	 * @param $path string
+	 * @throws \Exception
 	 * @return array
 	 */
 	public function parseYamlFile($path) {
 		$yamlContent = yaml_parse_file($path);
+
+		if (!count($yamlContent)) {
+			throw new \Exception('Config file with path '.$path.' empty or malformed yaml', 1358189377);
+		}
+
+		return $yamlContent;
+	}
+
+	/**
+	 * Takes a string and parses it as yaml content, returns an array with the content
+	 *
+	 * @param $yamlString string
+	 * @throws \Exception
+	 * @return array
+	 */
+	public function parseYamlString($yamlString) {
+		$yamlContent = yaml_parse($yamlString);
+
+		if (!count($yamlContent)) {
+			throw new \Exception('Config string was malformed or empty', 1358189382);
+		}
 
 		return $yamlContent;
 	}
