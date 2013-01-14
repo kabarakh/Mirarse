@@ -41,8 +41,8 @@ define('YAML_CRLN_BREAK', 3);
  * @param int $pos
  * @param int $ndocs
  * @param array $callbacks
- *
  * @return array
+ * @stub
  */
 function yaml_parse($input, $pos = 0, &$ndocs = 0, $callbacks = array()) {return array();}
 
@@ -54,9 +54,9 @@ function yaml_parse($input, $pos = 0, &$ndocs = 0, $callbacks = array()) {return
  * @param int $ndocs
  * @param array $callbacks
  * @return array
+ * @stub
  */
-function yaml_parse_file($filename, $pos = 0, &$ndocs = 0, $callbacks = array()) {return array();
-}
+function yaml_parse_file($filename, $pos = 0, &$ndocs = 0, $callbacks = array()) {return array();}
 
 /**
  * Convert all or part of a YAML document stream read from a URL to a PHP variable.
@@ -66,6 +66,7 @@ function yaml_parse_file($filename, $pos = 0, &$ndocs = 0, $callbacks = array())
  * @param int $ndocs
  * @param array $callbacks
  * @return array
+ * @stub
  */
 function yaml_parse_url($url, $pos = 0, &$ndocs = 0, $callbacks = array()) {return array();}
 
@@ -77,6 +78,7 @@ function yaml_parse_url($url, $pos = 0, &$ndocs = 0, $callbacks = array()) {retu
  * @param int $linebreak
  * @param array $callbacks
  * @return string
+ * @stub
  */
 function yaml_emit($data, $encoding = YAML_ANY_ENCODING, $linebreak = YAML_ANY_BREAK, $callbacks = array()){return '';}
 
@@ -89,6 +91,7 @@ function yaml_emit($data, $encoding = YAML_ANY_ENCODING, $linebreak = YAML_ANY_B
  * @param int $linebreak
  * @param array $callbacks
  * @return string
+ * @stub
  */
 function yaml_emit_file($filename, $data, $encoding = YAML_ANY_ENCODING, $linebreak = YAML_ANY_BREAK, $callbacks = array()){return '';}
 
