@@ -34,7 +34,7 @@ abstract class GalleryBaseClass {
 	 * Global constructor for every class. should be called always, must be called if you want to use injects
 	 */
 	public function __construct() {
-		$classMagic = new \Kabarakh\Mirarse\Bootstrap\ClassMagic();
+		$classMagic = new \Kabarakh\Mirarse\ClassMagic\ClassMagic();
 		$classMagic->resolveInjects($this);
 	}
 

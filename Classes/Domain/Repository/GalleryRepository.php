@@ -70,9 +70,11 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 		$folderContent->limitResultToImages();
 
 		$configFileContent = $this->folderHandler->getConfigFileFromFolder($singleFolder);
+		if (count($configFileContent) == 0) {
+			return;
+		}
 
-
-
+		$singleGalleryConfig = \Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig::createConfigObjectFromConfigFileContent($configFileContent);
 		#$gallery = \Kabarakh\Mirarse\Domain\Model\Gallery::getObjectFromArray();
 	}
 }

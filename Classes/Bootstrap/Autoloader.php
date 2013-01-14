@@ -41,8 +41,8 @@ class Autoloader {
 	}
 
 	/**
-	 * Autoloader for classes.
-	 * Assumes that all classes
+	 * Autoloader for own classes.
+	 * Assumes that all own classes are in GALLERY_CLASSES/namespace/made/to/path.php
 	 *
 	 * @param $className
 	 * @throws \Exception
@@ -59,6 +59,12 @@ class Autoloader {
 		}
 	}
 
+	/**
+	 * Autoloader for foreign classes
+	 * Assumes that foreign classes follow psr-0
+	 *
+	 * @param $className
+	 */
 	public static function autoloadForeign($className) {
 
 		$foreignLibraryPath = GALLERY_ROOT_PATH.'ForeignLibraries/';

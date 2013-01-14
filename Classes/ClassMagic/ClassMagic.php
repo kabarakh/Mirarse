@@ -22,7 +22,7 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kabarakh\Mirarse\Bootstrap;
+namespace Kabarakh\Mirarse\ClassMagic;
 
 /**
  * Some magic stuff like injects
@@ -56,11 +56,11 @@ class ClassMagic {
 	 * @return array
 	 */
 	protected function getInjectProperties($object) {
-		$reflectionClass = new \Kabarakh\Mirarse\ClassMagic\Reflection\ReflectionClass($object);
+		$reflectionClass = new \ReflectionClass($object);
 
 		$properties = $reflectionClass->getProperties();
 		$propertiesToInject = array();
-		foreach ($properties as $property) {/** @var $property \Kabarakh\Mirarse\ClassMagic\Reflection\ReflectionProperty */
+		foreach ($properties as $property) {/** @var $property \ReflectionProperty */
 			$docComment = $property->getDocComment();
 
 			if (strpos($docComment, '@inject')) {
@@ -72,7 +72,7 @@ class ClassMagic {
 		}
 
 		return $propertiesToInject;
-}
+	}
 
 	/**
 	 * Gets the var-annotation from the phpdoc comments and parses it to get the right class for the property
@@ -81,7 +81,8 @@ class ClassMagic {
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	protected function getPropertyTypeFromDocComment($docComment) {
+	public function getPropertyTypeFromDocComment($docComment) {
+
 		$docCommentLines = explode(chr(10), $docComment);
 
 		foreach ($docCommentLines as $singleLine) {
@@ -94,6 +95,7 @@ class ClassMagic {
 
 		throw new \Exception('@inject found but no @var was given', 1357950694);
 	}
+
 }
 
 ?>

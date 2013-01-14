@@ -24,19 +24,130 @@
 
 namespace Kabarakh\Mirarse\Domain\Model;
 
+use Kabarakh\Mirarse\Domain\Model\PropertySanitizer as Sanitizer;
+
 /**
  * Domain Model for the configuration of galleries, created out of the config files
  */
 class SingleGalleryConfig extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 
 	/**
+	 * @var string
+	 */
+	protected $title;
+
+	/**
+	 * @var string
+	 */
+	protected $description;
+
+	/**
+	 * @var \DateTime
+	 */
+	protected $date;
+
+	/**
+	 * @var string
+	 */
+	protected $thumbnailsPrefix;
+
+	/**
+	 * @var string
+	 */
+	protected $thumbnailsLocation;
+
+	/**
+	 * @param \DateTime $date
+	 */
+	public function setDate($date) {
+		$this->date = $date;
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getDate() {
+		return $this->date;
+	}
+
+	/**
+	 * @param string $description
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
+
+	/**
+	 * @param string $thumbnailsLocation
+	 */
+	public function setThumbnailsLocation($thumbnailsLocation) {
+		$this->thumbnailsLocation = $thumbnailsLocation;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getThumbnailsLocation() {
+		return $this->thumbnailsLocation;
+	}
+
+	/**
+	 * @param string $thumbnailsPrefix
+	 */
+	public function setThumbnailsPrefix($thumbnailsPrefix) {
+		$this->thumbnailsPrefix = $thumbnailsPrefix;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getThumbnailsPrefix() {
+		return $this->thumbnailsPrefix;
+	}
+
+	/**
+	 * @param string $title
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
+
+	/**
 	 * Creates a SingleGalleryConfigFile from an array
 	 *
 	 * @param array $configFileArray
+	 * @return null|\Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig
 	 */
-	public function createConfigObjectFromConfigFileContent(array $configFileArray) {
+	static public function createConfigObjectFromConfigFileContent(array $configFileArray) {
+		if (Sanitizer\dateTimeSanitizer::validateDate($configFileArray['date'])) {
+			$configFileArray['date'] = new \DateTime($configFileArray['date'], new \DateTimeZone('Europe/Berlin'));
+		}
 
+		foreach ($configFileArray['thumbnails'] as $key => $thumbnailOption) {
+			$configFileArray['thumbnails'.ucfirst($key)] = $thumbnailOption;
+			unset($configFileArray[$key]);
+		}
+		unset($configFileArray['thumbnails']);
+
+		$galleryConfigObject = self::getObjectFromArray($configFileArray);
+
+		return $galleryConfigObject;
 	}
+
 }
 
 ?>
