@@ -58,8 +58,8 @@ class Mirarse {
 	 * @param array $parameter
 	 * @param null|string $controller
 	 */
-	public function callAction($actionName, $parameter = array(), $controller = NULL) {
-		$this->controller->callAction($actionName, $parameter, $controller);
+	public function callAction($controller, $actionName, $parameter = array()) {
+		$this->controller->callAction($controller, $actionName, $parameter);
 	}
 
 }

@@ -45,5 +45,9 @@ abstract class AbstractController extends \Kabarakh\Mirarse\ClassMagic\GalleryBa
 	 *
 	 * @throws \Exception
 	 */
-	public abstract function callAction($actionName, $parameter = array(), $controller = NULL);
+	public abstract function callAction($controller, $actionName, $parameter = array());
+
+
 }
+
+?>

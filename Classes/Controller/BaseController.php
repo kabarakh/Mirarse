@@ -42,7 +42,7 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 	 *
 	 * @throws \Exception
 	 */
-	public function callAction($actionName, $parameter = array(), $controller = NULL) {
+	public function callAction($controller, $actionName, $parameter = array()) {
 		$action = $actionName."Action";
 
 		$GLOBALS['parameter'] = $parameter;
@@ -67,7 +67,8 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 	 *
 	 * @return BaseController
 	 * @throws \Exception
-	 */protected function getObjectForController($controller) {
+	 */
+	protected function getObjectForController($controller) {
 		if ($controller != NULL) {
 			$controllerClassName = __NAMESPACE__ . "\\" . $controller;
 
