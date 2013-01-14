@@ -1,0 +1,3 @@
+[submodule "ForeignLibraries/Symfony/Component/Yaml"]
+	path = ForeignLibraries/Symfony/Component/Yaml
+	url = https://github.com/symfony/Yaml.git

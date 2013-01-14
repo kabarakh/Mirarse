@@ -22,6 +22,7 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 namespace Kabarakh\Mirarse\FileSystemHandler;
+use \Symfony\Component\Yaml;
 
 /**
  * Everything that has to do with yaml config parsing (maybe this will be refactored to "everything that has to do with yaml"
@@ -37,7 +38,7 @@ class YamlParser {
 	 * @return array
 	 */
 	public function parseYamlFile($path) {
-		$yamlContent = yaml_parse_file($path);
+		$yamlContent = Yaml\Yaml::parse($path);
 
 		if (!count($yamlContent)) {
 			throw new \Exception('Config file with path '.$path.' empty or malformed yaml', 1358189377);
@@ -54,7 +55,7 @@ class YamlParser {
 	 * @return array
 	 */
 	public function parseYamlString($yamlString) {
-		$yamlContent = yaml_parse($yamlString);
+		$yamlContent = Yaml\Yaml::parse($yamlString);
 
 		if (!count($yamlContent)) {
 			throw new \Exception('Config string was malformed or empty', 1358189382);
