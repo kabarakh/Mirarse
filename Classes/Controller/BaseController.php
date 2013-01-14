@@ -33,19 +33,25 @@ namespace Kabarakh\Mirarse\Controller;
 class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 
 	/**
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\YamlParser
+	 * @inject
+	 */
+	protected $yamlParser;
+
+	/**
 	 * The method to call actions. This method must be used instead of calling the action methods directly,
 	 * if not the views can't be used
 	 *
-	 * @param $actionName
-	 * @param $parameter
-	 * @param null $controller
+	 * @param string $controller
+	 * @param string $actionName
+	 * @param string $parameter
 	 *
 	 * @throws \Exception
 	 */
-	public function callAction($controller, $actionName, $parameter = array()) {
+	public function callAction($controller, $actionName, $parameter = '') {
 		$action = $actionName."Action";
 
-		$GLOBALS['parameter'] = $parameter;
+		$GLOBALS['parameter'] = $this->yamlParser->parseYamlString($parameter);
 
 		try {
 			$controllerObject = $this->getObjectForController($controller.'Controller');

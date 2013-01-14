@@ -54,11 +54,11 @@ class Mirarse {
 	/**
 	 * Wrapper for $this->controller->callAction to make the script more usable
 	 *
-	 * @param $actionName
-	 * @param array $parameter
-	 * @param null|string $controller
+	 * @param string $controller
+	 * @param string $actionName
+	 * @param string $parameter
 	 */
-	public function callAction($controller, $actionName, $parameter = array()) {
+	public function callAction($controller, $actionName, $parameter = '') {
 		$this->controller->callAction($controller, $actionName, $parameter);
 	}
 

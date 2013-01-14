@@ -39,13 +39,13 @@ abstract class AbstractController extends \Kabarakh\Mirarse\ClassMagic\GalleryBa
 	 * The method to call actions. This method must be used instead of calling the action methods directly,
 	 * if not the views can't be used
 	 *
-	 * @param $actionName
-	 * @param $parameter
-	 * @param null $controller
+	 * @param string $controller
+	 * @param string $actionName
+	 * @param string $parameter
 	 *
 	 * @throws \Exception
 	 */
-	public abstract function callAction($controller, $actionName, $parameter = array());
+	public abstract function callAction($controller, $actionName, $parameter = '');
 
 
 }
