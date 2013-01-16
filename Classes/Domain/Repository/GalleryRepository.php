@@ -90,6 +90,8 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 		$images = array();
 
 		foreach ($folderContent as $imagePath) {
+			// todo: use image repository and ObjectProvider
+
 			$image = new \Kabarakh\Mirarse\Domain\Model\Image();
 			$image->setGalleryPath($singleFolder);
 			$image->setHasThumbnail(FALSE);
