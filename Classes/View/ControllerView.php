@@ -22,7 +22,7 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-namespace Kabarakh\Mirarse\Controller;
+namespace Kabarakh\Mirarse\View;
 
 /**
  * The view class for controllers.

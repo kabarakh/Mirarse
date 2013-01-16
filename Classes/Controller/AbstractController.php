@@ -30,7 +30,7 @@ namespace Kabarakh\Mirarse\Controller;
 abstract class AbstractController extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
-	 * @var \Kabarakh\Mirarse\Controller\ControllerView
+	 * @var \Kabarakh\Mirarse\View\ControllerView
 	 * @inject
 	 */
 	protected $view;
