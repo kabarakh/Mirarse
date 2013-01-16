@@ -36,8 +36,8 @@ class Autoloader {
 	 * @return void
 	 */
 	public function init() {
-		spl_autoload_register(__NAMESPACE__.'\Autoloader::autoload');
-		spl_autoload_register(__NAMESPACE__.'\Autoloader::autoloadForeign');
+		spl_autoload_register(array(__NAMESPACE__.'\Autoloader', 'autoload'));
+		spl_autoload_register(array(__NAMESPACE__.'\Autoloader', 'autoloadForeign'));
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Autoloader {
 	 * @param $className
 	 * @throws \Exception
 	 */
-	public static function autoload($className) {
+	public function autoload($className) {
 
 		$rootNameSpace = 'Kabarakh\\Mirarse\\';
 
@@ -65,7 +65,7 @@ class Autoloader {
 	 *
 	 * @param $className
 	 */
-	public static function autoloadForeign($className) {
+	public function autoloadForeign($className) {
 
 		$foreignLibraryPath = GALLERY_ROOT_PATH.'ForeignLibraries/';
 
