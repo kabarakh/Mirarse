@@ -39,6 +39,11 @@ class Image extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	protected $hasThumbnail;
 
 	/**
+	 * @var string
+	 */
+	protected $thumbnailLocation;
+
+	/**
 	 * @var integer
 	 */
 	protected $originalHeight;
@@ -89,6 +94,20 @@ class Image extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	 */
 	public function getHasThumbnail() {
 		return $this->hasThumbnail;
+	}
+
+	/**
+	 * @param string $thumbnailLocation
+	 */
+	public function setThumbnailLocation($thumbnailLocation) {
+		$this->thumbnailLocation = $thumbnailLocation;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getThumbnailLocation() {
+		return $this->thumbnailLocation;
 	}
 
 	/**
