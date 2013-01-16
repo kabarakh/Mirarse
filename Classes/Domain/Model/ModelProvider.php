@@ -124,6 +124,7 @@ class ModelProvider extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 			/** @var \ReflectionProperty $property */
 			$typeOfProperty = $this->classMagic->getPropertyTypeFromDocComment($property->getDocComment());
 			$typeOfArrayEntry = gettype($objectArray[$property->getName()]);
+
 			if ($typeOfArrayEntry === 'object') {
 				$typeOfArrayEntry = '\\'.get_class($objectArray[$property->getName()]);
 			}
