@@ -44,7 +44,7 @@ class ModelProvider extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 	 * @return null|object
 	 */
 	public function getObjectFromArray($modelType, $objectArray) {
-		if (self::validateObjectArray($modelType, $objectArray)) {
+		if ($this->validateObjectArray($modelType, $objectArray)) {
 			$classObject = new $modelType();
 			foreach ($objectArray as $parameter => $value) {
 				$setterName = 'set'.ucfirst($parameter);
@@ -69,7 +69,7 @@ class ModelProvider extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 		$propertiesToReflect = $reflectionClass->getProperties();
 
-		if (self::validatePropertyNames($propertiesToReflect, array_keys($objectArray)) && self::validatePropertyTypes($propertiesToReflect, $objectArray)) {
+		if ($this->validatePropertyNames($propertiesToReflect, array_keys($objectArray)) && $this->validatePropertyTypes($propertiesToReflect, $objectArray)) {
 			return TRUE;
 		}
 		return FALSE;
