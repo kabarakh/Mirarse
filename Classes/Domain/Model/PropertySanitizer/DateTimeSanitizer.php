@@ -29,7 +29,7 @@ namespace Kabarakh\Mirarse\Domain\Model\PropertySanitizer;
 class DateTimeSanitizer {
 
 	/**
-	 * Validate if the date string is of the format mm/dd/yyyy
+	 * Validate if the date string is of the format yyyy-mm-dd
 	 *
 	 * @param $dateString
 	 *
