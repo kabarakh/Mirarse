@@ -37,10 +37,10 @@ class DateTimeSanitizer {
 	 * @throws \Exception
 	 */
 	public function validateDate($dateString) {
-		if (!preg_match('@\d{2}/\d{2}/\d{4}@', $dateString)) {
-			throw new \Exception('Date string '.$dateString.' is not of format mm/dd/yyyy', 1358194069);
+		if (!preg_match('@\d{4}-\d{2}-\d{2}@', $dateString)) {
+			throw new \Exception('Date string '.$dateString.' is not of format yyyy-mm-dd', 1358194069);
 		}
-		list($month, $day, $year) = explode('/', $dateString);
+		list($year, $month, $day) = explode('-', $dateString);
 
 		if (!checkdate($month, $day, $year)) {
 			throw new \Exception('Date string '.$dateString.' is not a real date', 1358194071);

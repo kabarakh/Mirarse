@@ -47,9 +47,12 @@ class SingleGalleryConfigProvider extends \Kabarakh\Mirarse\ClassMagic\GalleryBa
 	 * @return null|\Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig
 	 */
 	public function createConfigObjectFromConfigFileContent(array $configFileArray) {
-		if ($this->dateTimeSanitizer->validateDate($configFileArray['date'])) {
-			$configFileArray['date'] = new \DateTime($configFileArray['date'], new \DateTimeZone('Europe/Berlin'));
+		$date = date('Y-m-d', $configFileArray['date']);
+
+		if ($this->dateTimeSanitizer->validateDate($date)) {
+			$configFileArray['date'] = new \DateTime($date);
 		}
+
 
 		foreach ($configFileArray['thumbnails'] as $key => $thumbnailOption) {
 			$configFileArray['thumbnails'.ucfirst($key)] = $thumbnailOption;
