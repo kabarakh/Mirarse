@@ -28,5 +28,138 @@ namespace Kabarakh\Mirarse\Domain\Model;
  */
 class Image extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 
+	/**
+	 * @var string
+	 */
+	protected $path;
+
+	/**
+	 * @var boolean
+	 */
+	protected $hasThumbnail;
+
+	/**
+	 * @var integer
+	 */
+	protected $originalHeight;
+
+	/**
+	 * @var integer
+	 */
+	protected $originalWidth;
+
+	/**
+	 * @var string
+	 */
+	protected $nextImagePath;
+
+	/**
+	 * @var string
+	 */
+	protected $previousImagePath;
+
+	/**
+	 * @var string
+	 */
+	protected $galleryPath;
+
+	/**
+	 * @param string $galleryPath
+	 */
+	public function setGalleryPath($galleryPath) {
+		$this->galleryPath = $galleryPath;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getGalleryPath() {
+		return $this->galleryPath;
+	}
+
+	/**
+	 * @param boolean $hasThumbnail
+	 */
+	public function setHasThumbnail($hasThumbnail) {
+		$this->hasThumbnail = $hasThumbnail;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getHasThumbnail() {
+		return $this->hasThumbnail;
+	}
+
+	/**
+	 * @param string $nextImagePath
+	 */
+	public function setNextImagePath($nextImagePath) {
+		$this->nextImagePath = $nextImagePath;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getNextImagePath() {
+		return $this->nextImagePath;
+	}
+
+	/**
+	 * @param integer $originalHeight
+	 */
+	public function setOriginalHeight($originalHeight) {
+		$this->originalHeight = $originalHeight;
+	}
+
+	/**
+	 * @return integer
+	 */
+	public function getOriginalHeight() {
+		return $this->originalHeight;
+	}
+
+	/**
+	 * @param integer $originalWidth
+	 */
+	public function setOriginalWidth($originalWidth) {
+		$this->originalWidth = $originalWidth;
+	}
+
+	/**
+	 * @return integer
+	 */
+	public function getOriginalWidth() {
+		return $this->originalWidth;
+	}
+
+	/**
+	 * @param string $path
+	 */
+	public function setPath($path) {
+		$this->path = $path;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPath() {
+		return $this->path;
+	}
+
+	/**
+	 * @param string $previousImagePath
+	 */
+	public function setPreviousImagePath($previousImagePath) {
+		$this->previousImagePath = $previousImagePath;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPreviousImagePath() {
+		return $this->previousImagePath;
+	}
+
 }
 ?>
