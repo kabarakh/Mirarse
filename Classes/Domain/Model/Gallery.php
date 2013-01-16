@@ -35,12 +35,12 @@ class Gallery extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	protected $path;
 
 	/**
-	 * @var int
+	 * @var integer
 	 */
 	protected $numberOfImages;
 
 	/**
-	 * @var \Kabarakh\Mirarse\Domain\Model\Image[]
+	 * @var array
 	 */
 	protected $images;
 
@@ -64,28 +64,28 @@ class Gallery extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	}
 
 	/**
-	 * @param $images \Kabarakh\Mirarse\Domain\Model\Image[]
+	 * @param $images array
 	 */
 	public function setImages($images) {
 		$this->images = $images;
 	}
 
 	/**
-	 * @return \Kabarakh\Mirarse\Domain\Model\Image[]
+	 * @return array
 	 */
 	public function getImages() {
 		return $this->images;
 	}
 
 	/**
-	 * @param int $numberOfImages
+	 * @param integer $numberOfImages
 	 */
 	public function setNumberOfImages($numberOfImages) {
 		$this->numberOfImages = $numberOfImages;
 	}
 
 	/**
-	 * @return int
+	 * @return integer
 	 */
 	public function getNumberOfImages() {
 		return $this->numberOfImages;

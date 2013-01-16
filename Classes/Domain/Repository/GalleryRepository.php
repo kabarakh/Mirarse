@@ -42,8 +42,15 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 	protected $singleGalleryConfigProvider;
 
 	/**
+	 * @var \Kabarakh\Mirarse\Domain\Model\ModelProvider
+	 * @inject
+	 */
+	protected $objectProvider;
+
+	/**
 	 * @param $rootPath string
 	 *
+	 * @return array
 	 * @throws \Exception
 	 */
 	public function getAllGalleriesByRootPath($rootPath) {
@@ -68,6 +75,7 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 	 * get config, images and stuff
 	 *
 	 * @param $singleFolder
+	 * @return null|\Kabarakh\Mirarse\Domain\Model\Gallery
 	 */
 	protected function createGalleryFromPath($singleFolder) {
 		/** @var $folderContent \Kabarakh\Mirarse\FileSystemHandler\FolderContentHandler */
