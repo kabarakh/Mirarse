@@ -36,6 +36,12 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 	protected $folderHandler;
 
 	/**
+	 * @var \Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig\SingleGalleryConfigProvider
+	 * @inject
+	 */
+	protected $singleGalleryConfigProvider;
+
+	/**
 	 * @param $rootPath string
 	 *
 	 * @throws \Exception
@@ -74,7 +80,7 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 			return;
 		}
 
-		$singleGalleryConfig = \Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig::createConfigObjectFromConfigFileContent($configFileContent);
+		$singleGalleryConfig = $this->singleGalleryConfigProvider->createConfigObjectFromConfigFileContent($configFileContent);
 		#$gallery = \Kabarakh\Mirarse\Domain\Model\Gallery::getObjectFromArray();
 	}
 }

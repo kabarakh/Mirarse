@@ -24,8 +24,6 @@
 
 namespace Kabarakh\Mirarse\Domain\Model;
 
-use Kabarakh\Mirarse\Domain\Model\PropertySanitizer as Sanitizer;
-
 /**
  * Domain Model for the configuration of galleries, created out of the config files
  */
@@ -124,28 +122,6 @@ class SingleGalleryConfig extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	 */
 	public function getTitle() {
 		return $this->title;
-	}
-
-	/**
-	 * Creates a SingleGalleryConfigFile from an array
-	 *
-	 * @param array $configFileArray
-	 * @return null|\Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig
-	 */
-	static public function createConfigObjectFromConfigFileContent(array $configFileArray) {
-		if (Sanitizer\dateTimeSanitizer::validateDate($configFileArray['date'])) {
-			$configFileArray['date'] = new \DateTime($configFileArray['date'], new \DateTimeZone('Europe/Berlin'));
-		}
-
-		foreach ($configFileArray['thumbnails'] as $key => $thumbnailOption) {
-			$configFileArray['thumbnails'.ucfirst($key)] = $thumbnailOption;
-			unset($configFileArray[$key]);
-		}
-		unset($configFileArray['thumbnails']);
-
-		$galleryConfigObject = self::getObjectFromArray($configFileArray);
-
-		return $galleryConfigObject;
 	}
 
 }

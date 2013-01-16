@@ -36,7 +36,7 @@ class DateTimeSanitizer {
 	 * @return bool
 	 * @throws \Exception
 	 */
-	static public function validateDate($dateString) {
+	public function validateDate($dateString) {
 		if (!preg_match('@\d{2}/\d{2}/\d{4}@', $dateString)) {
 			throw new \Exception('Date string '.$dateString.' is not of format mm/dd/yyyy', 1358194069);
 		}
