@@ -73,7 +73,7 @@ class FileHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 			if ($this->fileValidator->validateIfFileIsNotEmpty($pathOfConfigFile)) {
 				return $configFileContent = $this->yamlParser->parseYamlFile($pathOfConfigFile);
 			} else {
-				return NULL;
+				throw new \Exception('Config file in path '.$pathOfConfigFile. ' is empty');
 			}
 		} else {
 			throw new \Exception('No config file found with path ' . $pathOfConfigFile . '. This should not happen because we filter
