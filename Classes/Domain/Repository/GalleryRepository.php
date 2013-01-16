@@ -68,6 +68,8 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 			$galleryList[] = $this->createGalleryFromPath($singleFolder);
 		}
 
+		return $galleryList;
+
 	}
 
 	/**
@@ -83,12 +85,32 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 
 		$folderContent->limitResultToImages();
 
-		$configFileContent = $this->folderHandler->getConfigFileFromFolder($singleFolder);
-		if (count($configFileContent) == 0) {
-			return;
+		$numberOfImages = count($folderContent->getContent());
+
+		$images = array();
+
+		foreach ($folderContent as $imagePath) {
+			$image = new \Kabarakh\Mirarse\Domain\Model\Image();
+			$image->setGalleryPath($singleFolder);
+			$image->setHasThumbnail(FALSE);
+			$image->setPath($imagePath);
+
+			$images[] = $image;
 		}
 
+		$configFileContent = $this->folderHandler->getConfigFileFromFolder($singleFolder);
+
 		$singleGalleryConfig = $this->singleGalleryConfigProvider->createConfigObjectFromConfigFileContent($configFileContent);
-		#$gallery = \Kabarakh\Mirarse\Domain\Model\Gallery::getObjectFromArray();
+
+		$galleryObjectArray = array(
+			'path' => $singleFolder,
+			'galleryConfig' => $singleGalleryConfig,
+			'numberOfImages' => $numberOfImages,
+			'images' => $images,
+		);
+
+		$gallery = $this->objectProvider->getObjectFromArray('\Kabarakh\Mirarse\Domain\Model\Gallery', $galleryObjectArray);
+		/** @var $gallery \Kabarakh\Mirarse\Domain\Model\Gallery */
+		return $gallery;
 	}
 }

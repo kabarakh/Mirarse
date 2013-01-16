@@ -44,8 +44,9 @@ class GalleryController extends \Kabarakh\Mirarse\Controller\BaseController {
 			throw new \Exception('galleryRootPath is empty', 1358199277);
 		}
 
-		$this->galleryRepository->getAllGalleriesByRootPath($galleryRootPath, TRUE);
+		$galleryList = $this->galleryRepository->getAllGalleriesByRootPath($galleryRootPath);
 
+		$this->view->assign('galleryList', $galleryList);
 	}
 }
 
