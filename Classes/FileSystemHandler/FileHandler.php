@@ -41,20 +41,23 @@ class FileHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 	 */
 	protected $yamlParser;
 
+
 	/**
-	 * Returns the content from a file as an array
-	 * Validates first if the file exists
+	 * @param string $path
+	 * @param bool $fullText
 	 *
-	 * @param $pathOfConfigFile
-	 *
-	 * @return array
+	 * @return array|string
 	 * @throws \Exception
 	 */
-	public function getContentFromFile($pathOfConfigFile) {
-		if ($this->fileValidator->validateFileExists($pathOfConfigFile)) {
-			return $configFileContent = file($pathOfConfigFile);
+	public function getContentFromFile($path, $fullText = FALSE) {
+		if ($this->fileValidator->validateFileExists($path)) {
+			if ($fullText) {
+				return file_get_contents($path);
+			} else {
+				return $configFileContent = file($path);
+			}
 		} else {
-			throw new \Exception('No config file found with path ' . $pathOfConfigFile . '. This should not happen because we filter
+			throw new \Exception('No config file found with path ' . $path . '. This should not happen because we filter
 			if there are config files earlier, but you never know', 1357772287);
 		}
 	}
@@ -79,6 +82,59 @@ class FileHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 			throw new \Exception('No config file found with path ' . $pathOfConfigFile . '. This should not happen because we filter
 				if there are config files earlier, but you never know', 1357772287);
 		}
+	}
+
+	/**
+	 * returns timestamp for change date of file
+	 *
+	 * @param $path
+	 *
+	 * @return int
+	 * @throws \Exception
+	 */
+	public function getTimeStampOfLastChangeOfFile($path) {
+		if ($this->fileValidator->validateFileExists($path)) {
+			return filemtime($path);
+		} else {
+			throw new \Exception('No file found with path '.$path, 1358555668);
+		}
+}
+
+	/**
+	 * returns timestamp for creation date of file
+	 *
+	 * @param $path
+	 * @return int
+	 * @throws \Exception
+	 */
+	public function getTimeStampOfCreationOfFile($path) {
+		if ($this->fileValidator->validateFileExists($path)) {
+			return filectime($path);
+		} else {
+			throw new \Exception('No file found with path '.$path, 1358555668);
+		}
+}
+
+	/**
+	 * get the age of a file
+	 *
+	 * @param $path
+	 * @return int
+	 */
+	public function getAgeOfCacheFile($path) {
+		$creationDate = $this->getTimeStampOfCreationOfFile($path);
+		$now = time();
+
+		return $now - $creationDate;
+	}
+
+	/**
+	 * delete a file - NO SECURITY CHECK!
+	 *
+	 * @param $path
+	 */
+	public function deleteFile($path) {
+		unlink($path);
 	}
 }
 

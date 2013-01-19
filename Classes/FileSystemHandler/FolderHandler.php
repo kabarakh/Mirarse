@@ -130,6 +130,20 @@ class FolderHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 		return $path . '/' . $configFileName;
 	}
 
+	/**
+	 * Create folder paths recursively
+	 *
+	 * @param $path
+	 *
+	 * @throws \Exception
+	 */
+	public function generateFolderPath($path) {
+		mkdir($path, 0755, TRUE);
+		if (!$this->folderValidator->validateFolderExists($path)) {
+			throw new \Exception('Could not create folder '.$path, 1358556012);
+		}
+	}
+
 }
 
 ?>
