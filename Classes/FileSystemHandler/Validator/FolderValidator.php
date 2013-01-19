@@ -49,7 +49,7 @@ class FolderValidator extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 	 */
 	public function validateFolderExists($path) {
 
-		if ($path == FALSE) {
+		if (is_dir($path) == FALSE) {
 			return FALSE;
 		}
 

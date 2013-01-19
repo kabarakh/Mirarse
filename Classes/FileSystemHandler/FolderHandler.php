@@ -43,7 +43,7 @@ class FolderHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
 	 * returns an array with all folders and files in the respective $path
-	 * if relative is true, $path is considered inside of GALLERY_RUN_DIRECTORY
+	 * if relative is true, $path is considered inside of MIRARSE_RUN_DIRECTORY
 	 *
 	 * @param $path
 	 * @param bool $relative
