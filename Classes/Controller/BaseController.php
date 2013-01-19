@@ -50,7 +50,9 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 	 */
 	public function callAction($controller, $actionName, $parameter = '') {
 		$action = $actionName."Action";
+		$controllerObject = NULL;
 
+		// todo: session handler for parameter handling, and not always use this yaml stuff, only when parameter is filled
 		$GLOBALS['parameter'] = $this->yamlParser->parseYamlString($parameter);
 
 		try {
@@ -61,7 +63,9 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 			die("Error: ".$e);
 		}
 
-		$this->view->render();
+		$controllerObject->view->generatePathAutomatically($controller, $actionName);
+
+		$controllerObject->view->render();
 	}
 
 	/**
