@@ -53,14 +53,17 @@ class Initializer {
 	protected function initDirectories() {
 
 		// with this we define the SCRIPT_ROOT_PATH to the location of this very file, no matter from where it is included
-		define('GALLERY_ROOT_PATH', realpath(dirname(__FILE__).'/../../').'/');
+		define('MIRARSE_ROOT_PATH', realpath(dirname(__FILE__).'/../../').'/');
 
 		// get the path from where the gallery is run so we can use the relative path from there for gallery locations
-		define('GALLERY_RUN_DIRECTORY', realpath('.').'/');
+		define('MIRARSE_RUN_DIRECTORY', realpath('.').'/');
 
-		define('GALLERY_CLASSES', GALLERY_ROOT_PATH.'Classes/');
+		define('MIRARSE_CLASSES', MIRARSE_ROOT_PATH.'Classes/');
 
-		define('GALLERY_VIEWS', GALLERY_ROOT_PATH.'View/');
+		define('MIRARSE_TEMPLATES', MIRARSE_ROOT_PATH.'Templates/');
+
+		define('MIRARSE_CACHE', MIRARSE_RUN_DIRECTORY.'Cache/');
+
 	}
 
 	/**
@@ -70,7 +73,7 @@ class Initializer {
 	 */
 	protected function initAutoloader() {
 
-		require_once(GALLERY_CLASSES.'Bootstrap/Autoloader.php');
+		require_once(MIRARSE_CLASSES.'Bootstrap/Autoloader.php');
 
 		$autoloader = new \Kabarakh\Mirarse\Bootstrap\Autoloader();
 		$autoloader->init();

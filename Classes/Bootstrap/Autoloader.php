@@ -42,7 +42,7 @@ class Autoloader {
 
 	/**
 	 * Autoloader for own classes.
-	 * Assumes that all own classes are in GALLERY_CLASSES/namespace/made/to/path.php
+	 * Assumes that all own classes are in MIRARSE_CLASSES/namespace/made/to/path.php
 	 *
 	 * @param $className
 	 * @throws \Exception
@@ -51,7 +51,7 @@ class Autoloader {
 
 		$rootNameSpace = 'Kabarakh\\Mirarse\\';
 
-		$filename = str_replace($rootNameSpace, GALLERY_CLASSES, $className).".php";
+		$filename = str_replace($rootNameSpace, MIRARSE_CLASSES, $className).".php";
 		$filename = str_replace('\\', '/', $filename);
 
 		if (file_exists($filename)) {
@@ -67,7 +67,7 @@ class Autoloader {
 	 */
 	public function autoloadForeign($className) {
 
-		$foreignLibraryPath = GALLERY_ROOT_PATH.'ForeignLibraries/';
+		$foreignLibraryPath = MIRARSE_ROOT_PATH.'ForeignLibraries/';
 
 		$filename = str_replace('\\', '/', $className);
 		$filename = $foreignLibraryPath.$filename.'.php';

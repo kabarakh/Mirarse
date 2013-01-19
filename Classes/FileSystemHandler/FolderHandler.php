@@ -91,7 +91,7 @@ class FolderHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 	 * @throws \Exception
 	 */
 	protected function getAbsolutePathFromRelativePath($relativePath) {
-		$absolutePath = realpath(GALLERY_RUN_DIRECTORY . $relativePath);
+		$absolutePath = realpath(MIRARSE_RUN_DIRECTORY . $relativePath);
 
 		if (!$this->folderValidator->validateFolderExists($absolutePath)) {
 			throw new \Exception('Path ' . $relativePath . ' not accessible or does not exist', 1357353323);
