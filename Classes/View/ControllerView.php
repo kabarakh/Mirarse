@@ -131,25 +131,4 @@ class ControllerView extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 		$this->cachedViewHandler->getCacheFileToRender();
 	}
 
-	/*
-	 * folgender ablauf:
-	 *
-	 * 	- der pfad des views wird im controller-constructor (abstract) gesetzt - automatisch auf /Templates/<Controller>/<Action>.html - done
-	 * 	- die variablen kommen über view->assign in das toShow-Array im View-Objekt - done
-	 * 	- render wird aufgerufen - done
-	 * 		- das toShow-Array serialisieren und den string md5'en -done
-	 * 		- timestamp changedate von html-datei abrufen - done
-	 * 		- schau in /Cache/Templates nach <Controller>/<Action>/<timestamp>_<md5>.php - done
-	 * 		- wenn filemtime älter als 2 tage lösche datei - done
-	 * 		- wenn keine datei vorhanden (gilt auch nach löschen) - done
-	 * 			- html-file mit file_get_contents auslesen - done
-	 * 			- string-ersetzung auf {{objektname.parameter}} zu $toShow['objektname']->getParameter();
-	 * 				bzw {{objektname.parameter.parameter2}} zu $toShow['objektname']->getParameter()->getParameter2();
-	 * 			- string-ersetzung von {[]} auf die entsprechenden php-funktionen (if, for, foreach, while - zählervariablen implementieren
-	 * 				um auf odd/even und so zeug zugreifen zu können - einfügen in toShow und am ende wieder unsetten)
-	 * 			- die sonstigen html-bereiche in HEREDOC packen
-	 * 			- cache-datei generieren mit methode renderCached() - done
-	 * 		- include cache-datei (stellt renderCached() zur verfügung) - done
-	 * 		- run renderCached() um HTML auszugeben - done
-	 */
 }

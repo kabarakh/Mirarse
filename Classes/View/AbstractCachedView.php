@@ -36,11 +36,25 @@ abstract class AbstractCachedView extends \Kabarakh\Mirarse\ClassMagic\GalleryBa
 	protected $toDisplay;
 
 	/**
+	 * @param array $toDisplay
+	 */
+	public function setToDisplay($toDisplay) {
+		$this->toDisplay = $toDisplay;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getToDisplay() {
+		return $this->toDisplay;
+	}
+
+	/**
 	 * the method which is run to render the cache file
 	 *
 	 * @return mixed
 	 */
-	abstract function renderCached();
+	abstract public function renderCached();
 
 }
 

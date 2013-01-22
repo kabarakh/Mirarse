@@ -116,6 +116,7 @@ class CachedViewHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 		/** @var $cachedView \Kabarakh\Mirarse\View\AbstractCachedView */
 		$fullClassPath = '\\Kabarakh\\Mirarse\\View\\'.$this->cachedViewClassName;
 		$cachedView = new $fullClassPath;
+		$cachedView->setToDisplay($this->viewConfig->getToDisplay());
 		$cachedView->renderCached();
 	}
 

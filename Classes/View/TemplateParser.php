@@ -60,6 +60,10 @@ class TemplateParser extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 	 */
 	protected $viewConfig;
 
+	protected $startRegexp = '/(\{[\{\[\<])/';
+
+	protected $endRegexp = '/([\>\]\}]\})/';
+
 	/**
 	 * @param \Kabarakh\Mirarse\View\ViewConfig $viewConfig
 	 */
@@ -172,6 +176,7 @@ PHPCLASS;
 	 * @return void
 	 */
 	public function renderCached() {
+		var_dump($this->toDisplay);
 
 METHOD;
 
@@ -189,11 +194,122 @@ METHOD;
 	 * the core function - parse that thing and generate php code
 	 */
 	protected function parseHtmlContent() {
+
+		$this->htmlString = trim($this->htmlString);
+
+		$this->generateStartAndEndParts();
 		// todo: parse!
 
-		var_dump($this->htmlString);
-		$this->htmlString = 'echo \''.$this->htmlString.'\';';
+		$this->removeTemplateComments();
+
+		$this->generateEchoForTextParts();
+
+		$this->parseObjects();
+
+		$this->parsePhpFunctions();
+
 		$this->phpString .= $this->htmlString;
+	}
+
+	protected function generateStartAndEndParts() {
+		if (preg_match('/^(\{[\{\[\<])/', $this->htmlString) === 0) {
+			$this->htmlString = 'echo \''.$this->htmlString;
+		}
+
+		if (preg_match('/([\>\]\}]\})$/', $this->htmlString) === 0) {
+			$this->htmlString = $this->htmlString."';\n";
+		}
+	}
+
+	protected function generateEchoForTextParts() {
+		$this->htmlString = preg_replace($this->startRegexp, '\';
+${1}', $this->htmlString);
+
+		$this->htmlString = preg_replace($this->endRegexp, '${1}
+echo \'', $this->htmlString);
+	}
+
+	protected function removeTemplateComments() {
+		$this->htmlString = preg_replace('/{<.*>}/', '', $this->htmlString);
+	}
+
+	protected function parseObjects() {
+		$this->htmlString = preg_replace_callback('/\{\{(.+)\}\}/', array($this, 'splitObjectAtDotAndEcho'), $this->htmlString);
+	}
+
+	protected function splitObjectAtDotAndEcho($matches) {
+
+		$fullText = 'echo ';
+
+		$fullText .= $this->splitObjectAtDot($matches[1]);
+
+		$fullText .= ';';
+		return $fullText;
+	}
+
+	protected function splitObjectAtDot($matches) {
+		$splittedText = explode('.', $matches);
+
+		$fullText = '$this->toDisplay[\''.$splittedText[0].'\']';
+
+		if (count($splittedText) > 1) {
+			unset($splittedText[0]);
+
+			foreach ($splittedText as $textSnippet) {
+				$fullText .= '->get'.ucfirst($textSnippet).'()';
+			}
+		}
+
+		return $fullText;
+	}
+
+	protected function parsePhpFunctions() {
+		$this->htmlString = preg_replace_callback('/\{\[(.+)\]\}/', array($this, 'breakUpFunctionStringAndParse'), $this->htmlString);
+	}
+
+	protected function breakUpFunctionStringAndParse($matches) {
+		$parts = explode(' ', $matches[1]);
+		$functionName = $parts[0];
+		$parseFunctionName = 'parseFunction'.ucfirst($functionName);
+		return $this->$parseFunctionName($parts);
+	}
+
+	protected function parseFunctionForeach($parts) {
+		foreach ($parts as &$singlePart) {
+			var_dump($singlePart);
+			if (preg_match('/\{(.+)\}/', $singlePart)) {
+				$singlePart = preg_replace('/\{(.+)\}/', '${1}', $singlePart);
+				$singlePart = $this->splitObjectAtDot($singlePart);
+			}
+		}
+
+		$forString = 'foreach ('.$parts[1].' '.$parts[2].' '.$parts[3].') {';
+		return $forString;
+	}
+
+	protected function parseFunctionIf($parts) {
+		foreach ($parts as &$singlePart) {
+			var_dump($singlePart);
+			if (preg_match('/\{(.+)\}/', $singlePart)) {
+				$singlePart = preg_replace('/\{(.+)\}/', '${1}', $singlePart);
+				$singlePart = $this->splitObjectAtDot($singlePart);
+			}
+		}
+		$ifString = 'if ('.$parts[1];
+
+		if (count($parts > 2)) {
+			if ((strncmp($parts[3], '$', 1) !== 0) && (!is_numeric($parts[3]))) {
+				$parts[3] = '\''.$parts[3]. '\'';
+			}
+			$ifString .= ' '.$parts[2].' '.$parts[3];
+		}
+
+		$ifString .= ') {';
+		return $ifString;
+	}
+
+	protected function parseFunctionEnd($parts) {
+		return '}';
 	}
 
 	/**
@@ -227,7 +343,7 @@ CLASSFOOTER;
 	/**
 	 * write the php-string to the proper file
 	 */
-	private function writePhpStringToCacheFile() {
+	protected function writePhpStringToCacheFile() {
 		$fileHandle = fopen($this->pathToCacheFile, 'w+');
 
 		fwrite($fileHandle, $this->phpString);
@@ -235,6 +351,9 @@ CLASSFOOTER;
 		fclose($fileHandle);
 	}
 
+	public function __call($name, $params) {
+		return '';
+	}
 
 }
 
