@@ -92,7 +92,7 @@ class CachedViewHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 	 * Gets the cache file for the action-object-combination
 	 * checks if the cache files are to old and removes them if they are
 	 * builds a new cache file if needed
-	 * includes the file in the end and calls the renderfunction so we get content to display
+	 * includes the file in the end and calls the render function so we get content to display
 	 */
 	public function getCacheFileToRender() {
 		$this->pathToCacheFile = $this->generateCacheFileName();

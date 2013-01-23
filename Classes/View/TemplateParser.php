@@ -233,10 +233,20 @@ echo \'', $this->htmlString);
 		$this->htmlString = preg_replace('/{<.*>}/', '', $this->htmlString);
 	}
 
+	/**
+	 * parse {{}}-strings and use the next method to get the proper echo string
+	 */
 	protected function parseObjects() {
 		$this->htmlString = preg_replace_callback('/\{\{(.+)\}\}/', array($this, 'splitObjectAtDotAndEcho'), $this->htmlString);
 	}
 
+	/**
+	 * Builds the string echo $array['object']->getProperty()->getSubproperty();
+	 * for {{object.property.subproperty}}
+	 *
+	 * @param $matches
+	 * @return string
+	 */
 	protected function splitObjectAtDotAndEcho($matches) {
 
 		$fullText = 'echo ';
@@ -247,6 +257,13 @@ echo \'', $this->htmlString);
 		return $fullText;
 	}
 
+	/**
+	 * Builds the string $array['object']->getProperty()->getSubproperty()
+	 * for object.property.subproperty
+	 *
+	 * @param $matches
+	 * @return string
+	 */
 	protected function splitObjectAtDot($matches) {
 		$splittedText = explode('.', $matches);
 
@@ -263,10 +280,19 @@ echo \'', $this->htmlString);
 		return $fullText;
 	}
 
+	/**
+	 * Wrapper for the parsing og {[]} strings to their respective php function, use the next method as callback
+	 */
 	protected function parsePhpFunctions() {
 		$this->htmlString = preg_replace_callback('/\{\[(.+)\]\}/', array($this, 'breakUpFunctionStringAndParse'), $this->htmlString);
 	}
 
+	/**
+	 * gets the php function name to parse and calls the respective parser function
+	 *
+	 * @param $matches
+	 * @return mixed
+	 */
 	protected function breakUpFunctionStringAndParse($matches) {
 		$parts = explode(' ', $matches[1]);
 		$functionName = $parts[0];
@@ -274,6 +300,12 @@ echo \'', $this->htmlString);
 		return $this->$parseFunctionName($parts);
 	}
 
+	/**
+	 * Parse foreach-functions
+	 *
+	 * @param $parts
+	 * @return string
+	 */
 	protected function parseFunctionForeach($parts) {
 		foreach ($parts as &$singlePart) {
 			var_dump($singlePart);
@@ -287,6 +319,12 @@ echo \'', $this->htmlString);
 		return $forString;
 	}
 
+	/**
+	 * parse if-functions
+	 *
+	 * @param $parts
+	 * @return string
+	 */
 	protected function parseFunctionIf($parts) {
 		foreach ($parts as &$singlePart) {
 			var_dump($singlePart);
@@ -308,6 +346,12 @@ echo \'', $this->htmlString);
 		return $ifString;
 	}
 
+	/**
+	 * 'parse' end-parts - returns a closing bracket
+	 *
+	 * @param $parts
+	 * @return string
+	 */
 	protected function parseFunctionEnd($parts) {
 		return '}';
 	}
@@ -351,6 +395,14 @@ CLASSFOOTER;
 		fclose($fileHandle);
 	}
 
+	/**
+	 * if any parser is called which isn't available, just return an empty string so that
+	 * the file won't break
+	 *
+	 * @param $name
+	 * @param $params
+	 * @return string
+	 */
 	public function __call($name, $params) {
 		return '';
 	}
