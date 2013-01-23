@@ -335,7 +335,7 @@ echo \'', $this->htmlString);
 		}
 		$ifString = 'if ('.$parts[1];
 
-		if (count($parts > 2)) {
+		if (count($parts) > 2) {
 			if ((strncmp($parts[3], '$', 1) !== 0) && (!is_numeric($parts[3]))) {
 				$parts[3] = '\''.$parts[3]. '\'';
 			}
