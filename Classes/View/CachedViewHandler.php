@@ -97,13 +97,9 @@ class CachedViewHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 	public function getCacheFileToRender() {
 		$this->pathToCacheFile = $this->generateCacheFileName();
 
-		var_dump($this->pathToCacheFile);
-
 		$this->cleanUpOldCacheFiles();
 
 		if (!$this->fileValidator->validateFileExists($this->pathToCacheFile)) {
-			echo "creating new \n";
-
 			$this->templateParser->setViewConfig($this->viewConfig);
 			$this->templateParser->setCachedViewClassName($this->cachedViewClassName);
 			$this->templateParser->setPathToCacheFile($this->pathToCacheFile);

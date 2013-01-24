@@ -47,6 +47,7 @@ class GalleryController extends \Kabarakh\Mirarse\Controller\BaseController {
 		$galleryList = $this->galleryRepository->getAllGalleriesByRootPath($galleryRootPath);
 
 		$this->view->assign('galleryList', $galleryList);
+
 	}
 }
 

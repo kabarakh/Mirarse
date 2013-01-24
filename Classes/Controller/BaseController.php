@@ -60,7 +60,7 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 
 			$controllerObject->$action();
 		} catch (\Exception $e) {
-			die("Error: ".$e);
+			throw $e;
 		}
 
 		$controllerObject->view->generatePathAutomatically($controller, $actionName);

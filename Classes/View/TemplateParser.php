@@ -25,6 +25,9 @@ namespace Kabarakh\Mirarse\View;
 
 /**
  * Parses the html template and writes the php cache file
+ *
+ * TODO: extract "viewhelper"
+ * TODO: build image-viewhelper and debug-viewhelper
  */
 class TemplateParser extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
@@ -59,10 +62,6 @@ class TemplateParser extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 	 * @inject
 	 */
 	protected $viewConfig;
-
-	protected $startRegexp = '/(\{[\{\[\<])/';
-
-	protected $endRegexp = '/([\>\]\}]\})/';
 
 	/**
 	 * @param \Kabarakh\Mirarse\View\ViewConfig $viewConfig
@@ -176,6 +175,7 @@ PHPCLASS;
 	 * @return void
 	 */
 	public function renderCached() {
+
 		var_dump($this->toDisplay);
 
 METHOD;
@@ -222,10 +222,10 @@ METHOD;
 	}
 
 	protected function generateEchoForTextParts() {
-		$this->htmlString = preg_replace($this->startRegexp, '\';
+		$this->htmlString = preg_replace('/(\{[\{\[\<])/', '\';
 ${1}', $this->htmlString);
 
-		$this->htmlString = preg_replace($this->endRegexp, '${1}
+		$this->htmlString = preg_replace('/([\>\]\}]\})/', '${1}
 echo \'', $this->htmlString);
 	}
 
@@ -308,7 +308,6 @@ echo \'', $this->htmlString);
 	 */
 	protected function parseFunctionForeach($parts) {
 		foreach ($parts as &$singlePart) {
-			var_dump($singlePart);
 			if (preg_match('/\{(.+)\}/', $singlePart)) {
 				$singlePart = preg_replace('/\{(.+)\}/', '${1}', $singlePart);
 				$singlePart = $this->splitObjectAtDot($singlePart);
@@ -327,7 +326,6 @@ echo \'', $this->htmlString);
 	 */
 	protected function parseFunctionIf($parts) {
 		foreach ($parts as &$singlePart) {
-			var_dump($singlePart);
 			if (preg_match('/\{(.+)\}/', $singlePart)) {
 				$singlePart = preg_replace('/\{(.+)\}/', '${1}', $singlePart);
 				$singlePart = $this->splitObjectAtDot($singlePart);
@@ -381,7 +379,6 @@ CLASSFOOTER;
 
 		$this->phpString .= $classFooter;
 
-		var_dump($this->phpString);
 	}
 
 	/**
