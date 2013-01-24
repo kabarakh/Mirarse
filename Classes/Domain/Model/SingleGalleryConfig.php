@@ -45,6 +45,11 @@ class SingleGalleryConfig extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	protected $date;
 
 	/**
+	 * @var integer
+	 */
+	protected $imageSize;
+
+	/**
 	 * @var string
 	 */
 	protected $thumbnailsPrefix;
@@ -122,6 +127,20 @@ class SingleGalleryConfig extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	 */
 	public function getTitle() {
 		return $this->title;
+	}
+
+	/**
+	 * @param int $imageSize
+	 */
+	public function setImageSize($imageSize) {
+		$this->imageSize = $imageSize;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getImageSize() {
+		return $this->imageSize;
 	}
 
 }

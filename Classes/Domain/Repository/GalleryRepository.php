@@ -36,16 +36,16 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 	protected $folderHandler;
 
 	/**
-	 * @var \Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig\SingleGalleryConfigProvider
+	 * @var \Kabarakh\Mirarse\Domain\Repository\SingleGalleryConfigRepository
 	 * @inject
 	 */
-	protected $singleGalleryConfigProvider;
+	protected $singleGalleryConfigRepository;
 
 	/**
-	 * @var \Kabarakh\Mirarse\Domain\Model\ModelProvider
+	 * @var \Kabarakh\Mirarse\Domain\Repository\ImageRepository
 	 * @inject
 	 */
-	protected $objectProvider;
+	protected $imageRepository;
 
 	/**
 	 * @param $rootPath string
@@ -79,7 +79,7 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 	 * @param $singleFolder
 	 * @return null|\Kabarakh\Mirarse\Domain\Model\Gallery
 	 */
-	protected function createGalleryFromPath($singleFolder) {
+	public function createGalleryFromPath($singleFolder) {
 		/** @var $folderContent \Kabarakh\Mirarse\FileSystemHandler\FolderContentHandler */
 		$folderContent = $this->folderHandler->getContentsOfFolder($singleFolder);
 
@@ -89,20 +89,11 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 
 		$images = array();
 
-		foreach ($folderContent as $imagePath) {
-			// todo: use image repository and ObjectProvider
+		$singleGalleryConfig = $this->singleGalleryConfigRepository->generateSingleGalleryConfigFromPath($singleFolder);
 
-			$image = new \Kabarakh\Mirarse\Domain\Model\Image();
-			$image->setGalleryPath($singleFolder);
-			$image->setHasThumbnail(FALSE);
-			$image->setPath($imagePath);
-
-			$images[] = $image;
+		foreach ($folderContent->getContent() as $imagePath) {
+			$images[] = $this->imageRepository->generateImageFromPathWithSingleGalleryConfig($imagePath, $singleGalleryConfig);
 		}
-
-		$configFileContent = $this->folderHandler->getConfigFileFromFolder($singleFolder);
-
-		$singleGalleryConfig = $this->singleGalleryConfigProvider->createConfigObjectFromConfigFileContent($configFileContent);
 
 		$galleryObjectArray = array(
 			'path' => $singleFolder,

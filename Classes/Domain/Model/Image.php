@@ -54,6 +54,16 @@ class Image extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	protected $originalWidth;
 
 	/**
+	 * @var integer
+	 */
+	protected $calculatedHeight;
+
+	/**
+	 * @var integer
+	 */
+	protected $calculatedWidth;
+
+	/**
 	 * @var string
 	 */
 	protected $nextImagePath;
@@ -178,6 +188,34 @@ class Image extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	 */
 	public function getPreviousImagePath() {
 		return $this->previousImagePath;
+	}
+
+	/**
+	 * @param int $calculatedHeight
+	 */
+	public function setCalculatedHeight($calculatedHeight) {
+		$this->calculatedHeight = $calculatedHeight;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getCalculatedHeight() {
+		return $this->calculatedHeight;
+	}
+
+	/**
+	 * @param int $calculatedWidth
+	 */
+	public function setCalculatedWidth($calculatedWidth) {
+		$this->calculatedWidth = $calculatedWidth;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getCalculatedWidth() {
+		return $this->calculatedWidth;
 	}
 
 }

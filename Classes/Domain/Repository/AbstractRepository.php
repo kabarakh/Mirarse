@@ -28,5 +28,12 @@ namespace Kabarakh\Mirarse\Domain\Repository;
  * The abstract repository to provide functionality for each and every specific repository
  */
 abstract class AbstractRepository extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
+
+	/**
+	 * @var \Kabarakh\Mirarse\Domain\Model\ModelProvider
+	 * @inject
+	 */
+	protected $objectProvider;
+
 }
 ?>
