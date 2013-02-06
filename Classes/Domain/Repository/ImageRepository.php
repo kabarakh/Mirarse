@@ -48,12 +48,16 @@ class ImageRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractReposi
 
 
 	/**
-	 * @param $path
-	 * @param $singleGalleryConfig
+	 * @param $path string
+	 * @param $singleGalleryConfig \Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig
 	 *
 	 * @return \Kabarakh\Mirarse\Domain\Model\Image
 	 */
 	public function generateImageFromPathWithSingleGalleryConfig($path, $singleGalleryConfig) {
+		if (!$this->fileValidator->validateFileExists($path)) {
+			return NULL;
+		}
+
 		$galleryPath = dirname($path);
 
 		$fullPathToThumbnailLocation = $galleryPath.'/'.$singleGalleryConfig->getThumbnailsLocation();
