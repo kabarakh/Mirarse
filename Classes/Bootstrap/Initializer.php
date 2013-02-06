@@ -51,6 +51,12 @@ class Initializer {
 	 * @return void
 	 */
 	protected function initDirectories() {
+		if (isset($_ENV['DOCUMENT_ROOT'])) {
+			define('MIRARSE_SERVER_ROOT', $_ENV['DOCUMENT_ROOT']);
+		} else {
+			// server root to build absolute paths in frontend
+			define('MIRARSE_SERVER_ROOT', $_SERVER['DOCUMENT_ROOT']);
+		}
 
 		// with this we define the SCRIPT_ROOT_PATH to the location of this very file, no matter from where it is included
 		define('MIRARSE_ROOT_PATH', realpath(dirname(__FILE__).'/../../').'/');
@@ -60,7 +66,9 @@ class Initializer {
 
 		define('MIRARSE_CLASSES', MIRARSE_ROOT_PATH.'Classes/');
 
-		define('MIRARSE_TEMPLATES', MIRARSE_ROOT_PATH.'Templates/');
+		define('MIRARSE_RESOURCES', MIRARSE_ROOT_PATH.'Resources/');
+
+		define('MIRARSE_TEMPLATES', MIRARSE_RESOURCES.'Templates/');
 
 		define('MIRARSE_CACHE', MIRARSE_RUN_DIRECTORY.'Cache/');
 

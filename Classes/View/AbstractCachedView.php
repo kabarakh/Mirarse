@@ -49,6 +49,10 @@ abstract class AbstractCachedView extends \Kabarakh\Mirarse\ClassMagic\GalleryBa
 		return $this->toDisplay;
 	}
 
+	protected function generateWebserverPathFromAbsolutePath($path) {
+		return str_replace(MIRARSE_SERVER_ROOT, '', $path);
+	}
+
 	/**
 	 * the method which is run to render the cache file
 	 *
