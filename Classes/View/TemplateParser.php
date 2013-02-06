@@ -345,6 +345,20 @@ echo \'', $this->htmlString);
 	}
 
 	/**
+	 * Takes a thumbnail path and renders the thumbnail image tag
+	 *
+	 * @param $parts string
+	 * @return string
+	 */
+	protected function parseFunctionRenderThumbnail($parts) {
+		if (preg_match('/^\{(.+)\}$/', $parts[1])) {
+			$parts[1] = preg_replace('/\{(.+)\}/', '${1}', $parts[1]);
+			$parts[1] = $this->splitObjectAtDot($parts[1]);
+		}
+		return 'echo "<img src=\"".$this->generateWebserverPathFromAbsolutePath('.$parts[1].'->getThumbnailLocation())."\" />";';
+	}
+
+	/**
 	 * 'parse' end-parts - returns a closing bracket
 	 *
 	 * @param $parts

@@ -117,7 +117,11 @@ class Image extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	 * @return string
 	 */
 	public function getThumbnailLocation() {
-		return $this->thumbnailLocation;
+		if ($this->hasThumbnail) {
+			return $this->thumbnailLocation;
+		} else {
+			return '';
+		}
 	}
 
 	/**

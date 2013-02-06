@@ -50,6 +50,11 @@ class Gallery extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	protected $galleryConfig;
 
 	/**
+	 * @var \Kabarakh\Mirarse\Domain\Model\Image
+	 */
+	protected $thumbnailImage;
+
+	/**
 	 * @param \Kabarakh\Mirarse\Domain\Model\SingleGalleryConfig $galleryConfig
 	 */
 	public function setGalleryConfig($galleryConfig) {
@@ -103,6 +108,20 @@ class Gallery extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	 */
 	public function getPath() {
 		return $this->path;
+	}
+
+	/**
+	 * @param \Kabarakh\Mirarse\Domain\Model\Image $thumbnailImage
+	 */
+	public function setThumbnailImage($thumbnailImage) {
+		$this->thumbnailImage = $thumbnailImage;
+	}
+
+	/**
+	 * @return \Kabarakh\Mirarse\Domain\Model\Image
+	 */
+	public function getThumbnailImage() {
+		return $this->thumbnailImage;
 	}
 
 }

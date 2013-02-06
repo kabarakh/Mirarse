@@ -85,6 +85,10 @@ class SingleGalleryConfigRepository extends \Kabarakh\Mirarse\Domain\Repository\
 
 		$configFileArray['imageSize'] = $imageSize;
 
+		if (!$configFileArray['galleryThumbnail']) {
+			$configFileArray['galleryThumbnail'] = '';
+		}
+
 		foreach ($configFileArray['thumbnails'] as $key => $thumbnailOption) {
 			$configFileArray['thumbnails'.ucfirst($key)] = $thumbnailOption;
 			unset($configFileArray[$key]);

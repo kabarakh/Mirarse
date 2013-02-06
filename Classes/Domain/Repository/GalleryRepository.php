@@ -91,8 +91,14 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 
 		$singleGalleryConfig = $this->singleGalleryConfigRepository->generateSingleGalleryConfigFromPath($singleFolder);
 
-		foreach ($folderContent->getContent() as $imagePath) {
+		foreach ($folderContent->getContent() as $key => $imagePath) {
 			$images[] = $this->imageRepository->generateImageFromPathWithSingleGalleryConfig($imagePath, $singleGalleryConfig);
+		}
+
+		$thumbnailImage = $this->imageRepository->generateImageFromPathWithSingleGalleryConfig($singleFolder.'/'.$singleGalleryConfig->getGalleryThumbnail(), $singleGalleryConfig);
+
+		if ($thumbnailImage === NULL) {
+			$thumbnailImage = $images[0];
 		}
 
 		$galleryObjectArray = array(
@@ -100,6 +106,7 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 			'galleryConfig' => $singleGalleryConfig,
 			'numberOfImages' => $numberOfImages,
 			'images' => $images,
+			'thumbnailImage' => $thumbnailImage,
 		);
 
 		$gallery = $this->objectProvider->getObjectFromArray('\Kabarakh\Mirarse\Domain\Model\Gallery', $galleryObjectArray);

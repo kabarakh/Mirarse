@@ -60,6 +60,11 @@ class SingleGalleryConfig extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	protected $thumbnailsLocation;
 
 	/**
+	 * @var string
+	 */
+	protected $galleryThumbnail;
+
+	/**
 	 * @param \DateTime $date
 	 */
 	public function setDate($date) {
@@ -141,6 +146,20 @@ class SingleGalleryConfig extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 	 */
 	public function getImageSize() {
 		return $this->imageSize;
+	}
+
+	/**
+	 * @param string $galleryThumbnail
+	 */
+	public function setGalleryThumbnail($galleryThumbnail) {
+		$this->galleryThumbnail = $galleryThumbnail;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getGalleryThumbnail() {
+		return $this->galleryThumbnail;
 	}
 
 }
