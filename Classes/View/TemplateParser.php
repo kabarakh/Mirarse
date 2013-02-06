@@ -26,7 +26,6 @@ namespace Kabarakh\Mirarse\View;
 /**
  * Parses the html template and writes the php cache file
  *
- * TODO: extract "viewhelper"
  * TODO: build image-viewhelper and debug-viewhelper
  */
 class TemplateParser extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
