@@ -1,0 +1,8 @@
+<div class="mirarse-list">
+	<ul>
+		{[foreach {galleryList} as {singleGallery}]}
+			<li>Path to gallery: {{singleGallery.path}}<br />
+			{[renderThumbnail {singleGallery.thumbnailImage}]}</li>
+		{[end for]}
+	</ul>
+</div>
