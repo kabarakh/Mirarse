@@ -63,7 +63,7 @@ class ClassMagic {
 		foreach ($properties as $property) {/** @var $property \ReflectionProperty */
 			$docComment = $property->getDocComment();
 
-			if (strpos($docComment, '@inject')) {
+			if (strpos($docComment, '@inject') !== FALSE) {
 				$type = $this->getPropertyTypeFromDocComment($docComment);
 
 				$propertiesToInject[] = array('property' => $property, 'type' => $type);
@@ -86,7 +86,7 @@ class ClassMagic {
 		$docCommentLines = explode(chr(10), $docComment);
 
 		foreach ($docCommentLines as $singleLine) {
-			if (strpos($singleLine, '@var ')) {
+			if (strpos($singleLine, '@var ') !== FALSE) {
 				$singleLine = trim($singleLine);
 				$singleLineArray = explode(' ', $singleLine);
 				return $singleLineArray[2];
