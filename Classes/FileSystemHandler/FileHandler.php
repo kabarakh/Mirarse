@@ -27,7 +27,7 @@ namespace Kabarakh\Mirarse\FileSystemHandler;
 /**
  * Everything which has to do with file handling
  */
-class FileHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
+class FileHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass implements \Kabarakh\Mirarse\ClassMagic\SingletonInterface {
 
 	/**
 	 * @var \Kabarakh\Mirarse\FileSystemHandler\Validator\FileValidator

@@ -29,6 +29,8 @@ namespace Kabarakh\Mirarse\ClassMagic;
  */
 class ClassMagic {
 
+	protected $singletonObjects = array();
+
 	/**
 	 * Gets all properties from a class with var and inject phpdoc annotations and resolves them.
 	 * just builds basic objects of the proper type and sets them to the property
@@ -40,7 +42,7 @@ class ClassMagic {
 		$injectProperties = $this->getInjectProperties($classObj);
 
 		foreach ($injectProperties as $propertyEntry) {
-			$objectToInject = new $propertyEntry['type']();
+			$objectToInject = $this->getObjectOfClass($propertyEntry['type']);
 
 			$propertyEntry['property']->setAccessible(TRUE);
 			$propertyEntry['property']->setValue($classObj, $objectToInject);
@@ -94,6 +96,21 @@ class ClassMagic {
 		}
 
 		throw new \Exception('@inject found but no @var was given', 1357950694);
+	}
+
+	public function getObjectOfClass($classname) {
+		if (in_array('Kabarakh\Mirarse\ClassMagic\SingletonInterface', class_implements($classname))) {
+			if (!isset($this->singletonObjects[$classname])) {
+				$this->singletonObjects[$classname] = new $classname;
+			}
+			return $this->singletonObjects[$classname];
+		} else {
+			return new $classname;
+		}
+	}
+
+	public function debug() {
+		var_dump($this->singletonObjects);
 	}
 
 }

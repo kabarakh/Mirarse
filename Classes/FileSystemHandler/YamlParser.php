@@ -28,7 +28,7 @@ use \Symfony\Component\Yaml\Yaml;
  * Everything that has to do with yaml config parsing (maybe this will be refactored to "everything that has to do with yaml"
  * and the parsing is only part of it
  */
-class YamlParser {
+class YamlParser implements \Kabarakh\Mirarse\ClassMagic\SingletonInterface {
 
 	/**
 	 * Takes the path to the file, reads the yaml content and returns an array with the content

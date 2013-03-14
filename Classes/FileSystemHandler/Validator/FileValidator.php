@@ -27,7 +27,7 @@ namespace Kabarakh\Mirarse\FileSystemHandler\Validator;
 /**
  * Everything which has to do with file handling
  */
-class FileValidator extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
+class FileValidator extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass implements \Kabarakh\Mirarse\ClassMagic\SingletonInterface {
 
 	/**
 	 * Checks if a file with the provided path is an image file. Uses finfo and the mimetype to check the files.

@@ -27,7 +27,7 @@ namespace Kabarakh\Mirarse\FileSystemHandler\Validator;
 /**
  * Everything which has to do with folder handling
  */
-class FolderValidator extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
+class FolderValidator extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass implements \Kabarakh\Mirarse\ClassMagic\SingletonInterface {
 
 	/**
 	 * @var \Kabarakh\Mirarse\FileSystemHandler\Validator\FileValidator

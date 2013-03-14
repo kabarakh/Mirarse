@@ -21,25 +21,13 @@
  * 
  * This copyright notice MUST APPEAR in all copies of the script!
  */
-namespace Kabarakh\Mirarse\FileSystemHandler\Validator;
+namespace Kabarakh\Mirarse\ClassMagic;
 
 /**
- * Everything that has to do with folder content arrays
+ * Empty interface so the other class magic classes can use this for singletons
  */
-class FolderContentValidator extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass implements \Kabarakh\Mirarse\ClassMagic\SingletonInterface {
+interface SingletonInterface {
 
-	/**
-	 * @param $folderContent \Kabarakh\Mirarse\FileSystemHandler\FolderContentHandler
-	 *
-	 * @return bool
-	 */
-	public function validateFolderContentContainsAtLeastOneFile($folderContent) {
-		$folderContent->removeDotDirectoriesFromFolderContent();
-		if (count($folderContent->getContent()) > 0) {
-			return TRUE;
-		}
-		return FALSE;
-	}
 }
 
 ?>

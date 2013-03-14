@@ -67,4 +67,5 @@ class Mirarse {
 // this is put here so the user can just include this file and use $gallery->callAction
 $mirarse = new \Kabarakh\Mirarse();
 $mirarse->start();
+
 ?>
