@@ -33,10 +33,10 @@ namespace Kabarakh\Mirarse\Controller;
 class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 
 	/**
-	 * @var \Kabarakh\Mirarse\FileSystemHandler\YamlParser
+	 * @var \Kabarakh\Mirarse\Bootstrap\ConfigurationHandler
 	 * @inject
 	 */
-	protected $yamlParser;
+	protected $configurationHandler;
 
 	/**
 	 * The method to call actions. This method must be used instead of calling the action methods directly,
@@ -52,8 +52,7 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 		$action = $actionName."Action";
 		$controllerObject = NULL;
 
-		// todo: session handler for parameter handling, and not always use this yaml stuff, only when parameter is filled
-		$GLOBALS['parameter'] = $this->yamlParser->parseYamlString($parameter);
+		$this->configurationHandler->mergeStandardAndUserConfig($parameter);
 
 		try {
 			$controllerObject = $this->getObjectForController($controller.'Controller');

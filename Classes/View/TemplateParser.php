@@ -357,6 +357,20 @@ echo \'', $this->htmlString);
 		return 'echo "<img src=\"".$this->generateWebserverPathFromAbsolutePath('.$parts[1].'->getThumbnailLocation())."\" />";';
 	}
 
+	protected function parseFunctionRenderDate($parts) {
+		foreach ($parts as &$singlePart) {
+			if (preg_match('/\{(.+)\}/', $singlePart)) {
+				$singlePart = preg_replace('/\{(.+)\}/', '${1}', $singlePart);
+				$singlePart = $this->splitObjectAtDot($singlePart);
+			}
+		}
+		if (!$parts[2]) {
+			$parts[2] = 'd. F Y';
+		}
+
+		return 'echo '.$parts[1].'->format("'.$parts[2].'");';
+	}
+
 	/**
 	 * 'parse' end-parts - returns a closing bracket
 	 *

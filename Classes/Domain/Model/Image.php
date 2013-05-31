@@ -120,7 +120,7 @@ class Image extends \Kabarakh\Mirarse\Domain\Model\AbstractModel {
 		if ($this->hasThumbnail) {
 			return $this->thumbnailLocation;
 		} else {
-			return '';
+			return $GLOBALS['parameter']['thumbnailPath'];
 		}
 	}
 

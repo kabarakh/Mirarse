@@ -1,8 +1,11 @@
 <div class="mirarse-list">
-	<ul>
-		{[foreach {galleryList} as {singleGallery}]}
-			<li>Path to gallery: {{singleGallery.path}}<br />
-			{[renderThumbnail {singleGallery.thumbnailImage}]}</li>
-		{[end for]}
-	</ul>
+	{[foreach {galleryList} as {singleGallery}]}
+		<div class="mirarse-list-single">
+			<h2 class="mirarse-list-single-title">
+				<a href="{[callAction Gallery.single {singleGallery}]}">{{singleGallery.galleryConfig.title}}
+				<span class="mirarse-list-single-date">{[renderDate {singleGallery.galleryConfig.date}]}</span></a>
+			</h2>
+			<a href="{[callAction Gallery.single {singleGallery}]}">{[renderThumbnail {singleGallery.thumbnailImage}]}</a>
+		</div>
+	{[end for]}
 </div>
