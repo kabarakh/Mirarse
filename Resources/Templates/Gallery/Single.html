@@ -1,0 +1,19 @@
+<div class="mirarse-singleGallery">
+	<div class="debug">{[debug {gallery}]}</div>
+
+	<div class="mirarse-singleGallery-header">
+		<h3>
+			{{gallery.galleryConfig.title}}
+			<span class="mirarse-singleGallery-date">{[renderDate {gallery.galleryConfig.date} d.m.Y]}</span>
+		</h3>
+	</div>
+	<div class="mirarse-singleGallery-main">
+		{[foreach {gallery.images} as {singleImage}]}
+			<div class="mirarse-singleGallery-thumbnail">
+				<a href="{[callAction Image single imagePath={singleImage.path}]}">
+					<img src="{{singleImage.thumbnailLocation}}" />
+				</a>
+			</div>
+		{[end]}
+	</div>
+</div>

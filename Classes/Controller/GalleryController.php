@@ -49,6 +49,17 @@ class GalleryController extends \Kabarakh\Mirarse\Controller\BaseController {
 		$this->view->assign('galleryList', $galleryList);
 
 	}
+
+	public function singleAction() {
+		$galleryPath = $GLOBALS['parameter']['galleryPath'];
+		if (empty($galleryPath)) {
+			throw new \Exception('galleryPath is empty', 1370123615);
+		}
+
+		$gallery = $this->galleryRepository->createGalleryFromPath($galleryPath);
+
+		$this->view->assign('gallery', $gallery);
+	}
 }
 
 ?>
