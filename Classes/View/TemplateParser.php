@@ -25,8 +25,6 @@ namespace Kabarakh\Mirarse\View;
 
 /**
  * Parses the html template and writes the php cache file
- *
- * TODO: build image-viewhelper and debug-viewhelper
  */
 class TemplateParser extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
@@ -396,6 +394,15 @@ echo \'', $this->htmlString);
 		$parameterString = implode("\n", $parameters);
 
 		return 'echo $this->generateWebserverPathFromAbsolutePath(".") . \'?Mirarse%5Bcontroller%5D='.$controller.'&Mirarse%5Baction%5D='.$action.'&Mirarse%5Bparameter%5D=\'.urlencode(\''.$parameterString.');';
+	}
+	
+	protected function parseFunctionDebug($parts) {
+		if (preg_match('/\{(.+)\}/', $parts[1])) {
+			$parts[1] = preg_replace('/\{(.+)\}/', '${1}', $parts[1]);
+			$parts[1] = $this->splitObjectAtDot($parts[1]);
+		}
+
+		return 'var_dump('.$parts[1].');';
 	}
 
 	/**
