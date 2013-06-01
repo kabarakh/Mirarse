@@ -371,6 +371,35 @@ echo \'', $this->htmlString);
 		return 'echo '.$parts[1].'->format("'.$parts[2].'");';
 	}
 
+	protected function parseFunctionCallAction($parts) {
+		$controllerAndActionString = $parts[1];
+		$controllerAndAction = explode('.', $controllerAndActionString);
+		$controller = $controllerAndAction[0];
+		$action = $controllerAndAction[1];
+
+		unset($parts[0]);
+		unset($parts[1]);
+
+		$parameters = array();
+
+		foreach ($parts as $singleParameterString) {
+			$singleParameter = explode('=', $singleParameterString);
+			$parameterName = $singleParameter[0];
+			$parameterValue = $singleParameter[1];
+
+			if (preg_match('/\{(.+)\}/', $parameterValue)) {
+				$parameterValue = preg_replace('/\{(.+)\}/', '${1}', $parameterValue);
+				$parameterValue = "'." . $this->splitObjectAtDot($parameterValue);
+			}
+
+			$parameters[$parameterName] = $parameterName.': '.$parameterValue;
+		}
+
+		$parameterString = implode("\n", $parameters);
+
+		return 'echo $this->generateWebserverPathFromAbsolutePath(".") . \'?\' . urlencode(\'Mirarse[controller]='.$controller.'&Mirarise[action]='.$action.'&Mirarse[parameter]='.$parameterString.');';
+	}
+
 	/**
 	 * 'parse' end-parts - returns a closing bracket
 	 *
