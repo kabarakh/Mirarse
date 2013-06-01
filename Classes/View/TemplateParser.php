@@ -175,8 +175,6 @@ PHPCLASS;
 	 */
 	public function renderCached() {
 
-		var_dump($this->toDisplay);
-
 METHOD;
 
 		$this->phpString .= $methodHeader;
