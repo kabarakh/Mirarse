@@ -90,18 +90,21 @@ class ImageRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractReposi
 			}
 		}
 
-		$galleryFiles = $this->folderHandler->getContentsOfFolder($galleryPath);
-		$galleryFiles->limitResultToImages();
-		$position = array_search($path, $galleryFiles->getContent());
+		$galleryFilesHandler = $this->folderHandler->getContentsOfFolder($galleryPath);
+		$galleryFilesHandler->limitResultToImages();
+
+		$galleryFiles = $galleryFilesHandler->getContent();
+
+		$position = array_search($path, $galleryFiles);
 
 		$nextImagePath = '';
 		$previousImagePath = '';
 
-		if (!$position === 0) {
-			$previousImagePath = $galleryPath[($position-1)];
+		if ($position !== 0) {
+			$previousImagePath = $galleryFiles[($position-1)];
 		}
-		if (!$position === (count($galleryPath)-1)) {
-			$nextImagePath = $galleryPath[($position+1)];
+		if ($position !== (count($galleryFiles)-1)) {
+			$nextImagePath = $galleryFiles[($position+1)];
 		}
 
 		$imageObjectArray = array (
