@@ -23,7 +23,7 @@
  */
 namespace Kabarakh\Mirarse\Bootstrap;
 
-class ConfigurationHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
+class ConfigurationHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass implements \Kabarakh\Mirarse\ClassMagic\SingletonInterface {
 
 	/**
 	 * @var \Kabarakh\Mirarse\FileSystemHandler\YamlParser
