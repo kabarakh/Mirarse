@@ -397,7 +397,7 @@ echo \'', $this->htmlString);
 
 		$parameterString = implode("\n", $parameters);
 
-		return 'echo $this->generateWebserverPathFromAbsolutePath(".") . \'?Mirarse%5Bcontroller%5D='.$controller.'&Mirarise%5Baction%5D='.$action.'&Mirarse%5Bparameter%5D=\'.urlencode('.$parameterString.');';
+		return 'echo $this->generateWebserverPathFromAbsolutePath(".") . \'?Mirarse%5Bcontroller%5D='.$controller.'&Mirarse%5Baction%5D='.$action.'&Mirarse%5Bparameter%5D=\'.urlencode(\''.$parameterString.');';
 	}
 
 	/**
