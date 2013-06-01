@@ -59,6 +59,11 @@ class Mirarse {
 	 * @param string $parameter
 	 */
 	public function callAction($controller, $actionName, $parameter = '') {
+		if ($_GET['Mirarse']['controller'] && $_GET['Mirarse']['action']) {
+			$controller = $_GET['Mirarse']['controller'];
+			$actionName = $_GET['Mirarse']['action'];
+			$parameter = array_merge($parameter, $_GET['Mirarse']['parameter']);
+		}
 		$this->controller->callAction($controller, $actionName, $parameter);
 	}
 
