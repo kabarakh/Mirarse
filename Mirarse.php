@@ -62,7 +62,7 @@ class Mirarse {
 		if ($_GET['Mirarse']['controller'] && $_GET['Mirarse']['action']) {
 			$controller = $_GET['Mirarse']['controller'];
 			$actionName = $_GET['Mirarse']['action'];
-			$parameter = array_merge($parameter, $_GET['Mirarse']['parameter']);
+			$parameter = $parameter."\n". str_replace("|", "\n", $_GET['Mirarse']['parameter']);
 		}
 		$this->controller->callAction($controller, $actionName, $parameter);
 	}
