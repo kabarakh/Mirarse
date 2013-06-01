@@ -11,7 +11,7 @@
 		{[foreach {gallery.images} as {singleImage}]}
 			<div class="mirarse-singleGallery-thumbnail">
 				<a href="{[callAction Image single imagePath={singleImage.path}]}">
-					<img src="{{singleImage.thumbnailLocation}}" />
+					{[renderThumbnail {singleImage}]}" />
 				</a>
 			</div>
 		{[end]}
