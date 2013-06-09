@@ -207,11 +207,11 @@ METHOD;
 	}
 
 	protected function generateStartAndEndParts() {
-		if (preg_match('/^(\{[\{\[\<])/', $this->htmlString) === 0) {
+		if (preg_match('/^(\{[\{\[\<])/', $this->htmlString) === 1) {
 			$this->htmlString = 'echo \''.$this->htmlString;
 		}
 
-		if (preg_match('/([\>\]\}]\})$/', $this->htmlString) === 0) {
+		if (preg_match('/([\>\]\}]\})$/', $this->htmlString) === 1) {
 			$this->htmlString = $this->htmlString."';\n";
 		}
 	}
