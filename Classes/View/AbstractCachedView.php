@@ -35,18 +35,16 @@ abstract class AbstractCachedView extends \Kabarakh\Mirarse\ClassMagic\GalleryBa
 	 */
 	protected $toDisplay;
 
-	/**
-	 * @param array $toDisplay
-	 */
-	public function setToDisplay($toDisplay) {
-		$this->toDisplay = $toDisplay;
+	public function __get($name) {
+		if (array_key_exists($name, $this->toDisplay)) {
+			return $this->toDisplay[$name];
+		} else {
+			throw new \Exception('View didn\'t find variable '.$name. ', please make sure it is assigned', 1371073844);
+		}
 	}
 
-	/**
-	 * @return array
-	 */
-	public function getToDisplay() {
-		return $this->toDisplay;
+	public function __set($name, $value) {
+		$this->toDisplay[$name] = $value;
 	}
 
 	protected function generateWebserverPathFromAbsolutePath($path) {
