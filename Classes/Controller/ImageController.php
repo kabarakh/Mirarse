@@ -39,7 +39,7 @@ class GalleryController extends \Kabarakh\Mirarse\Controller\BaseController {
 	 * @var \Kabarakh\Mirarse\Domain\Repository\SingleGalleryConfigRepository
 	 * @inject
 	 */
-	protected $singleGallalleryConfigRepository;
+	protected $singleGalleryConfigRepository;
 
 	/**
 	 * @throws \Exception
@@ -51,7 +51,7 @@ class GalleryController extends \Kabarakh\Mirarse\Controller\BaseController {
 			throw new \Exception('imagePath is empty', 1370774049);
 		}
 
-		$config = $this->singleGallalleryConfigRepository->generateSingleGalleryConfigFromPath(dirname($imagePath));
+		$config = $this->singleGalleryConfigRepository->generateSingleGalleryConfigFromPath(dirname($imagePath));
 
 		$image = $this->imageRepository->generateImageFromPathWithSingleGalleryConfig($imagePath, $config);
 

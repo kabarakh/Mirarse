@@ -33,7 +33,7 @@ abstract class AbstractRepository extends \Kabarakh\Mirarse\ClassMagic\GalleryBa
 	 * @var \Kabarakh\Mirarse\Domain\Model\ModelProvider
 	 * @inject
 	 */
-	protected $objectProvider;
+	protected $modelProvider;
 
 }
 ?>

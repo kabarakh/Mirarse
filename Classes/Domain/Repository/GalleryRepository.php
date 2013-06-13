@@ -109,7 +109,7 @@ class GalleryRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractRepo
 			'thumbnailImage' => $thumbnailImage,
 		);
 
-		$gallery = $this->objectProvider->getObjectFromArray('\Kabarakh\Mirarse\Domain\Model\Gallery', $galleryObjectArray);
+		$gallery = $this->modelProvider->getObjectFromArray('\Kabarakh\Mirarse\Domain\Model\Gallery', $galleryObjectArray);
 		/** @var $gallery \Kabarakh\Mirarse\Domain\Model\Gallery */
 		return $gallery;
 	}

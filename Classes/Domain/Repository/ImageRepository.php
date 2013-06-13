@@ -120,7 +120,7 @@ class ImageRepository extends \Kabarakh\Mirarse\Domain\Repository\AbstractReposi
 			'previousImagePath' => $previousImagePath
 		);
 
-		$image = $this->objectProvider->getObjectFromArray('\Kabarakh\Mirarse\Domain\Model\Image', $imageObjectArray);
+		$image = $this->modelProvider->getObjectFromArray('\Kabarakh\Mirarse\Domain\Model\Image', $imageObjectArray);
 		/** @var $image \Kabarakh\Mirarse\Domain\Model\Image */
 		return $image;
 	}
