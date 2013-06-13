@@ -1,15 +1,18 @@
+{{gallery.galleryConfig.title}}
+{[renderDate string=20130510 format=d.m.Y]}
+{< kommentar >}
 <div class="mirarse-singleGallery">
 	<div class="mirarse-singleGallery-header">
 		<h3>
 			{{gallery.galleryConfig.title}}
-			<span class="mirarse-singleGallery-date">{[renderDate {gallery.galleryConfig.date} d.m.Y]}</span>
+			<span class="mirarse-singleGallery-date">{[renderDate object={gallery.galleryConfig.date} format=d.m.Y]}</span>
 		</h3>
 	</div>
 	<div class="mirarse-singleGallery-main">
-		{[foreach {gallery.images} as {singleImage}]}
+		{[foreach array={gallery.images} as={singleImage}]}
 			<div class="mirarse-singleGallery-thumbnail">
-				<a href="{[callAction Image single imagePath={singleImage.path}]}">
-					{[renderThumbnail {singleImage}]}
+				<a href="{[callAction controller=Image action=single imagePath={singleImage.path}]}">
+					{[renderThumbnail image={singleImage}]}
 				</a>
 			</div>
 		{[end]}

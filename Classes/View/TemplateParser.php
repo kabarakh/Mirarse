@@ -35,6 +35,12 @@ class TemplateParser extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 	protected $fileHandler;
 
 	/**
+	 * @var \Kabarakh\Mirarse\View\ObjectParser
+	 * @inject
+	 */
+	protected $objectParser;
+
+	/**
 	 * @var string
 	 */
 	protected $pathToCacheFile;
@@ -53,6 +59,11 @@ class TemplateParser extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 	 * @var string
 	 */
 	protected $phpString = '';
+
+	/**
+	 * @var array
+	 */
+	protected $parseArray = array();
 
 	/**
 	 * @var \Kabarakh\Mirarse\View\ViewConfig
@@ -192,228 +203,23 @@ METHOD;
 
 		$this->htmlString = trim($this->htmlString);
 
-		$this->generateStartAndEndParts();
-		// todo: parse!
+		$this->spitHtmlStringToGetParseArray();
 
-		$this->removeTemplateComments();
+		$this->determineTypeOfAllParts();
 
-		$this->generateEchoForTextParts();
+		// todo: for each part to the appropriate thing
+		$this->parseEachArrayPartByType();
 
-		$this->parseObjects();
+		var_dump($this->parseArray);
 
-		$this->parsePhpFunctions();
+		// todo: class-external view helpers... maybe?
+
+		// todo: after parsing the array implode with \n should be all to generate the php string
 
 		$this->phpString .= $this->htmlString;
 	}
 
-	protected function generateStartAndEndParts() {
-		if (preg_match('/^(\{[\{\[\<])/', $this->htmlString) === 1) {
-			$this->htmlString = 'echo \''.$this->htmlString;
-		}
 
-		if (preg_match('/([\>\]\}]\})$/', $this->htmlString) === 1) {
-			$this->htmlString = $this->htmlString."';\n";
-		}
-	}
-
-	protected function generateEchoForTextParts() {
-		$this->htmlString = preg_replace('/(\{[\{\[\<])/', '\';
-${1}', $this->htmlString);
-
-		$this->htmlString = preg_replace('/([\>\]\}]\})/', '${1}
-echo \'', $this->htmlString);
-	}
-
-	protected function removeTemplateComments() {
-		$this->htmlString = preg_replace('/{<.*>}/', '', $this->htmlString);
-	}
-
-	/**
-	 * parse {{}}-strings and use the next method to get the proper echo string
-	 */
-	protected function parseObjects() {
-		$this->htmlString = preg_replace_callback('/\{\{(.+)\}\}/', array($this, 'splitObjectAtDotAndEcho'), $this->htmlString);
-	}
-
-	/**
-	 * Builds the string echo $array['object']->getProperty()->getSubproperty();
-	 * for {{object.property.subproperty}}
-	 *
-	 * @param $matches
-	 * @return string
-	 */
-	protected function splitObjectAtDotAndEcho($matches) {
-
-		$fullText = 'echo ';
-
-		$fullText .= $this->splitObjectAtDot($matches[1]);
-
-		$fullText .= ';';
-		return $fullText;
-	}
-
-	/**
-	 * Builds the string $array['object']->getProperty()->getSubproperty()
-	 * for object.property.subproperty
-	 *
-	 * @param $matches
-	 * @return string
-	 */
-	protected function splitObjectAtDot($matches) {
-		$splittedText = explode('.', $matches);
-
-		$fullText = '$this->toDisplay[\''.$splittedText[0].'\']';
-
-		if (count($splittedText) > 1) {
-			unset($splittedText[0]);
-
-			foreach ($splittedText as $textSnippet) {
-				$fullText .= '->get'.ucfirst($textSnippet).'()';
-			}
-		}
-
-		return $fullText;
-	}
-
-	/**
-	 * Wrapper for the parsing og {[]} strings to their respective php function, use the next method as callback
-	 */
-	protected function parsePhpFunctions() {
-		$this->htmlString = preg_replace_callback('/\{\[(.+)\]\}/', array($this, 'breakUpFunctionStringAndParse'), $this->htmlString);
-	}
-
-	/**
-	 * gets the php function name to parse and calls the respective parser function
-	 *
-	 * @param $matches
-	 * @return mixed
-	 */
-	protected function breakUpFunctionStringAndParse($matches) {
-		$parts = explode(' ', $matches[1]);
-		$functionName = $parts[0];
-		$parseFunctionName = 'parseFunction'.ucfirst($functionName);
-		return $this->$parseFunctionName($parts);
-	}
-
-	/**
-	 * Parse foreach-functions
-	 *
-	 * @param $parts
-	 * @return string
-	 */
-	protected function parseFunctionForeach($parts) {
-		foreach ($parts as &$singlePart) {
-			if (preg_match('/\{(.+)\}/', $singlePart)) {
-				$singlePart = preg_replace('/\{(.+)\}/', '${1}', $singlePart);
-				$singlePart = $this->splitObjectAtDot($singlePart);
-			}
-		}
-
-		$forString = 'foreach ('.$parts[1].' '.$parts[2].' '.$parts[3].') {';
-		return $forString;
-	}
-
-	/**
-	 * parse if-functions
-	 *
-	 * @param $parts
-	 * @return string
-	 */
-	protected function parseFunctionIf($parts) {
-		foreach ($parts as &$singlePart) {
-			if (preg_match('/\{(.+)\}/', $singlePart)) {
-				$singlePart = preg_replace('/\{(.+)\}/', '${1}', $singlePart);
-				$singlePart = $this->splitObjectAtDot($singlePart);
-			}
-		}
-		$ifString = 'if ('.$parts[1];
-
-		if (count($parts) > 2) {
-			if ((strncmp($parts[3], '$', 1) !== 0) && (!is_numeric($parts[3]))) {
-				$parts[3] = '\''.$parts[3]. '\'';
-			}
-			$ifString .= ' '.$parts[2].' '.$parts[3];
-		}
-
-		$ifString .= ') {';
-		return $ifString;
-	}
-
-	/**
-	 * Takes a thumbnail path and renders the thumbnail image tag
-	 *
-	 * @param $parts string
-	 * @return string
-	 */
-	protected function parseFunctionRenderThumbnail($parts) {
-		if (preg_match('/^\{(.+)\}$/', $parts[1])) {
-			$parts[1] = preg_replace('/\{(.+)\}/', '${1}', $parts[1]);
-			$parts[1] = $this->splitObjectAtDot($parts[1]);
-		}
-		return 'echo "<img src=\"".$this->generateWebserverPathFromAbsolutePath('.$parts[1].'->getThumbnailLocation())."\" />";';
-	}
-
-	protected function parseFunctionRenderDate($parts) {
-		foreach ($parts as &$singlePart) {
-			if (preg_match('/\{(.+)\}/', $singlePart)) {
-				$singlePart = preg_replace('/\{(.+)\}/', '${1}', $singlePart);
-				$singlePart = $this->splitObjectAtDot($singlePart);
-			}
-		}
-		if (!$parts[2]) {
-			$parts[2] = 'd. F Y';
-		}
-
-		return 'echo '.$parts[1].'->format("'.$parts[2].'");';
-	}
-
-	protected function parseFunctionCallAction($parts) {
-		$controllerAndActionString = $parts[1];
-		$controllerAndAction = explode('.', $controllerAndActionString);
-		$controller = $controllerAndAction[0];
-		$action = $controllerAndAction[1];
-
-		unset($parts[0]);
-		unset($parts[1]);
-
-		$parameters = array();
-
-		foreach ($parts as $singleParameterString) {
-			$singleParameter = explode('=', $singleParameterString);
-			$parameterName = $singleParameter[0];
-			$parameterValue = $singleParameter[1];
-
-			if (preg_match('/\{(.+)\}/', $parameterValue)) {
-				$parameterValue = preg_replace('/\{(.+)\}/', '${1}', $parameterValue);
-				$parameterValue = "'." . $this->splitObjectAtDot($parameterValue);
-			}
-
-			$parameters[$parameterName] = $parameterName.': '.$parameterValue;
-		}
-
-		$parameterString = implode("\n", $parameters);
-
-		return 'echo $this->generateWebserverPathFromAbsolutePath(".") . \'?Mirarse%5Bcontroller%5D='.$controller.'&Mirarse%5Baction%5D='.$action.'&Mirarse%5Bparameter%5D=\'.urlencode(\''.$parameterString.');';
-	}
-	
-	protected function parseFunctionDebug($parts) {
-		if (preg_match('/\{(.+)\}/', $parts[1])) {
-			$parts[1] = preg_replace('/\{(.+)\}/', '${1}', $parts[1]);
-			$parts[1] = $this->splitObjectAtDot($parts[1]);
-		}
-
-		return 'var_dump('.$parts[1].');';
-	}
-
-	/**
-	 * 'parse' end-parts - returns a closing bracket
-	 *
-	 * @param $parts
-	 * @return string
-	 */
-	protected function parseFunctionEnd($parts) {
-		return '}';
-	}
 
 	/**
 	 * closing bracket for the method
@@ -453,16 +259,110 @@ CLASSFOOTER;
 		fclose($fileHandle);
 	}
 
-	/**
-	 * if any parser is called which isn't available, just return an empty string so that
-	 * the file won't break
-	 *
-	 * @param $name
-	 * @param $params
-	 * @return string
-	 */
 	public function __call($name, $params) {
-		return '';
+		throw new \Exception('Function with name '.$name. ' not defined', 1371059373);
+	}
+
+	protected function spitHtmlStringToGetParseArray() {
+		$this->parseArray = preg_split('/(\{[\{\[\<]|[\>\]\}]\})/', $this->htmlString, NULL, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+	}
+
+	protected function determineTypeOfAllParts() {
+		foreach ($this->parseArray as $key => $parseArrayEntry) {
+			if (preg_match('/([\>\]\}]\})/', $parseArrayEntry)) {
+				unset($this->parseArray[$key]);
+			} elseif (preg_match('/(\{[\{\[\<])/', $parseArrayEntry)) {
+				unset($this->parseArray[$key]);
+				$this->setTypeForArrayEntry($parseArrayEntry, ($key + 1));
+			} else {
+			}
+		}
+		$this->setInlineTypeToStringEntries();
+	}
+
+	protected function parseEachArrayPartByType() {
+		foreach ($this->parseArray as &$parseArrayEntry) {
+			$parseArrayEntry = $this->parseArrayEntryByType($parseArrayEntry);
+		}
+	}
+
+	protected function parseArrayEntryByType($arrayEntry) {
+		if ($arrayEntry['type'] === 'inline') {
+			return $arrayEntry;
+		} elseif ($arrayEntry['type'] === 'property') {
+			$arrayEntry['value'] = $this->objectParser->parseObjectStringToPhpForm($arrayEntry['value']);
+		} elseif ($arrayEntry['type'] === 'comment') {
+			unset($arrayEntry);
+		} elseif ($arrayEntry['type'] === 'function') {
+			$arrayEntry['value'] = $this->determineAndCallRenderFunction($arrayEntry['value']);
+		} else {
+			throw new \Exception('Wrong type for parse array entry. This should never happen', 1371072952);
+		}
+
+		return $arrayEntry;
+	}
+
+	protected function setTypeForArrayEntry($parseArrayEntry, $key) {
+		switch ($parseArrayEntry) {
+			case '{{':
+				$parseArrayEntry = array(
+					'type' => 'property',
+					'value' => $this->parseArray[$key],
+				);
+				break;
+			case '{[':
+				$parseArrayEntry = array(
+					'type' => 'function',
+					'value' => $this->parseArray[$key],
+				);
+				break;
+			case '{<':
+				$parseArrayEntry = array(
+					'type' => 'comment',
+					'value' => $this->parseArray[$key],
+				);
+				break;
+			default:
+				throw new \Exception('Wrong string to determine type. This should never happen', 1371160341);
+		}
+		$this->parseArray[$key] = $parseArrayEntry;
+	}
+
+	protected function setInlineTypeToStringEntries() {
+		foreach ($this->parseArray as $key => $parseArrayEntry) {
+			if (gettype($parseArrayEntry) === 'string') {
+				$this->parseArray[$key] = array(
+					'type' => 'inline',
+					'value' => $parseArrayEntry
+				);
+			}
+		}
+	}
+
+	/**
+	 * @param string $stringToRender
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
+	protected function determineAndCallRenderFunction($stringToRender) {
+		$splittedFunctionEntry = explode(' ', $stringToRender);
+		$className = 'Kabarakh\\Mirarse\\View\\ViewFunctions\\' . ucfirst($splittedFunctionEntry[0]) . 'ViewFunction';
+		unset($splittedFunctionEntry[0]);
+
+		if (class_exists($className)) {
+			/** @var \Kabarakh\Mirarse\View\ViewFunctions\AbstractViewFunction $viewFunctionClass */
+			$viewFunctionClass = new $className($splittedFunctionEntry);
+
+			$viewFunctionClass->validateParameter();
+
+			return $viewFunctionClass->render();
+
+
+
+		} else {
+			throw new \Exception('ViewFunction ' . $className . ' not found', 1371075969);
+		}
 	}
 
 }
