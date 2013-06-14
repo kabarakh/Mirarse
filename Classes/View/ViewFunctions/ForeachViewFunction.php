@@ -23,33 +23,22 @@
  */
 namespace Kabarakh\Mirarse\View\ViewFunctions;
 
-class RenderDateViewFunction extends \Kabarakh\Mirarse\View\ViewFunctions\AbstractViewFunction {
+class ForeachViewFunction extends \Kabarakh\Mirarse\View\ViewFunctions\AbstractViewFunction {
 
 	public function render() {
-		$objectName = '';
+		$array = $this->objectParser->parseObjectStringToPhpForm($this->array);
 
-		if ($this->string) {
+		$key = $this->key ? ' $'.$this->key.' => ': '';
 
-				try {
-				$objectName = 'create_date("'.$this->string.'")';
-			} catch (\Exception $e) {
-				throw new \Exception('Date format not working for displaying the date', 1371230207);
-			}
-
-		} elseif ($this->object) {
-			$objectName = $this->objectParser->parseObjectStringToPhpForm($this->object);
-		}
-
-		$format = $this->format ? $this->format : 'Y/m/d';
-
-		return $objectName. '->format("' .$format .'");';
+		return 'for ('.$array.' as '.$key.'$'.$this->as.') {';
 	}
 
 	public function validateParameter() {
-		if (!$this->string && !$this->object) {
-			throw new \Exception('Either object or string has to be given as a parameter in renderDate renderFunction', 1371163180);
+		if (!$this->array || !$this->as) {
+			throw new \Exception('The parameters array and as must be given for foreachRenderFunction', 1371230409);
 		}
 	}
+
 
 }
 ?>
