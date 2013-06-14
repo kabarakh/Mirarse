@@ -31,8 +31,6 @@ class ConfigurationHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass
 	 */
 	protected $yamlParser;
 
-	// todo: session handler for parameter handling, and not always use this yaml stuff, only when parameter is filled
-
 	public function mergeStandardAndUserConfig($parameter) {
 		$GLOBALS['parameter'] = $this->yamlParser->parseYamlString($parameter);
 
