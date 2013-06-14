@@ -109,10 +109,6 @@ class ClassMagic {
 		}
 	}
 
-	public function debug() {
-		var_dump($this->singletonObjects);
-	}
-
 }
 
 ?>
