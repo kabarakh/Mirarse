@@ -31,8 +31,10 @@ class ObjectParser {
 
 		$splittedText = explode('.', $objectString);
 
-		foreach ($splittedText as &$propertyName) {
-			$propertyName = 'get'.ucfirst($propertyName).'()';
+		foreach ($splittedText as $key => &$propertyName) {
+			if ($key !== 0) {
+				$propertyName = 'get'.ucfirst($propertyName).'()';
+			}
 		}
 
 		$newString = implode('->', $splittedText);
