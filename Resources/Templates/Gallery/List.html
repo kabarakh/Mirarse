@@ -2,7 +2,7 @@
 	{[foreach array={galleryList} as=singleGallery key=key]}
 		<div class="mirarse-list-single">
 			<h2 class="mirarse-list-single-title">
-				<a href="{[callAction Gallery.single galleryPath={singleGallery.path}]}">{{singleGallery.galleryConfig.title}}
+				<a href="{[callAction controller=Gallery action=single galleryPath={singleGallery.path}]}">{{singleGallery.galleryConfig.title}}
 				<span class="mirarse-list-single-date">{[renderDate object={singleGallery.galleryConfig.date}]}</span></a>
 			</h2>
 			<a href="{[callAction controller=Gallery action=single galleryPath={singleGallery.path}]}">{[renderThumbnail image={singleGallery.thumbnailImage}]}</a>
