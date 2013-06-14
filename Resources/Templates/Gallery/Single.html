@@ -9,7 +9,7 @@
 		</h3>
 	</div>
 	<div class="mirarse-singleGallery-main">
-		{[foreach array={gallery.images} as={singleImage}]}
+		{[foreach array={gallery.images} as=singleImage]}
 			<div class="mirarse-singleGallery-thumbnail">
 				<a href="{[callAction controller=Image action=single imagePath={singleImage.path}]}">
 					{[renderThumbnail image={singleImage}]}

@@ -1,5 +1,5 @@
 <div class="mirarse-list">
-	{[foreach array={galleryList} as={singleGallery}]}
+	{[foreach array={galleryList} as=singleGallery key=key]}
 		<div class="mirarse-list-single">
 			<h2 class="mirarse-list-single-title">
 				<a href="{[callAction Gallery.single galleryPath={singleGallery.path}]}">{{singleGallery.galleryConfig.title}}
