@@ -31,7 +31,7 @@ class RenderDateViewFunction extends \Kabarakh\Mirarse\View\ViewFunctions\Abstra
 		if ($this->string) {
 
 				try {
-				$objectName = 'create_date("'.$this->string.'")';
+				$objectName = 'date_create("'.$this->string.'")';
 			} catch (\Exception $e) {
 				throw new \Exception('Date format not working for displaying the date', 1371230207);
 			}
@@ -42,7 +42,7 @@ class RenderDateViewFunction extends \Kabarakh\Mirarse\View\ViewFunctions\Abstra
 
 		$format = $this->format ? $this->format : 'Y/m/d';
 
-		return $objectName. '->format("' .$format .'");';
+		return 'echo '.$objectName. '->format("' .$format .'")';
 	}
 
 	public function validateParameter() {
