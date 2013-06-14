@@ -30,36 +30,32 @@ use \Symfony\Component\Yaml\Yaml;
  */
 class YamlParser extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass implements \Kabarakh\Mirarse\ClassMagic\SingletonInterface {
 
-	/**
-	 * Takes the path to the file, reads the yaml content and returns an array with the content
-	 *
-	 * @param $path string
-	 * @throws \Exception
-	 * @return array
-	 */
-	public function parseYamlFile($path) {
+
+	public function parseYamlFile($path, $exceptionOnInvalidType = false, $objectSupport = false) {
 		try {
-			$yamlContent = Yaml::parse($path);
+			$yamlContent = Yaml::parse($path, $exceptionOnInvalidType, $objectSupport);
 			return $yamlContent;
 		} catch (\Exception $e) {
 			throw new \Exception('Config file with path '.$path.' empty or malformed yaml', 1358189377);
 		}
 	}
 
-	/**
-	 * Takes a string and parses it as yaml content, returns an array with the content
-	 *
-	 * @param $yamlString string
-	 * @throws \Exception
-	 * @return array
-	 */
-	public function parseYamlString($yamlString) {
+	public function parseYamlString($yamlString, $exceptionOnInvalidType = false, $objectSupport = false) {
 		try {
-			$yamlContent = Yaml::parse($yamlString);
+			$yamlContent = Yaml::parse($yamlString, $exceptionOnInvalidType, $objectSupport);
 			return $yamlContent;
 		}
 		catch (\Exception $e) {
 			throw new \Exception('Config string was malformed or empty', 1358189382);
+		}
+	}
+
+	public function arrayToYaml($dataArray, $inline = 2, $indent = 4, $exceptionOnInvalidType = false, $objectSupport = false) {
+		try {
+			$yamlContent = Yaml::dump($dataArray, $inline , $indent, $exceptionOnInvalidType, $objectSupport);
+			return $yamlContent;
+		} catch (\Exception $e) {
+			throw new \Exception('Array could not be converted to yaml string', 1371245796);
 		}
 	}
 }
