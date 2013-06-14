@@ -35,6 +35,20 @@ abstract class AbstractCachedView extends \Kabarakh\Mirarse\ClassMagic\GalleryBa
 	 */
 	protected $toDisplay;
 
+	/**
+	 * @param array $toDisplay
+	 */
+	public function setToDisplay($toDisplay) {
+		$this->toDisplay = $toDisplay;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getToDisplay() {
+		return $this->toDisplay;
+	}
+
 	public function __get($name) {
 		if (array_key_exists($name, $this->toDisplay)) {
 			return $this->toDisplay[$name];
