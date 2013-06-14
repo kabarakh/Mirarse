@@ -210,13 +210,8 @@ METHOD;
 		// todo: for each part to the appropriate thing
 		$this->parseEachArrayPartByType();
 
-		var_dump($this->parseArray);
-
-		// todo: class-external view helpers... maybe?
-
 		// todo: after parsing the array implode with \n should be all to generate the php string
-
-		$this->phpString .= $this->htmlString;
+		$this->concatenateParseArrayParts();
 	}
 
 
@@ -288,9 +283,9 @@ CLASSFOOTER;
 
 	protected function parseArrayEntryByType($arrayEntry) {
 		if ($arrayEntry['type'] === 'inline') {
-			return $arrayEntry;
+			$arrayEntry['value'] = 'echo "'. addslashes($arrayEntry['value']) .'"';
 		} elseif ($arrayEntry['type'] === 'property') {
-			$arrayEntry['value'] = $this->objectParser->parseObjectStringToPhpForm($arrayEntry['value']);
+			$arrayEntry['value'] = 'echo '.$this->objectParser->parseObjectStringToPhpForm($arrayEntry['value']);
 		} elseif ($arrayEntry['type'] === 'comment') {
 			unset($arrayEntry);
 		} elseif ($arrayEntry['type'] === 'function') {
@@ -360,6 +355,13 @@ CLASSFOOTER;
 
 		} else {
 			throw new \Exception('ViewFunction ' . $className . ' not found', 1371075969);
+		}
+	}
+
+	protected function concatenateParseArrayParts() {
+		var_dump($this->parseArray);
+		foreach ($this->parseArray as $arrayPart) {
+			$this->phpString .= $arrayPart['value'].';';
 		}
 	}
 
