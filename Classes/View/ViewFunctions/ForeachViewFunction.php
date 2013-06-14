@@ -28,9 +28,9 @@ class ForeachViewFunction extends \Kabarakh\Mirarse\View\ViewFunctions\AbstractV
 	public function render() {
 		$array = $this->objectParser->parseObjectStringToPhpForm($this->array);
 
-		$key = $this->key ? ' $'.$this->key.' => ': '';
+		$key = $this->key ? ' $this->'.$this->key.' => ': '';
 
-		return 'foreach ('.$array.' as '.$key.'$'.$this->as.') {';
+		return 'foreach ('.$array.' as '.$key.'$this->'.$this->as.') {';
 	}
 
 	public function validateParameter() {
