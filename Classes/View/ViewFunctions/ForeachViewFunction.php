@@ -30,7 +30,7 @@ class ForeachViewFunction extends \Kabarakh\Mirarse\View\ViewFunctions\AbstractV
 
 		$key = $this->key ? ' $'.$this->key.' => ': '';
 
-		return 'for ('.$array.' as '.$key.'$'.$this->as.') {';
+		return 'foreach ('.$array.' as '.$key.'$'.$this->as.') {';
 	}
 
 	public function validateParameter() {
