@@ -18,11 +18,12 @@ Version 1.1 (planned)
 * serverside image scaling - when image is opened in single view, generate smaller image and display that
 
 Version 1.2 (planned)
+=====================
 
 * JavaScript-version:
 
-	* Integrate Lightbox
-	* Integrate AJAX-Calls to resize images/generate thumbnails
+  - Integrate Lightbox
+  - Integrate AJAX-Calls to resize images/generate thumbnails
 
 * Readable URLs (maybe)
 * ...
