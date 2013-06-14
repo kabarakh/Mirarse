@@ -27,16 +27,28 @@ class ObjectParser {
 
 	public function parseObjectStringToPhpForm($objectString) {
 
+		$objectString = $this->removeCurlyBracketsIfNeccessary($objectString);
+
 		$splittedText = explode('.', $objectString);
 
 		foreach ($splittedText as &$propertyName) {
-			$propertyName = 'get'.ucfirst($propertyName);
+			$propertyName = 'get'.ucfirst($propertyName).'()';
 		}
 
 		$newString = implode('->', $splittedText);
 		$newString = '$this->'.$newString;
 
 		return $newString;
+
+	}
+
+	protected function removeCurlyBracketsIfNeccessary($objectString) {
+
+		if (preg_match('/^\{[^{\}]+\}$/', $objectString)) {
+			return substr($objectString, 1, (strlen($objectString)-2));
+		} else {
+			return $objectString;
+		}
 
 	}
 }
