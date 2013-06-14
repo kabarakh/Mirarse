@@ -358,8 +358,6 @@ CLASSFOOTER;
 
 			return $viewFunctionClass->render();
 
-
-
 		} else {
 			throw new \Exception('ViewFunction ' . $className . ' not found', 1371075969);
 		}
