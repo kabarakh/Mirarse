@@ -25,7 +25,7 @@ namespace Kabarakh\Mirarse\View\ViewFunctions;
 
 abstract class AbstractViewFunction extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 	/**
-	 * @var Kabarakh\Mirarse\View\ObjectParser
+	 * @var \Kabarakh\Mirarse\View\ObjectParser
 	 * @inject
 	 */
 	protected $objectParser;
