@@ -342,6 +342,11 @@ CLASSFOOTER;
 	 */
 	protected function determineAndCallRenderFunction($stringToRender) {
 		$splittedFunctionEntry = explode(' ', $stringToRender);
+		foreach ($splittedFunctionEntry as $key => $singleEntry) {
+			if ($key === '' || $singleEntry === '') {
+				unset ($splittedFunctionEntry[$key]);
+			}
+		}
 		$className = 'Kabarakh\\Mirarse\\View\\ViewFunctions\\' . ucfirst($splittedFunctionEntry[0]) . 'ViewFunction';
 		unset($splittedFunctionEntry[0]);
 

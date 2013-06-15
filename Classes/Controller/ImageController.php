@@ -27,7 +27,7 @@ namespace Kabarakh\Mirarse\Controller;
 /**
  * The controller for galleries. Has a list- and a singleView-action
  */
-class GalleryController extends \Kabarakh\Mirarse\Controller\BaseController {
+class ImageController extends \Kabarakh\Mirarse\Controller\BaseController {
 
 	/**
 	 * @var  \Kabarakh\Mirarse\Domain\Repository\ImageRepository
