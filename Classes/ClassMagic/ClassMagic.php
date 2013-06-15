@@ -92,7 +92,7 @@ class ClassMagic {
 
 				$singleLine = str_replace('@var', '', $singleLine);
 				$singleLine = str_replace('*', '', $singleLine);
-				
+
 				$singleLine = trim($singleLine);
 				$singleLineArray = explode(' ', $singleLine);
 
