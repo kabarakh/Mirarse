@@ -47,7 +47,7 @@ class CallActionViewFunction extends \Kabarakh\Mirarse\View\ViewFunctions\Abstra
 			}
 		}
 
-		$propertiesYaml = trim($this->yamlParser->arrayToYaml($this->properties, 0, 0));
+		$propertiesYaml = trim($this->yamlParser->arrayToYaml($this->properties, 4, 0));
 
 		$parameterSting = '?Mirarse%5Bcontroller%5D='.$controller.'&Mirarse%5Baction%5D='.$action.'&Mirarse%5Bparameter%5D=".urlencode("'.$propertiesYaml.'")';
 
