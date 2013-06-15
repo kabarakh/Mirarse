@@ -36,7 +36,7 @@ class ImageController extends \Kabarakh\Mirarse\Controller\BaseController {
 	protected $imageRepository;
 
 	/**
-	 * @var \Kabarakh\Mirarse\Domain\Repository\SingleGalleryConfigRepository
+	 * @var \Kabarakh\Mirarse\Domain\Repository\SingleGalleryConfigRepository asdasd
 	 * @inject
 	 */
 	protected $singleGalleryConfigRepository;
