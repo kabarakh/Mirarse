@@ -45,7 +45,7 @@ class ImageController extends \Kabarakh\Mirarse\Controller\BaseController {
 	 * @throws \Exception
 	 */
 	public function singleAction() {
-		$imagePath = $GLOBALS['parameters']['imagePath'];
+		$imagePath = $GLOBALS['parameter']['imagePath'];
 
 		if (empty($imagePath)) {
 			throw new \Exception('imagePath is empty', 1370774049);

@@ -32,7 +32,7 @@ class ConfigurationHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass
 	protected $yamlParser;
 
 	public function mergeStandardAndUserConfig($parameter) {
-		$getParameter = $this->yamlParser->parseYamlString($_GET['parameter']);
+		$getParameter = $this->yamlParser->parseYamlString($_GET['Mirarse']['parameter']);
 
 		$userParameter = $this->yamlParser->parseYamlString($parameter);
 
