@@ -90,6 +90,7 @@ class ClassMagic {
 		foreach ($docCommentLines as $singleLine) {
 			if (strpos($singleLine, '@var ') !== FALSE) {
 				$singleLine = str_replace('@var', '', $singleLine);
+				$singleLine = str_replace('*', '', $singleLine);
 				$singleLine = trim($singleLine);
 				$singleLineArray = explode(' ', $singleLine);
 				var_dump($singleLineArray);
