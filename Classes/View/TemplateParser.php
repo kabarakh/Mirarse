@@ -341,12 +341,8 @@ CLASSFOOTER;
 	 * @throws \Exception
 	 */
 	protected function determineAndCallRenderFunction($stringToRender) {
-		$splittedFunctionEntry = explode(' ', $stringToRender);
-		foreach ($splittedFunctionEntry as $key => $singleEntry) {
-			if ($key === '' || $singleEntry === '') {
-				unset ($splittedFunctionEntry[$key]);
-			}
-		}
+		$splittedFunctionEntry =  preg_split('/[\s]+/', $stringToRender, NULL, PREG_SPLIT_NO_EMPTY);
+
 		$className = 'Kabarakh\\Mirarse\\View\\ViewFunctions\\' . ucfirst($splittedFunctionEntry[0]) . 'ViewFunction';
 		unset($splittedFunctionEntry[0]);
 
