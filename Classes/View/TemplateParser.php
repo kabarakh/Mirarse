@@ -359,7 +359,6 @@ CLASSFOOTER;
 	}
 
 	protected function concatenateParseArrayParts() {
-		var_dump($this->parseArray);
 		foreach ($this->parseArray as $arrayPart) {
 			$this->phpString .= $arrayPart['value'].';';
 		}
