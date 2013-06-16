@@ -34,9 +34,12 @@ class ConfigurationHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass
 	public function mergeStandardAndUserConfig($parameter) {
 		$getParameter = $this->yamlParser->parseYamlString($_GET['Mirarse']['parameter']);
 
-		$userParameter = $this->yamlParser->parseYamlString($parameter);
+		$GLOBALS['parameter'] = $this->yamlParser->parseYamlString($parameter);
 
-		$GLOBALS['parameter'] = array_merge($userParameter, $getParameter);
+
+		if (is_array($getParameter)) {
+			$GLOBALS['parameter'] = array_merge($GLOBALS['parameter'], $getParameter);
+		}
 
 		if (!$GLOBALS['parameter']['thumbnailPath']) {
 			$GLOBALS['parameter']['thumbnailPath'] = MIRARSE_RESOURCES.'Images/MirarseLogo.png';
