@@ -29,7 +29,7 @@ class RenderThumbnailViewFunction extends \Kabarakh\Mirarse\View\ViewFunctions\A
 	public function render() {
 		$image = $this->objectParser->parseObjectStringToPhpForm($this->image);
 
-		$stringToRender = 'echo "<img alt=\"\" src=\"".$this->generateWebserverPathFromAbsolutePath('.$image.'->getThumbnailLocation())."\" />"';
+		$stringToRender = 'echo "<img width=\"".'.$image.'->getCalculatedWidth()."px\" height=\"".'.$image.'->getCalculatedHeight()."px\" alt=\"\" src=\"".$this->generateWebserverPathFromAbsolutePath('.$image.'->getThumbnailLocation())."\" />"';
 
 		return $stringToRender;
 	}
