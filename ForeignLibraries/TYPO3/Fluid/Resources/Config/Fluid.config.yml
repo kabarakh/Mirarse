@@ -1,0 +1,5 @@
+fluid:
+    view:
+        templateRootPath: @BundleName/Resources/Templates/
+        partialRootPath: @BundleName/Resources/Partials/
+        layoutRootPath: @BundleName/Resources/Layouts/

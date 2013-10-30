@@ -66,11 +66,17 @@ class Initializer {
 
 		define('MIRARSE_CLASSES', MIRARSE_ROOT_PATH.'Classes/');
 
+		define('MIRARSE_TESTS', MIRARSE_ROOT_PATH.'Tests/');
+
 		define('MIRARSE_RESOURCES', MIRARSE_ROOT_PATH.'Resources/');
 
 		define('MIRARSE_TEMPLATES', MIRARSE_RESOURCES.'Templates/');
+		define('MIRARSE_LAYOUTS', MIRARSE_RESOURCES.'Layouts/');
+		define('MIRARSE_PARTIALS', MIRARSE_RESOURCES.'Partials/');
 
 		define('MIRARSE_CACHE', MIRARSE_RUN_DIRECTORY.'Cache/');
+
+		define('CLASS_CACHE_DIR', MIRARSE_CACHE);
 
 	}
 

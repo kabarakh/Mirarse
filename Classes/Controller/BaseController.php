@@ -39,6 +39,12 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 	protected $configurationHandler;
 
 	/**
+	 * @var \Kabarakh\Mirarse\FileSystemHandler\Validator\FileValidator
+	 * @inject
+	 */
+	protected $fileValidator;
+
+	/**
 	 * The method to call actions. This method must be used instead of calling the action methods directly,
 	 * if not the views can't be used
 	 *
@@ -62,9 +68,11 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 			throw $e;
 		}
 
-		$controllerObject->view->generatePathAutomatically($controller, $actionName);
+		$this->generatePathForViewAutomatically($controller, $actionName);
 
-		$controllerObject->view->render();
+		echo $controllerObject->view->render();
+
+		return;
 	}
 
 	/**
@@ -99,6 +107,82 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 
 		return $controllerObject;
 
+	}
+
+
+	/**
+	 * Override the automatically generated paths to the html files - even if you use the config to use another
+	 * root directory
+	 *
+	 * @param $path
+	 */
+	public function setNonStandardPathForView($path) {
+		if ($this->fileValidator->validateFileExists($path)) {
+			$this->view->setTemplatePathAndFilename($path);
+		}
+	}
+
+	/**
+	 * Use controller and action to generate a path
+	 * Because this has to work it throws an exception if file isn't present
+	 * If nonStandardPath is set earlier, this method does nothing
+	 *
+	 * @param $controller
+	 * @param $action
+	 * @throws \Exception
+	 */
+	public function generatePathForViewAutomatically($controller, $action) {
+		$templatePath = $this->view->getTemplatePathAndFilename();
+		if (empty($templatePath)) {
+			$baseTemplateFolder = $this->getBaseTemplateFolder();
+
+			$path = $baseTemplateFolder.$controller.'/'.ucfirst($action).'.html';
+
+			if (!$this->fileValidator->validateFileExists($path)) {
+				throw new \Exception('Template file '.$path.' not found', 1358550218);
+			}
+
+			$this->view->setTemplatePathAndFilename($path);
+		}
+	}
+
+	/**
+	 * Reads the config string and builds the path to the template files according to it
+	 * if no config is set, use standard templates folder
+	 *
+	 * @return string
+	 */
+	protected function getBaseTemplateFolder() {
+		if ($GLOBALS['parameter']['templateRootPath']) {
+			return MIRARSE_RUN_DIRECTORY.$GLOBALS['parameter']['templateRootPath'].'/';
+		}
+		return MIRARSE_TEMPLATES;
+	}
+
+	/**
+	 * Reads the config string and builds the path to the template files according to it
+	 * if no config is set, use standard templates folder
+	 *
+	 * @return string
+	 */
+	protected function getBaseLayoutFolder() {
+		if ($GLOBALS['parameter']['layoutRootPath']) {
+			return MIRARSE_RUN_DIRECTORY.$GLOBALS['parameter']['layoutRootPath'].'/';
+		}
+		return MIRARSE_LAYOUTS;
+	}
+
+	/**
+	 * Reads the config string and builds the path to the template files according to it
+	 * if no config is set, use standard templates folder
+	 *
+	 * @return string
+	 */
+	protected function getBasePartialFolder() {
+		if ($GLOBALS['parameter']['partialRootPath']) {
+			return MIRARSE_RUN_DIRECTORY.$GLOBALS['parameter']['partialRootPath'].'/';
+		}
+		return MIRARSE_PARTIALS;
 	}
 
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+		<parameter key="fluid.class">TYPO3\Fluid\FluidEnvironment</parameter>
+		<parameter key="fluid.engine.class">TYPO3\Fluid\FluidEngine</parameter>
+		<parameter key="fluid.loader.class">TYPO3\Fluid\Loader\FilesystemLoader</parameter>
+	</parameters>
+
+	<services>
+		<service id="fluid" class="%fluid.class%">
+			<argument type="service" id="fluid.loader" />
+			<argument>%fluid%</argument>
+			<argument type="service" id="kernel" />
+		</service>
+		<service id="fluid.loader" alias="fluid.loader.filesystem" />
+		<service id="fluid.loader.filesystem" class="%fluid.loader.class%" public="false">
+			<argument type="service" id="templating.locator" />
+			<argument type="service" id="templating.name_parser" />
+			<argument>%fluid%</argument>
+		</service>
+		<service id="templating.engine.fluid" class="%fluid.engine.class%" public="false">
+			<argument type="service" id="fluid"/>
+			<argument type="service" id="templating.name_parser"/>
+			<argument type="service" id="fluid.loader" />
+			<tag name="templating.engine" />
+		</service>
+	</services>
+</container>

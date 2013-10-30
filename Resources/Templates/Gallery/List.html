@@ -1,11 +1,11 @@
 <div class="mirarse-list">
-	{[foreach array={galleryList} as=singleGallery key=key]}
+	<f:for each="{galleryList}" as="signleGallery" key="key">
 		<div class="mirarse-list-single">
 			<h2 class="mirarse-list-single-title">
-				<a href="{[callAction controller=Gallery action=single galleryPath={singleGallery.path}]}">{{singleGallery.galleryConfig.title}}
-				<span class="mirarse-list-single-date">{[renderDate object={singleGallery.galleryConfig.date}]}</span></a>
+				<a href="#">{singleGallery.galleryConfig.title}
+				<span class="mirarse-list-single-date"><f:format.date>{singleGallery.galleryConfig.date}</f:format.date></span></a>
 			</h2>
-			<a href="{[callAction controller=Gallery action=single galleryPath={singleGallery.path}]}">{[renderThumbnail image={singleGallery.thumbnailImage}]}</a>
+			<a href="#"><img src="{singleGallery.thumbnailImage}" /></a>
 		</div>
-	{[end]}
+	</f:for>
 </div>

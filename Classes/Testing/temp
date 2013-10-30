@@ -1,0 +1,6 @@
+<?php
+// TODO initialize autoloader and stuff
+// TODO load test directory (check phpUnit)
+// TODO run tests
+
+?>
