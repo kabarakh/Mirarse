@@ -1,3 +1,6 @@
 [submodule "ForeignLibraries/Symfony/Component/Yaml"]
 	path = ForeignLibraries/Symfony/Component/Yaml
 	url = https://github.com/symfony/Yaml.git
+[submodule "ForeignLibraries/TYPO3/Fluid"]
+	path = ForeignLibraries/TYPO3/Fluid
+	url = https://github.com/NamelessCoder/TYPO3.Fluid.git
