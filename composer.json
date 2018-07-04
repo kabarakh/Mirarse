@@ -1,0 +1,16 @@
+{
+    "name": "kabarakh/mirarse",
+    "description": "Mirarse - a not so small gallery",
+    "license": "GPL-2.0+",
+    "require": {
+        "typo3fluid/fluid": "~2.5.0",
+        "symfony/yaml": "^4.1",
+        "neos/utility-arrays": "^5.0",
+        "neos/utility-files": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kabarakh\\Mirarse\\": "Classes"
+        }
+    }
+}

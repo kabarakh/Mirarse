@@ -27,6 +27,9 @@ namespace Kabarakh\Mirarse\Controller;
 /**
  * The base class for all controllers. Takes care of calling actions and the views
  */
+
+use Neos\Utility\Arrays;
+
 /**
  *
  */
@@ -68,7 +71,7 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 			throw $e;
 		}
 
-		$this->generatePathForViewAutomatically($controller, $actionName);
+		$this->generatePathForViewAutomatically($controller, $actionName, $controllerObject->view);
 
 		echo $controllerObject->view->render();
 
@@ -118,7 +121,8 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 	 */
 	public function setNonStandardPathForView($path) {
 		if ($this->fileValidator->validateFileExists($path)) {
-			$this->view->setTemplatePathAndFilename($path);
+			$templatePaths = $this->view->getRenderingContext()->getTemplatePaths();
+			$templatePaths->setTemplatePathAndFilename($path);
 		}
 	}
 
@@ -129,21 +133,18 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 	 *
 	 * @param $controller
 	 * @param $action
+     * @param $view
 	 * @throws \Exception
 	 */
-	public function generatePathForViewAutomatically($controller, $action) {
-		$templatePath = $this->view->getTemplatePathAndFilename();
-		if (empty($templatePath)) {
-			$baseTemplateFolder = $this->getBaseTemplateFolder();
-
-			$path = $baseTemplateFolder.$controller.'/'.ucfirst($action).'.html';
-
-			if (!$this->fileValidator->validateFileExists($path)) {
-				throw new \Exception('Template file '.$path.' not found', 1358550218);
-			}
-
-			$this->view->setTemplatePathAndFilename($path);
-		}
+	public function generatePathForViewAutomatically($controller, $action, $view = null) {
+	    if (!$view) {
+	        $view = $this->view;
+        }
+	    $renderingContext = $view->getRenderingContext();
+	    $renderingContext->getTemplatePaths()->setTemplateRootPaths([$this->getBaseTemplateFolder()]);
+	    $renderingContext->setControllerName($controller);
+	    $renderingContext->setControllerAction($action);
+	    $view->setRenderingContext($renderingContext);
 	}
 
 	/**
@@ -153,8 +154,9 @@ class BaseController extends \Kabarakh\Mirarse\Controller\AbstractController {
 	 * @return string
 	 */
 	protected function getBaseTemplateFolder() {
-		if ($GLOBALS['parameter']['templateRootPath']) {
-			return MIRARSE_RUN_DIRECTORY.$GLOBALS['parameter']['templateRootPath'].'/';
+	    $templateRootPath = Arrays::getValueByPath($GLOBALS, 'parameter.templateRootPath');
+		if ($templateRootPath) {
+			return MIRARSE_RUN_DIRECTORY.$templateRootPath.'/';
 		}
 		return MIRARSE_TEMPLATES;
 	}

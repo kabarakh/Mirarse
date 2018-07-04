@@ -1,0 +1,7 @@
+{{var}} => echo $this->toDisplay[var] oder was ich auch immer hab // funzt
+
+{<comment>} => '' // funzt
+
+bla => echo 'bla' // funzt
+
+{[function bla={var} blubb=string]} => new 

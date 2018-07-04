@@ -36,7 +36,9 @@ class GalleryController extends \Kabarakh\Mirarse\Controller\BaseController {
 	protected $galleryRepository;
 
 	/**
-	 * the action to list all galleries available in the configured base folder
+	 * the action to list all galleries
+	 *
+	 * @throws \Exception
 	 */
 	public function listAction() {
 		$galleryRootPath = $GLOBALS['parameter']['galleryRootPath'];
@@ -50,6 +52,11 @@ class GalleryController extends \Kabarakh\Mirarse\Controller\BaseController {
 
 	}
 
+	/**
+	 * the action to show a single gallery
+	 *
+	 * @throws \Exception
+	 */
 	public function singleAction() {
 		$galleryPath = $GLOBALS['parameter']['galleryPath'];
 		if (empty($galleryPath)) {

@@ -64,8 +64,6 @@ class Initializer {
 		// get the path from where the gallery is run so we can use the relative path from there for gallery locations
 		define('MIRARSE_RUN_DIRECTORY', realpath('.').'/');
 
-		define('MIRARSE_CLASSES', MIRARSE_ROOT_PATH.'Classes/');
-
 		define('MIRARSE_TESTS', MIRARSE_ROOT_PATH.'Tests/');
 
 		define('MIRARSE_RESOURCES', MIRARSE_ROOT_PATH.'Resources/');
@@ -86,11 +84,7 @@ class Initializer {
 	 * @return void
 	 */
 	protected function initAutoloader() {
-
-		require_once(MIRARSE_CLASSES.'Bootstrap/Autoloader.php');
-
-		$autoloader = new \Kabarakh\Mirarse\Bootstrap\Autoloader();
-		$autoloader->init();
+		require_once(__DIR__ . '/../../vendor/autoload.php');
 	}
 
 }

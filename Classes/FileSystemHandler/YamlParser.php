@@ -33,7 +33,7 @@ class YamlParser extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass implement
 
 	public function parseYamlFile($path, $exceptionOnInvalidType = false, $objectSupport = false) {
 		try {
-			$yamlContent = Yaml::parse($path, $exceptionOnInvalidType, $objectSupport);
+			$yamlContent = Yaml::parseFile($path, $exceptionOnInvalidType, $objectSupport);
 			return $yamlContent;
 		} catch (\Exception $e) {
 			throw new \Exception('Config file with path '.$path.' empty or malformed yaml', 1358189377);

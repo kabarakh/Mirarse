@@ -30,7 +30,7 @@ namespace Kabarakh\Mirarse\Controller;
 abstract class AbstractController extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass {
 
 	/**
-	 * @var \TYPO3\Fluid\FluidTemplate
+	 * @var \TYPO3Fluid\Fluid\View\TemplateView
 	 * @inject
 	 */
 	protected $view;

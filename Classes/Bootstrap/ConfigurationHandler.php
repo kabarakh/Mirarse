@@ -22,6 +22,7 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 namespace Kabarakh\Mirarse\Bootstrap;
+use \Neos\Utility\Arrays;
 
 class ConfigurationHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass implements \Kabarakh\Mirarse\ClassMagic\SingletonInterface {
 
@@ -32,16 +33,16 @@ class ConfigurationHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass
 	protected $yamlParser;
 
 	public function mergeStandardAndUserConfig($parameter) {
-		$getParameter = $this->yamlParser->parseYamlString($_GET['Mirarse']['parameter']);
+		$getParameter = Arrays::getValueByPath($_GET, 'Mirarse.parameter');
 
 		$GLOBALS['parameter'] = $this->yamlParser->parseYamlString($parameter);
-
 
 		if (is_array($getParameter)) {
 			$GLOBALS['parameter'] = array_merge($GLOBALS['parameter'], $getParameter);
 		}
 
-		if (!$GLOBALS['parameter']['thumbnailPath']) {
+		$thumbnailPath = Arrays::getValueByPath($GLOBALS, 'parameter.thumbnailPath');
+		if (!$thumbnailPath) {
 			$GLOBALS['parameter']['thumbnailPath'] = MIRARSE_RESOURCES.'Images/MirarseLogo.png';
 		}
 	}

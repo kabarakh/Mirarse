@@ -23,7 +23,7 @@
  */
 
 namespace Kabarakh\Mirarse\FileSystemHandler;
-
+use \Neos\Utility\Arrays;
 /**
  * Everything which has to do with folder handling
  */
@@ -123,8 +123,9 @@ class FolderHandler extends \Kabarakh\Mirarse\ClassMagic\GalleryBaseClass implem
 	public function getFullPathToConfigFile($path) {
 		$configFileName = 'gallery.yml';
 
-		if ($GLOBALS['parameter']['galleryConfigFile']) {
-			$configFileName = $GLOBALS['parameter']['galleryConfigFile'];
+		$galleryConfigFile = Arrays::getValueByPath($GLOBALS, 'parameter.galleryConfigFile');
+		if ($galleryConfigFile) {
+			$configFileName = $galleryConfigFile;
 		}
 
 		return $path . '/' . $configFileName;

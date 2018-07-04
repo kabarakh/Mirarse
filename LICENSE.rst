@@ -2,7 +2,7 @@
 Copyright notice
 ================
 
-\(c) 2012/2013 Christian Herberger <webmaster@kabarakh.de>
+(c) 2012/2013 Christian Herberger <webmaster@kabarakh.de>
          
 All rights reserved
 

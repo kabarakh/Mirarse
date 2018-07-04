@@ -23,7 +23,7 @@
  */
 
 namespace Kabarakh;
-
+use \Neos\Utility\Arrays;
 /**
  * The main class for the gallery. Starts the whole thing and contains the controllers
  */
@@ -59,10 +59,9 @@ class Mirarse {
 	 * @param string $parameter
 	 */
 	public function callAction($controller, $actionName, $parameter = '') {
-		if ($_GET['Mirarse']['controller'] && $_GET['Mirarse']['action']) {
-			$controller = $_GET['Mirarse']['controller'];
-			$actionName = $_GET['Mirarse']['action'];
-		}
+		$controller = Arrays::getValueByPath($_GET, 'Mirarse.controller') ?: $controller;
+		$actionName = Arrays::getValueByPath($_GET, 'Mirarse.action') ?: $actionName;
+
 		$this->controller->callAction($controller, $actionName, $parameter);
 	}
 

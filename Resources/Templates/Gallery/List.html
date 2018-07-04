@@ -1,11 +1,12 @@
-<div class="mirarse-list">
-	<f:for each="{galleryList}" as="signleGallery" key="key">
+{namespace mirarse=Kabarakh\Mirarse\ViewHelpers}
+<div class="mirarse-list"><f:debug>{_all}</f:debug>
+	<f:for each="{galleryList}" as="singleGallery" key="key">
 		<div class="mirarse-list-single">
 			<h2 class="mirarse-list-single-title">
 				<a href="#">{singleGallery.galleryConfig.title}
-				<span class="mirarse-list-single-date"><f:format.date>{singleGallery.galleryConfig.date}</f:format.date></span></a>
+				<span class="mirarse-list-single-date"><mirarse:format.date date="{singleGallery.galleryConfig.date}"/></span></a>
 			</h2>
-			<a href="#"><img src="{singleGallery.thumbnailImage}" /></a>
+			<a href="#"><img src="{singleGallery.thumbnailImage.path}" /></a>
 		</div>
 	</f:for>
 </div>
